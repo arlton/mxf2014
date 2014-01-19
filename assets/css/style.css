@@ -45,6 +45,9 @@ a {
 #navbar nav ul li a {
   color: #ffffff;
 }
+#navbar nav ul li a.active {
+  color: #0d1416;
+}
 #navbar nav ul li:last-child {
   margin: 0;
 }
