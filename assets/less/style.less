@@ -1,8 +1,60 @@
 @import "variables.less";
 
-#welcome {
-  background: @black;
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'helvetica', sans-serif;
 }
+
+a {
+  color: @gold;
+  text-decoration: none;
+}
+
+#welcome {
+  padding: 25px 0;
+  background: @black;
+  color: @white;
+  a {
+    padding: 10px 25px;
+    margin-top: 5px;
+    margin-left: 10px;
+    line-height: 32px;
+    color: white;
+    border: 2px solid @gold;
+    border-radius: 1px;
+    float: right;
+    &:hover {
+      background: @gold;
+    }
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+#navbar {
+  background: @gold;
+  padding: 10px 0;
+  nav {
+    ul {
+      float: right;
+      li {
+        float: left;
+        margin-right: 15px;
+        a {
+          color: @white;
+        }
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+} 
 
 #speakers {
   img {

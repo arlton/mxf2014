@@ -1,5 +1,52 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'helvetica', sans-serif;
+}
+a {
+  color: #a38527;
+  text-decoration: none;
+}
 #welcome {
+  padding: 25px 0;
   background: #0d1416;
+  color: #ffffff;
+}
+#welcome a {
+  padding: 10px 25px;
+  margin-top: 5px;
+  margin-left: 10px;
+  line-height: 32px;
+  color: white;
+  border: 2px solid #a38527;
+  border-radius: 1px;
+  float: right;
+}
+#welcome a:hover {
+  background: #a38527;
+}
+#welcome img {
+  display: block;
+  margin: 0 auto;
+}
+#welcome p {
+  text-align: center;
+}
+#navbar {
+  background: #a38527;
+  padding: 10px 0;
+}
+#navbar nav ul {
+  float: right;
+}
+#navbar nav ul li {
+  float: left;
+  margin-right: 15px;
+}
+#navbar nav ul li a {
+  color: #ffffff;
+}
+#navbar nav ul li:last-child {
+  margin: 0;
 }
 #speakers img {
   width: 100%;
