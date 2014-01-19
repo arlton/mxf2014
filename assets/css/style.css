@@ -1,6 +1,7 @@
 body {
   -webkit-font-smoothing: antialiased;
   font-family: 'helvetica', sans-serif;
+  background: #0d1416;
 }
 a {
   color: #a38527;
@@ -10,6 +11,7 @@ a {
   padding: 25px 0;
   background: #0d1416;
   color: #ffffff;
+  position: relative;
 }
 #welcome a {
   padding: 10px 25px;
@@ -50,6 +52,17 @@ a {
 }
 #navbar nav ul li:last-child {
   margin: 0;
+}
+#speakers,
+#what,
+#why,
+#quotes,
+#sponsors,
+#details,
+#schedule,
+#email-signup,
+footer {
+  background: #ffffff;
 }
 #speakers img {
   width: 100%;
