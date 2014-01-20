@@ -121,6 +121,7 @@ section::after {
 #details,
 #schedule,
 #email-signup,
+#about,
 footer {
   background: #ffffff;
 }
@@ -315,6 +316,10 @@ footer {
   color: #0d1416;
   background: #ffffff;
 }
+#bigHalfCircle path {
+  fill: #0d1416;
+  stroke: #0d1416;
+}
 svg#bigTriangleColor {
   pointer-events: none;
 }
@@ -343,6 +348,72 @@ svg#bigTriangleColor path {
   transition: all 0.3s;
 }
 #photos a:hover {
+  color: #ffffff;
+  background: #a38527;
+}
+#schedule h2 {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  color: #0d1416;
+}
+#schedule h3 {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+#schedule ul li {
+  margin-bottom: 40px;
+  float: left;
+  clear: both;
+  color: #a38527;
+}
+#schedule ul li span {
+  color: #0d1416;
+  border-radius: 40px;
+  border: 3px solid #0d1416;
+  font-weight: 600;
+  margin-right: 10px;
+  width: 55px;
+  height: 55px;
+  display: block;
+  float: left;
+  text-align: center;
+  padding-top: 14px;
+  margin-top: -17px;
+}
+#about {
+  margin-top: -2px;
+  background: #0d1416;
+  color: #ffffff;
+}
+#about h2 {
+  margin-bottom: 60px;
+}
+#about p {
+  color: #a38527;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+#register {
+  padding: 80px 0;
+}
+#register a {
+  display: block;
+  max-width: 300px;
+  padding: 20px 10px;
+  font-size: 20px;
+  margin: 0 10px;
+  border-radius: 2px;
+  background: #ffffff;
+  color: #a38527;
+  margin: 0 auto;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#register a:hover {
   color: #ffffff;
   background: #a38527;
 }
