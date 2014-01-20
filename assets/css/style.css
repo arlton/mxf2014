@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?9028557');
-  src: url('../font/fontello.eot?9028557#iefix') format('embedded-opentype'), url('../font/fontello.woff?9028557') format('woff'), url('../font/fontello.ttf?9028557') format('truetype'), url('../font/fontello.svg?9028557#fontello') format('svg');
+  src: url('../font/fontello.eot?88253292');
+  src: url('../font/fontello.eot?88253292#iefix') format('embedded-opentype'), url('../font/fontello.woff?88253292') format('woff'), url('../font/fontello.ttf?88253292') format('truetype'), url('../font/fontello.svg?88253292#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -11,7 +11,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?9028557#fontello') format('svg');
+    src: url('../font/fontello.svg?88253292#fontello') format('svg');
   }
 }
 */
@@ -40,10 +40,18 @@
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
+.icon-globe:before {
+  content: '\e804';
+}
+/* '' */
 .icon-lanyrd:before {
   content: '\e800';
 }
 /* '' */
+.icon-dribbble:before {
+  content: '\e803';
+}
+/* '' */
 .icon-twitter:before {
   content: '\e801';
 }
@@ -72,8 +80,6 @@ h2 {
   text-align: center;
   font-size: 36px;
   font-weight: 600;
-  margin-top: 60px;
-  margin-bottom: 60px;
   color: #ffffff;
 }
 .btn {
@@ -213,6 +219,16 @@ footer {
 #speakers {
   background: #a38527;
 }
+#speakers h2 {
+  margin-top: 60px;
+  margin-bottom: 10px;
+}
+#speakers p {
+  text-align: center;
+  font-style: italic;
+  color: #ffffff;
+  margin-bottom: 50px;
+}
 #speakers figure {
   border: 5px solid #ffffff;
   overflow: hidden;
@@ -265,27 +281,38 @@ footer {
   transition: transform 0.4s, opacity 0.1s 0.3s;
 }
 #speakers figcaption h3 {
+  text-align: center;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 5px;
 }
 #speakers figcaption p {
-  font-size: 14px;
+  text-align: center;
+  font-size: 18px;
   line-height: 16px;
   font-weight: 300;
+  margin-bottom: 0;
 }
 #speakers figcaption p.title {
   color: #a38527;
 }
+#speakers figcaption p.social {
+  margin-top: 20px;
+}
 #speakers figcaption a {
   text-align: center;
   padding: 5px 10px;
+  margin: 0 10px;
   border-radius: 2px;
-  display: inline-block;
   background: #a38527;
   color: #fff;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#speakers figcaption a:hover {
+  color: #0d1416;
+  background: #ffffff;
 }
 svg#bigTriangleColor {
   pointer-events: none;
