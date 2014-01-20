@@ -172,6 +172,7 @@ footer {
 
 #speakers {
   background: @gold;
+  padding-bottom: 100px;
   h2 {
     margin-top: 60px;
     margin-bottom: 10px;
@@ -187,6 +188,7 @@ footer {
     overflow: hidden;
     margin: 0 0 20px 0;
     position: relative;
+    border-radius: 2px;
     img {
       width: 100%;
       max-width: 100%;
@@ -254,7 +256,6 @@ footer {
       }
     }
     a {
-      text-align: center;
       padding: 5px 10px;
       margin: 0 10px;
       border-radius: 2px;
@@ -280,4 +281,26 @@ svg#bigTriangleColor {
   }
 }
 
-
+#photos {
+  min-height: 400px;
+  background: url('../img/collage.png') no-repeat center center; 
+  a {
+    display: block;
+    max-width: 300px;
+    margin: 165px auto 0 auto;
+    color: @black;
+    background: @white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    padding: 20px 15px;
+    text-align: center;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    &:hover {
+      color: @white;
+      background: @gold;
+    }
+  }
+}

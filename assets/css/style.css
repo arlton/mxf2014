@@ -218,6 +218,7 @@ footer {
 }
 #speakers {
   background: #a38527;
+  padding-bottom: 100px;
 }
 #speakers h2 {
   margin-top: 60px;
@@ -234,6 +235,7 @@ footer {
   overflow: hidden;
   margin: 0 0 20px 0;
   position: relative;
+  border-radius: 2px;
 }
 #speakers figure img {
   width: 100%;
@@ -300,7 +302,6 @@ footer {
   margin-top: 20px;
 }
 #speakers figcaption a {
-  text-align: center;
   padding: 5px 10px;
   margin: 0 10px;
   border-radius: 2px;
@@ -321,4 +322,27 @@ svg#bigTriangleColor path {
   fill: #0d1416;
   stroke: #0d1416;
   stroke-width: 2;
+}
+#photos {
+  min-height: 400px;
+  background: url('../img/collage.png') no-repeat center center;
+}
+#photos a {
+  display: block;
+  max-width: 300px;
+  margin: 165px auto 0 auto;
+  color: #0d1416;
+  background: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 2px;
+  padding: 20px 15px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#photos a:hover {
+  color: #ffffff;
+  background: #a38527;
 }
