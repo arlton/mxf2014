@@ -8,8 +8,8 @@ a {
   text-decoration: none;
 }
 #welcome {
+  z-index: -9999;
   padding: 25px 0;
-  background: #0d1416;
   color: #ffffff;
   position: relative;
 }
