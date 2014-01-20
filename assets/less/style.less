@@ -27,6 +27,18 @@ h2 {
   color: @white;
 }
 
+hr {
+  display: block;
+  -webkit-margin-before: 0.5em;
+  -webkit-margin-after: 0.5em;
+  -webkit-margin-start: auto;
+  -webkit-margin-end: auto;
+  border: 0;
+  color: @gold;
+  background-color: @gold;
+  height: 1px;
+}
+
 .btn {
   border: none;
   font-family: inherit;
@@ -120,6 +132,12 @@ footer {
   h2 {
     margin: 0;
     font-weight: 200;
+    span {
+      font-size: 13px;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
   }
 }
 
@@ -273,11 +291,6 @@ footer {
   }
 }
 
-#bigHalfCircle path {
-  fill: @black;
-  stroke: @black;
-}
-
 svg#bigTriangleColor {
   pointer-events: none;
     path {
@@ -312,6 +325,7 @@ svg#bigTriangleColor {
 }
 
 #schedule {
+  padding-bottom: 60px;
   h2 {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -343,6 +357,44 @@ svg#bigTriangleColor {
         margin-top: -17px;
       }
     }
+  }
+}
+
+#details {
+  h2 {
+    color: @black;
+    margin-top: 80px;
+    margin-bottom: 60px;
+  }
+  .event-details {
+    margin-bottom: 200px;
+    display: block;
+    h3 {
+      font-weight: 600;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    p {
+      line-height: 20px;
+      strong {
+        font-weight: 600;
+      }
+    }
+  }
+  #bigHalfCircle {
+    margin-bottom: -600px;
+    path {
+      fill: @black;
+      stroke: @black;
+    }
+  }
+  #map {
+    height: 600px;
+    background: transparent url('../img/map.jpg') no-repeat center top;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 }
 
@@ -381,5 +433,47 @@ svg#bigTriangleColor {
       color: @white;
       background: @gold;
     }
+  }
+}
+
+#sponsors {
+  padding: 0 0 60px 0;
+  background: @black;
+  h2 {
+    margin-bottom: 20px;
+    margin-top: 100px;
+  }
+  p {
+    color: @white;
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 24px;
+    font-weight: 300;
+    &.become-sponsor {
+      margin-top: 40px;
+    }
+  }
+  img {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+footer {
+  background: @gold;
+  padding: 40px 0;
+  color: @white;
+  .social {
+    a {
+      font-size: 20px;
+      color: @white;
+      margin-right: 5px;
+      &:hover {
+        color: @tan;
+      }
+    }
+  }
+  p {
+    float: right;
   }
 }

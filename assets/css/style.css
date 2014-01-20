@@ -82,6 +82,17 @@ h2 {
   font-weight: 600;
   color: #ffffff;
 }
+hr {
+  display: block;
+  -webkit-margin-before: 0.5em;
+  -webkit-margin-after: 0.5em;
+  -webkit-margin-start: auto;
+  -webkit-margin-end: auto;
+  border: 0;
+  color: #a38527;
+  background-color: #a38527;
+  height: 1px;
+}
 .btn {
   border: none;
   font-family: inherit;
@@ -171,6 +182,12 @@ footer {
 #welcome h2 {
   margin: 0;
   font-weight: 200;
+}
+#welcome h2 span {
+  font-size: 13px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 #navbar {
   z-index: 9999;
@@ -316,10 +333,6 @@ footer {
   color: #0d1416;
   background: #ffffff;
 }
-#bigHalfCircle path {
-  fill: #0d1416;
-  stroke: #0d1416;
-}
 svg#bigTriangleColor {
   pointer-events: none;
 }
@@ -351,6 +364,9 @@ svg#bigTriangleColor path {
   color: #ffffff;
   background: #a38527;
 }
+#schedule {
+  padding-bottom: 60px;
+}
 #schedule h2 {
   padding-top: 60px;
   padding-bottom: 60px;
@@ -380,6 +396,41 @@ svg#bigTriangleColor path {
   text-align: center;
   padding-top: 14px;
   margin-top: -17px;
+}
+#details h2 {
+  color: #0d1416;
+  margin-top: 80px;
+  margin-bottom: 60px;
+}
+#details .event-details {
+  margin-bottom: 200px;
+  display: block;
+}
+#details .event-details h3 {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+#details .event-details p {
+  line-height: 20px;
+}
+#details .event-details p strong {
+  font-weight: 600;
+}
+#details #bigHalfCircle {
+  margin-bottom: -600px;
+}
+#details #bigHalfCircle path {
+  fill: #0d1416;
+  stroke: #0d1416;
+}
+#details #map {
+  height: 600px;
+  background: transparent url('../img/map.jpg') no-repeat center top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 #about {
   margin-top: -2px;
@@ -416,4 +467,42 @@ svg#bigTriangleColor path {
 #register a:hover {
   color: #ffffff;
   background: #a38527;
+}
+#sponsors {
+  padding: 0 0 60px 0;
+  background: #0d1416;
+}
+#sponsors h2 {
+  margin-bottom: 20px;
+  margin-top: 100px;
+}
+#sponsors p {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 60px;
+  font-size: 24px;
+  font-weight: 300;
+}
+#sponsors p.become-sponsor {
+  margin-top: 40px;
+}
+#sponsors img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+footer {
+  background: #a38527;
+  padding: 40px 0;
+  color: #ffffff;
+}
+footer .social a {
+  font-size: 20px;
+  color: #ffffff;
+  margin-right: 5px;
+}
+footer .social a:hover {
+  color: #e7e2bf;
+}
+footer p {
+  float: right;
 }
