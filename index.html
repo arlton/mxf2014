@@ -39,15 +39,20 @@
   <section data-scroll-index="0" data-stellar-ratio="0.5" id="welcome" class="fading">
     <div class="grid-container">
       <div class="grid-50 mobile-grid-100">
-        <p>August 22nd - 23rd<br />Ron Robinson Theater<br />Little Rock, Arkansas</p>
+        <div class="social">
+          <a href="http://www.twitter.com/madebyfew"><i class="icon-twitter"></i></a>
+          <a href="http://www.facebook.com/madebyfew"><i class="icon-facebook"></i></a>
+          <a href="http://lanyrd.com/2014/mxf2014"><i class="icon-lanyrd"></i></a>
+        </div>
       </div>
       <div class="grid-50 mobile-grid-100">
-        <a class="btn" href="/register">Register Now</a>
+        <a class="btn register" href="/register">Register Now</a>
       </div>
       <div class="grid-100 mobile-grid-100">
         <h1>
           <img src="./assets/img/logo1.png">
         </h1>
+        <h2>A conference for makers of the web.</h2>
       </div>
     </div>
   </section>
@@ -57,10 +62,7 @@
       <path d="M0 0 L50 70 L100 0 Z" />
     </svg>
     <div class="grid-container">
-      <div class="grid-30">
-        <img src="./assets/img/triangle.png">
-      </div>
-      <div class="grid-70">
+      <div class="grid-100">
         <nav>
           <ul>
             <li><a data-scroll-nav="0">WELCOME</a></li>
@@ -281,7 +283,7 @@
     });
 
     var fadeStart=100 // 100px scroll or less will equiv to 1 opacity
-        ,fadeUntil=400 // 200px scroll or more will equiv to 0 opacity
+        ,fadeUntil=270 // 200px scroll or more will equiv to 0 opacity
         ,fading = $('.fading')
     ;
 

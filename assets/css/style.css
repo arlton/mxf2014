@@ -1,3 +1,57 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('../font/fontello.eot?9028557');
+  src: url('../font/fontello.eot?9028557#iefix') format('embedded-opentype'), url('../font/fontello.woff?9028557') format('woff'), url('../font/fontello.ttf?9028557') format('truetype'), url('../font/fontello.svg?9028557#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?9028557#fontello') format('svg');
+  }
+}
+*/
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+.icon-lanyrd:before {
+  content: '\e800';
+}
+/* '' */
+.icon-twitter:before {
+  content: '\e801';
+}
+/* '' */
+.icon-facebook:before {
+  content: '\e802';
+}
+/* '' */
 *,
 *:after,
 *::before {
@@ -7,7 +61,7 @@
 }
 body {
   -webkit-font-smoothing: antialiased;
-  font-family: 'helvetica', sans-serif;
+  font-family: "iskra", sans-serif;
   background: #0d1416;
 }
 a {
@@ -31,7 +85,6 @@ h2 {
   cursor: pointer;
   padding: 25px 80px;
   display: inline-block;
-  margin: 15px 30px;
   text-transform: uppercase;
   letter-spacing: 1px;
   outline: none;
@@ -67,29 +120,50 @@ footer {
 }
 #welcome {
   z-index: -1;
-  padding: 50px 0 80px 0;
+  padding: 50px 0 110px 0;
   color: #ffffff;
   position: relative;
   background: transparent url('../img/welcome.png') center center no-repeat;
   width: 100%;
 }
-#welcome a {
+#welcome .social {
+  padding-top: 20px;
+}
+#welcome .social a {
+  font-size: 20px;
+  color: #ffffff;
+  margin-right: 5px;
+}
+#welcome .social a:hover {
+  color: #e7e2bf;
+}
+#welcome a.register {
   padding: 10px 25px;
   margin-top: 5px;
   margin-left: 10px;
   line-height: 32px;
   color: white;
-  border: 2px solid #a38527;
-  border-radius: 1px;
+  border: 1px solid #a38527;
+  border-radius: 2px;
   float: right;
 }
-#welcome a:hover {
+#welcome a.register:hover {
   background: #a38527;
+}
+#welcome p {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 10px;
 }
 #welcome h1 img {
   display: block;
   width: 70%;
-  margin: 80px auto;
+  margin: 40px auto 80px auto;
+}
+#welcome h2 {
+  margin: 0;
+  font-weight: 200;
 }
 #navbar {
   z-index: 9999;
@@ -97,17 +171,17 @@ footer {
   padding: 0 0 15px 0;
 }
 #navbar img {
-  width: 50px;
+  width: 40px;
 }
-#navbar nav ul {
-  float: right;
+#navbar nav {
+  text-align: center;
 }
 #navbar nav ul li {
-  float: left;
-  margin-right: 20px;
+  display: inline;
+  margin-right: 40px;
 }
 #navbar nav ul li a {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   color: #ffffff;
@@ -120,6 +194,21 @@ footer {
 }
 #navbar nav ul li:last-child {
   margin: 0;
+}
+#navbar a.register {
+  margin-top: -10px;
+  color: #0d1416;
+  float: right;
+  border: 1px solid #0d1416;
+  border-radius: 2px;
+  padding: 8px 15px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#navbar a.register:hover {
+  color: #ffffff;
+  background: #0d1416;
 }
 #speakers {
   background: #a38527;
@@ -177,10 +266,12 @@ footer {
 }
 #speakers figcaption h3 {
   font-weight: 600;
+  margin-bottom: 5px;
 }
 #speakers figcaption p {
   font-size: 14px;
   line-height: 16px;
+  font-weight: 300;
 }
 #speakers figcaption p.title {
   color: #a38527;
