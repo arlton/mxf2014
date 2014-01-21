@@ -137,7 +137,6 @@ footer {
   background: #ffffff;
 }
 #welcome {
-  z-index: -1;
   padding: 50px 0 110px 0;
   color: #ffffff;
   position: relative;
@@ -153,7 +152,7 @@ footer {
   margin-right: 5px;
 }
 #welcome .social a:hover {
-  color: #e7e2bf;
+  color: #a38527;
 }
 #welcome a.register {
   padding: 10px 25px;
