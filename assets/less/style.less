@@ -142,32 +142,35 @@ footer {
 }
 
 #navbar {
-  z-index: 9999;
   background: @gold;
-  padding: 0 0 15px 0;
   img {
     width: 40px;
   }
-  nav {
-    text-align: center;
-    ul {
-      li {
-        display: inline;
-        margin-right: 40px;
-        a {
-          font-size: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          color: @white;
-          &:hover {
-            color: @tan;
+  #nav-wrapper {
+    z-index: 9999;
+    background: @gold;
+    padding: 20px 0;
+    nav {
+      text-align: center;
+      ul {
+        li {
+          display: inline;
+          margin-right: 40px;
+          a {
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            color: @white;
+            &:hover {
+              color: @tan;
+            }
+            &.active {
+              color: @black;
+            }
           }
-          &.active {
-            color: @black;
+          &:last-child {
+            margin: 0;
           }
-        }
-        &:last-child {
-          margin: 0;
         }
       }
     }
@@ -193,7 +196,7 @@ footer {
   background: @gold;
   padding-bottom: 100px;
   h2 {
-    margin-top: 60px;
+    margin-top: 100px;
     margin-bottom: 10px;
   }
   p {
@@ -303,6 +306,10 @@ svg#bigTriangleColor {
 #photos {
   min-height: 400px;
   background: url('../img/collage.png') no-repeat center center; 
+  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   a {
     display: block;
     max-width: 300px;
@@ -327,7 +334,7 @@ svg#bigTriangleColor {
 #schedule {
   padding-bottom: 60px;
   h2 {
-    padding-top: 60px;
+    padding-top: 100px;
     padding-bottom: 60px;
     color: @black;
   }
