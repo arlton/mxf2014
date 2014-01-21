@@ -493,6 +493,9 @@ svg#bigTriangleColor path {
 #sponsors p.become-sponsor {
   margin-top: 40px;
 }
+#sponsors p.become-sponsor a:hover {
+  color: #ffffff;
+}
 #sponsors img {
   width: 100%;
   margin-bottom: 20px;
