@@ -373,12 +373,31 @@ svg#bigTriangleColor {
     margin-bottom: 60px;
   }
   .event-details {
-    margin-bottom: 200px;
+    padding-bottom: 500px;
     display: block;
+    .event-description {
+      padding: 20px 30px;
+      border: 1px solid @gold;
+      border-radius: 2px;
+      margin-bottom: 50px;
+      p {
+        margin-bottom: 15px;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 20px;
+        &.emphasis {
+          font-size: 24px;
+          line-height: 32px;
+        }
+      }
+    }
     h3 {
       font-weight: 600;
       font-size: 20px;
       margin-bottom: 10px;
+      &.hotel {
+        margin-top: 30px;
+      }
     }
     p {
       line-height: 20px;
