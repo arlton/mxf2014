@@ -141,6 +141,10 @@ footer {
   color: #ffffff;
   position: relative;
   background: transparent url('../img/welcome.png') center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   width: 100%;
 }
 #welcome .social {
@@ -409,14 +413,14 @@ svg#bigTriangleColor path {
   margin-bottom: 60px;
 }
 #details .event-details {
-  padding-bottom: 500px;
+  padding-bottom: 540px;
   display: block;
 }
 #details .event-details .event-description {
   padding: 20px 30px;
   border: 1px solid #a38527;
   border-radius: 2px;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 #details .event-details .event-description p {
   margin-bottom: 15px;
