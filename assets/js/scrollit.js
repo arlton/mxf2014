@@ -103,7 +103,6 @@
             var winTop = $(window).scrollTop();
 
             var visible = $('[data-scroll-index]').filter(function(ndx, div) {
-                winTop < $(div).offset().top + (settings.topOffset) + $(div).outerHeight());
                 return winTop >= $(div).offset().top + settings.topOffset &&
                 winTop < $(div).offset().top + (settings.topOffset) + $(div).outerHeight()
             });
