@@ -22,7 +22,7 @@ a {
 
 h2 {
   text-align: center;
-  font-size: 36px;
+  font-size: 56px;
   font-weight: 600;
   color: @white;
 }
@@ -521,12 +521,14 @@ svg#bigTriangleColor {
   img {
     width: 100%;
     margin-bottom: 20px;
+    border: 1px solid @gold;
+    border-radius: 2px;
   }
 }
 
 footer {
   background: @gold;
-  padding: 40px 0;
+  padding: 40px 0 60px 0;
   color: @white;
   .social {
     a {
@@ -540,5 +542,14 @@ footer {
   }
   p {
     float: right;
+    text-align: right;
+    font-size: 14px;
+    line-height: 20px;
+    a {
+      color: @white;
+      &:hover {
+        color: @black;
+      }
+    }
   }
 }

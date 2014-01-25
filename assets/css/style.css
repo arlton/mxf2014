@@ -78,7 +78,7 @@ a {
 }
 h2 {
   text-align: center;
-  font-size: 36px;
+  font-size: 56px;
   font-weight: 600;
   color: #ffffff;
 }
@@ -552,10 +552,12 @@ svg#bigTriangleColor path {
 #sponsors img {
   width: 100%;
   margin-bottom: 20px;
+  border: 1px solid #9e813d;
+  border-radius: 2px;
 }
 footer {
   background: #9e813d;
-  padding: 40px 0;
+  padding: 40px 0 60px 0;
   color: #ffffff;
 }
 footer .social a {
@@ -568,4 +570,13 @@ footer .social a:hover {
 }
 footer p {
   float: right;
+  text-align: right;
+  font-size: 14px;
+  line-height: 20px;
+}
+footer p a {
+  color: #ffffff;
+}
+footer p a:hover {
+  color: #0d1416;
 }
