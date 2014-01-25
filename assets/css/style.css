@@ -72,6 +72,14 @@ body {
   font-family: "iskra", sans-serif;
   background: #0d1416;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "iskra", sans-serif;
+}
 a {
   color: #9e813d;
   text-decoration: none;
@@ -566,7 +574,7 @@ footer .social a {
   margin-right: 5px;
 }
 footer .social a:hover {
-  color: #e7e2bf;
+  color: #0d1416;
 }
 footer p {
   float: right;
