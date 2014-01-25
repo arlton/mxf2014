@@ -152,7 +152,7 @@ footer {
   #nav-wrapper {
     z-index: 9999;
     background: @gold;
-    padding: 20px 0;
+    padding: 19px 0 21px 0;
     nav {
       text-align: center;
       ul {
@@ -165,14 +165,29 @@ footer {
             cursor: pointer;
             color: @white;
             &:hover {
-              color: @tan;
-            }
-            &.active {
               color: @black;
+            }
+          }
+          &.active {
+            a {
+              color: @black;
+              &:hover {
+                color: @white;
+              } 
             }
           }
           &:last-child {
             margin: 0;
+            a {
+              border: 1px solid @white;
+              padding: 5px 14px 7px 14px;
+              border-radius: 2px;
+              &:hover {
+                background: @black;
+                border-color: @black;
+                color: @white;
+              }
+            }
           }
         }
       }
@@ -200,7 +215,7 @@ footer {
   padding-bottom: 100px;
   h2 {
     margin-top: 100px;
-    margin-bottom: 10px;
+    margin-bottom: 60px;
   }
   p {
     text-align: center;
@@ -225,10 +240,10 @@ footer {
     }
     &:hover {
       img {
-        -webkit-transform: translateY(-50px);
-        -moz-transform: translateY(-50px);
-        -ms-transform: translateY(-50px);
-        transform: translateY(-50px);
+        -webkit-transform: translateY(-20px);
+        -moz-transform: translateY(-20px);
+        -ms-transform: translateY(-20px);
+        transform: translateY(-20px);
       }
       figcaption {
         opacity: 1;
@@ -281,7 +296,6 @@ footer {
       }
     }
     a {
-      padding: 5px 10px;
       margin: 0 10px;
       border-radius: 2px;
       background: @gold;
@@ -289,11 +303,30 @@ footer {
       -webkit-transition: all 0.3s;
       -moz-transition: all 0.3s;
       transition: all 0.3s;
+      &.twitter {
+        padding: 5px 14px;
+        i {
+          margin-left: -3px;
+        }
+      }
+      &.site {
+        padding: 5px 10px;
+        i {
+          font-size: 21px;
+        }
+      }
       &:hover {
         color: @black;
         background: @white;
       }
     }
+  }
+  .tba {
+    border: 5px solid @white;
+    margin: 0 0 20px 0;
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden;
   }
 }
 
