@@ -1,0 +1,520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Made by Few 2014</title>
+        <style type="text/css">
+			/* /\/\/\/\/\/\/\/\/ CLIENT-SPECIFIC STYLES /\/\/\/\/\/\/\/\/ */
+			#outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
+			.ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+			.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing */
+			body, table, td, p, a, li, blockquote{-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+			table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+			img{-ms-interpolation-mode:bicubic;} /* Allow smoother rendering of resized image in Internet Explorer */
+
+			/* /\/\/\/\/\/\/\/\/ RESET STYLES /\/\/\/\/\/\/\/\/ */
+			body{margin:0; padding:0;}
+			img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
+			table{border-collapse:collapse !important;}
+			body, #bodyTable, #bodyCell{height:100% !important; margin:0; padding:0; width:100% !important;}
+
+			/* /\/\/\/\/\/\/\/\/ TEMPLATE STYLES /\/\/\/\/\/\/\/\/ */
+
+			#bodyCell{padding:20px;}
+			#templateContainer{width:600px;}
+
+			/* ========== Page Styles ========== */
+
+			/**
+			* @tab Page
+			* @section background style
+			* @tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
+			* @theme page
+			*/
+			body, #bodyTable{
+				background-color:#ffffff;
+			}
+
+			hr {
+			  display: block;
+			  border: 0;
+			  color: #9E813D;
+			  background-color: #9E813D;
+			  height: 1px;
+			  margin-top: 20px;
+			  margin-bottom: 20px;
+			}
+
+			/**
+			* @tab Page
+			* @section email border
+			* @tip Set the border for your email.
+			*/
+			#templateContainer{
+				border:1px solid #9E813D;
+			}
+
+			/**
+			* @tab Page
+			* @section heading 1
+			* @tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
+			* @style heading 1
+			*/
+			h1{
+				/*@editable*/ color:#0D1416 !important;
+				display:block;
+				font-family:Helvetica;
+				font-size:24px;
+				font-style:normal;
+				font-weight:bold;
+				line-height:100%;
+				letter-spacing:normal;
+				margin-top:0;
+				margin-right:0;
+				margin-bottom:10px;
+				margin-left:0;
+				text-align:left;
+			}
+
+			/**
+			* @tab Page
+			* @section heading 2
+			* @tip Set the styling for all second-level headings in your emails.
+			* @style heading 2
+			*/
+			h2{
+				color:#0D1416 !important;
+				display:block;
+				font-family:Helvetica;
+				font-size:18px;
+				font-style:normal;
+				font-weight:bold;
+				line-height:100%;
+				letter-spacing:normal;
+				margin-top:0;
+				margin-right:0;
+				margin-bottom:10px;
+				margin-left:0;
+				text-align:left;
+			}
+
+			/**
+			* @tab Page
+			* @section heading 3
+			* @tip Set the styling for all third-level headings in your emails.
+			* @style heading 3
+			*/
+			h3{
+				color:#0D1416 !important;
+				display:block;
+				font-family:Helvetica;
+				font-size:16px;
+				font-weight:normal;
+				line-height:100%;
+				letter-spacing:normal;
+				margin-top:10px;
+				margin-right:0;
+				margin-bottom:5px;
+				margin-left:0;
+				 text-align:left;
+			}
+
+			/**
+			* @tab Page
+			* @section heading 4
+			* @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
+			* @style heading 4
+			*/
+			h4{
+				color:#0D1416 !important;
+				display:block;
+				font-family:Helvetica;
+				font-size:14px;
+				font-style:italic;
+				font-weight:normal;
+				line-height:100%;
+				letter-spacing:normal;
+				margin-top:0;
+				margin-right:0;
+				margin-bottom:10px;
+				margin-left:0;
+				text-align:left;
+			}
+
+			/* ========== Header Styles ========== */
+
+			/**
+			* @tab Header
+			* @section preheader style
+			* @tip Set the background color and bottom border for your email's preheader area.
+			* @theme header
+			*/
+			#templatePreheader{
+				background-color:#ffffff;
+				border-bottom:1px solid #CCCCCC;
+			}
+
+			/**
+			* @tab Header
+			* @section preheader text
+			* @tip Set the styling for your email's preheader text. Choose a size and color that is easy to read.
+			*/
+			.preheaderContent{
+				color:#0D1416;
+				font-family:Helvetica;
+				font-size:10px;
+				line-height:125%;
+				text-align:left;
+			}
+
+			/**
+			* @tab Header
+			* @section preheader link
+			* @tip Set the styling for your email's preheader links. Choose a color that helps them stand out from your text.
+			*/
+			.preheaderContent a:link, .preheaderContent a:visited, .preheaderContent a .yshortcuts {
+				color:#9E813D;
+				font-weight:normal;
+				text-decoration:underline;
+			}
+
+			/**
+			* @tab Header
+			* @section header style
+			* @tip Set the background color and borders for your email's header area.
+			* @theme header
+			*/
+			#templateHeader{
+				background-color:#0D1416;
+				border-top: none;
+				border-bottom: none;
+			}
+
+			/**
+			* @tab Header
+			* @section header text
+			* @tip Set the styling for your email's header text. Choose a size and color that is easy to read.
+			*/
+			.headerContent{
+				color:#0D1416;
+				font-family:Helvetica;
+				font-size:20px;
+				font-weight:bold;
+				line-height:100%;
+				padding-top:0;
+				padding-right:0;
+				padding-bottom:0;
+				padding-left:0;
+				text-align:left;
+				vertical-align:middle;
+			}
+
+			/**
+			* @tab Header
+			* @section header link
+			* @tip Set the styling for your email's header links. Choose a color that helps them stand out from your text.
+			*/
+			.headerContent a:link, .headerContent a:visited, .headerContent a .yshortcuts {
+				color:#9E813D;
+				font-weight:normal;
+				text-decoration:underline;
+			}
+
+			#headerImage{
+				height:auto;
+				max-width:600px;
+			}
+
+			/* ========== Body Styles ========== */
+
+			/**
+			* @tab Body
+			* @section body style
+			* @tip Set the background color and borders for your email's body area.
+			*/
+			#templateBody{
+				background-color:#ffffff;
+			}
+
+			/**
+			* @tab Body
+			* @section body text
+			* @tip Set the styling for your email's main content text. Choose a size and color that is easy to read.
+			* @theme main
+			*/
+			.bodyContent{
+				color:#0D1416;
+				font-family:Helvetica;
+				font-size:14px;
+				line-height:150%;
+				padding-top:20px;
+				padding-right:20px;
+				padding-bottom:20px;
+				padding-left:20px;
+				text-align:left;
+			}
+
+			/**
+			* @tab Body
+			* @section body link
+			* @tip Set the styling for your email's main content links. Choose a color that helps them stand out from your text.
+			*/
+			.bodyContent a:link, .bodyContent a:visited, .bodyContent a .yshortcuts {
+				color:#9E813D;
+				font-weight:normal;
+				text-decoration:underline;
+			}
+
+			.bodyContent img{
+				display:inline;
+				height:auto;
+				max-width:560px;
+			}
+
+			/* ========== Footer Styles ========== */
+
+			/**
+			* @tab Footer
+			* @section footer text
+			* @tip Set the styling for your email's footer text. Choose a size and color that is easy to read.
+			* @theme footer
+			*/
+			.footerContent{
+				color:#0D1416;
+				font-family:Helvetica;
+				font-size:14px;
+				line-height:150%;
+				padding-top:20px;
+				padding-right:20px;
+				padding-bottom:20px;
+				padding-left:20px;
+			}
+
+			/**
+			* @tab Footer
+			* @section footer link
+			* @tip Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
+			*/
+			.footerContent a:link, .footerContent a:visited, /* Yahoo! Mail Override */ .footerContent a .yshortcuts, .footerContent a span /* Yahoo! Mail Override */{
+				color:#9E813D;
+				font-weight:normal;
+				text-decoration:underline;
+			}
+
+			/* /\/\/\/\/\/\/\/\/ MOBILE STYLES /\/\/\/\/\/\/\/\/ */
+
+            @media only screen and (max-width: 480px){
+				/* /\/\/\/\/\/\/ CLIENT-SPECIFIC MOBILE STYLES /\/\/\/\/\/\/ */
+				body, table, td, p, a, li, blockquote{-webkit-text-size-adjust:none !important;}
+        body{width:100% !important; min-width:100% !important;}
+
+				/* /\/\/\/\/\/\/ MOBILE RESET STYLES /\/\/\/\/\/\/ */
+				#bodyCell{padding:10px !important;}
+
+				/* /\/\/\/\/\/\/ MOBILE TEMPLATE STYLES /\/\/\/\/\/\/ */
+
+				/* ======== Page Styles ======== */
+
+				/**
+				* @tab Mobile Styles
+				* @section template width
+				* @tip Make the template fluid for portrait or landscape view adaptability. If a fluid layout doesn't work for you, set the width to 300px instead.
+				*/
+				#templateContainer{
+					max-width:600px !important;
+					width:100% !important;
+				}
+
+				/**
+				* @tab Mobile Styles
+				* @section heading 1
+				* @tip Make the first-level headings larger in size for better readability on small screens.
+				*/
+				h1{
+					font-size:24px !important;
+					line-height:100% !important;
+				}
+
+				/**
+				* @tab Mobile Styles
+				* @section heading 2
+				* @tip Make the second-level headings larger in size for better readability on small screens.
+				*/
+				h2{
+					font-size:20px !important;
+					line-height:100% !important;
+				}
+
+				/**
+				* @tab Mobile Styles
+				* @section heading 3
+				* @tip Make the third-level headings larger in size for better readability on small screens.
+				*/
+				h3{
+					font-size:18px !important;
+					line-height:100% !important;
+				}
+
+				/**
+				* @tab Mobile Styles
+				* @section heading 4
+				* @tip Make the fourth-level headings larger in size for better readability on small screens.
+				*/
+				h4{
+					font-size:16px !important;
+					line-height:100% !important;
+				}
+
+				/* ======== Header Styles ======== */
+
+				#templatePreheader{display:none !important;} /* Hide the template preheader to save space */
+
+				/**
+				* @tab Mobile Styles
+				* @section header image
+				* @tip Make the main header image fluid for portrait or landscape view adaptability, and set the image's original width as the max-width. If a fluid setting doesn't work, set the image width to half its original size instead.
+				*/
+				#headerImage{
+					height:auto !important;
+					max-width:600px !important;
+					width:100% !important;
+				}
+
+				/**
+				* @tab Mobile Styles
+				* @section header text
+				* @tip Make the header content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+				*/
+				.headerContent{
+					font-size:20px !important;
+					line-height:125% !important;
+				}
+
+				/* ======== Body Styles ======== */
+
+				/**
+				* @tab Mobile Styles
+				* @section body image
+				* @tip Make the main body image fluid for portrait or landscape view adaptability, and set the image's original width as the max-width. If a fluid setting doesn't work, set the image width to half its original size instead.
+				*/
+				#bodyImage{
+					height:auto !important;
+					max-width:560px !important;
+					width:100% !important;
+				}
+
+				/**
+				* @tab Mobile Styles
+				* @section body text
+				* @tip Make the body content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+				*/
+				.bodyContent{
+					font-size:18px !important;
+					line-height:125% !important;
+				}
+
+				/* ======== Footer Styles ======== */
+
+				/**
+				* @tab Mobile Styles
+				* @section footer text
+				* @tip Make the body content text larger in size for better readability on small screens.
+				*/
+				.footerContent{
+					font-size:16px !important;
+					line-height:115% !important;
+				}
+			}
+			.emailButton{background-color:#428bca; border-collapse:separate; border-radius:4px; margin-bottom: 40px;}
+			.buttonContent{color:#FFFFFF; font-family:Helvetica; font-size:18px; font-weight:bold; line-height:100%; padding:15px; text-align:center;}
+			.buttonContent a{color:#FFFFFF; display:block; text-decoration:none;}
+			td[class="buttonContent"]{padding:0 !important;}
+			td[class="buttonContent"] a{padding:15px !important;}
+		</style>
+    </head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+    	<center>
+        	<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+            	<tr>
+                	<td align="center" valign="top" id="bodyCell">
+                    	<!-- BEGIN TEMPLATE // -->
+                    	<table border="0" cellpadding="0" cellspacing="0" id="templateContainer">
+                        	<tr>
+                            	<td align="center" valign="top">
+                                	<!-- BEGIN HEADER // -->
+                                    <table border="0" cellpadding="20" cellspacing="0" width="100%" id="templateHeader">
+                                        <tr>
+                                            <td valign="top" class="headerContent">
+                                            	<img src="http://new.madebyfew.com/assets/img/logo-email.png" style="width:250px; height: 82px; display: block; margin-top: 20px; margin-left: auto; margin-bottom: 20px; margin-right: auto;" alt="Made by Few 2014"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END HEADER -->
+                                </td>
+                            </tr>
+                        	<tr>
+                            	<td align="center" valign="top">
+                                	<!-- BEGIN BODY // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
+                                        <tr>
+                                            <td valign="top" class="bodyContent" mc:edit="body_content01">
+                                                <h2>Hi FIRST_NAME, this is your order confirmation.</h2>
+																								Thanks for registering for Made by Few 2014! It’s going to be an amazing time. Please review your order information below and let us know if you have any questions. We look forward to seeing you in August.
+                                                <hr />
+                                                <h3>Ticket Holder #1:</h3>
+                                                <strong>First Name:</strong> Arlton<br />
+                                                <strong>Last Name:</strong> Lowry<br />
+                                                <strong>Orgainzation:</strong> Artletic<br />
+                                                <strong>Title:</strong> Designer<br />
+                                                <strong>Twitter:</strong> @arlton<br />
+                                                <strong>Shirt Size:</strong> XX-Large
+                                                <hr />
+                                                <h3>Ticket Holder #2:</h3>
+                                                <strong>First Name:</strong> Arlton<br />
+                                                <strong>Last Name:</strong> Lowry<br />
+                                                <strong>Orgainzation:</strong> Artletic<br />
+                                                <strong>Title:</strong> Designer<br />
+                                                <strong>Twitter:</strong> @arlton<br />
+                                                <strong>Shirt Size:</strong> XX-Large
+                                                <hr />
+                                                <h3>Additional Information:</h3>
+                                                I'm a vegitarian, so it would be great if you could have some options for me.
+                                                <hr />
+                                                <h3>Event Information:</h3>
+                                                <strong>Venue:</strong> Ron Robinson Theater<br />
+                                                <strong>Address:</strong> #1 Count Pulaski Way, Little Rock, AR 72201<br />
+                                                <strong>Event Date:</strong> August 22nd - 23rd<br />
+                                                <strong>Website:</strong> <a href="http://www.madebyfew.com">http://www.madebyfew.com</a><br />
+                                                <hr />
+                                                <h3>Follow us to receive event updates:</h3>
+                                                <strong>Twitter:</strong> <a href="http://www.twitter.com/madebyfew">http://www.twitter.com/madebyfew</a><br />
+                                                <strong>Facebook:</strong> <a href="http://www.facebook.com/madebyfew">http://www.facebook.com/madebyfew</a><br />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END BODY -->
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                        	<tr>
+                            	<td align="center" valign="top">
+                                	<!-- BEGIN FOOTER // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateFooter">
+                                        <tr>
+                                            <td valign="top" class="footerContent" mc:edit="footer_content00">
+                                                <p>If you have any questions, please contact us at <a href="mailto:hello@madebyfew.com">hello@madebyfew.com</a>.</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END FOOTER -->
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- // END TEMPLATE -->
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </body>
+</html>
