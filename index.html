@@ -38,7 +38,7 @@
 
   <section data-scroll-index="0" data-stellar-ratio="0.8" id="welcome" class="fading">
     <div class="grid-container">
-      <div class="grid-50 mobile-grid-100">
+      <div class="grid-50 mobile-grid-100 hide-on-mobile visible-on-tablet">
         <div class="social">
           <a href="http://www.twitter.com/madebyfew"><i class="icon-twitter"></i></a>
           <a href="http://www.facebook.com/madebyfew"><i class="icon-facebook"></i></a>
@@ -46,13 +46,16 @@
         </div>
       </div>
       <div class="grid-50 mobile-grid-100">
-        <a class="btn register" href="/register">Register Now</a>
+        <a class="btn register hide-on-mobile visible-on-tablet" href="/register">Register Now</a>
       </div>
       <div class="grid-100 mobile-grid-100">
         <h1>
-          <img src="./assets/img/logo1.png">
+          <img class="hide-on-mobile" src="./assets/img/logo1.png">
+          <img class="hide-on-desktop" src="./assets/img/logo1.png">
         </h1>
-        <h2>A conference for makers of the web.<br /><span>August 22nd - 23rd | Little Rock, Arkansas</span></h2>
+        <h2 class="hide-on-mobile">A conference for makers of the web.<br /><span>August 22nd - 23rd | Little Rock, Arkansas</span></h2>
+        <h2 class="hide-on-desktop">A conference for makers of the web.<br /><span>August 22nd - 23rd<br />Little Rock, Arkansas</span></h2>
+        <a class="btn register-mobile hide-on-desktop" href="/register">Register Now</a>
       </div>
     </div>
   </section>
@@ -61,7 +64,7 @@
     <svg id="bigTriangleColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 102" preserveAspectRatio="none">
       <path d="M0 0 L50 70 L100 0 Z" />
     </svg>
-    <div id="nav-wrapper">
+    <div id="nav-wrapper" class="hide-on-mobile">
       <div class="grid-container">
         <div class="grid-100">
           <nav>
@@ -82,7 +85,8 @@
   <section data-scroll-index="1" id="speakers">
     <div class="grid-container">
       <div class="grid-100 mobile-grid-100">
-        <h2>Speakers</h2>
+        <h2 class="hide-on-mobile">Speakers</h2>
+        <h2 class="hide-on-desktop">Speakers</h2>
       </div>
       <div class="grid-50 mobile-grid-100">
         <figure>
@@ -209,7 +213,7 @@
         <hr />
         <h2>Details</h2>
       </div>
-      <div class="event-details">
+      <div class="event-details hide-on-mobile">
         <div class="grid-80 prefix-10 mobile-grid-100">
           <div class="event-description">
             <p class="emphasis">Made by Few is a single-track, two day conference taking place on August 22-23 in Little Rock, Arkansas at the Ron Robinson Theater. The conference focuses on individuals who design and create web/mobile applications and sites.</p>
@@ -218,24 +222,68 @@
           </div>
         </div>
         <div class="grid-20 prefix-10 mobile-grid-100">
-          <h3>MxF Venue</h3>
-          <p><strong>Ron Robinson Theater</strong><br/>#1 Count Pulaski Way<br/>Little Rock, AR 72201<br /><a href="https://goo.gl/maps/ZKxA1">Google Map &#8594;</a></p>
+          <div class="details-block">
+            <h3>MxF Venue</h3>
+            <p><strong>Ron Robinson Theater</strong><br/>#1 Count Pulaski Way<br/>Little Rock, AR 72201<br /><a href="https://goo.gl/maps/ZKxA1">Google Map &#8594;</a></p>
+          </div>
         </div>
         <div class="grid-20 mobile-grid-100">
-          <h3>DxF Venue</h3>
-          <p>Announcing Soon.</p>
+          <div class="details-block">
+            <h3>DxF Venue</h3>
+            <p>Announcing Soon.</p>
+          </div>
         </div>
         <div class="grid-20 mobile-grid-100">
-          <h3>After-party Venue</h3>
-          <p>Announcing Soon.</p>
+          <div class="details-block">
+            <h3>After-party Venue</h3>
+            <p>Announcing Soon.</p>
+          </div>
         </div>
         <div class="grid-20 mobile-grid-100">
-          <h3>Suggested Hotel</h3>
-          <p>Announcing Soon.</p>
+          <div class="details-block">
+            <h3>Suggested Hotel</h3>
+            <p>Announcing Soon.</p>
+          </div>
+        </div>
+      </div>
+      <div class="event-details hide-on-desktop">
+        <div class="grid-80 prefix-10 mobile-grid-100">
+          <div class="event-description">
+            <p class="emphasis">Made by Few is a single-track, two day conference taking place on August 22-23 in Little Rock, Arkansas at the Ron Robinson Theater. The conference focuses on individuals who design and create web/mobile applications and sites.</p>
+            <p>There will be a total of 10 speakers, with 5 speakers presenting each day. The speakers will be a mix of designers, illustrators, developers, and entrepreneurs.</p>
+            <p>The ticket cost will include admission to each day of the conference, the <a href="http://www.designedbyfew.com">Designed by Few Competition</a>, the conference after-party, lunch & breakfast on both days, plus a conference t-shirt and schwag. We will also be doing a few giveaways throughout each day.</p>
+          </div>
+        </div>
+        <div class="grid-20 prefix-10 mobile-grid-100">
+          <div class="details-block">
+            <h3>MxF Venue</h3>
+            <p><strong>Ron Robinson Theater</strong><br/>#1 Count Pulaski Way<br/>Little Rock, AR 72201<br /><a href="https://goo.gl/maps/ZKxA1">Google Map &#8594;</a></p>
+          </div>
+        </div>
+        <div class="grid-20 mobile-grid-100">
+          <div class="details-block">
+            <h3>DxF Venue</h3>
+            <p>Announcing Soon.</p>
+          </div>
+        </div>
+        <div class="grid-20 mobile-grid-100">
+          <div class="details-block">
+            <h3>After-party Venue</h3>
+            <p>Announcing Soon.</p>
+          </div>
+        </div>
+        <div class="grid-20 mobile-grid-100">
+          <div class="details-block">
+            <h3>Suggested Hotel</h3>
+            <p>Announcing Soon.</p>
+          </div>
         </div>
       </div>
     </div>
-    <svg id="bigHalfCircle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <svg id="bigHalfCircle" class="hide-on-mobile" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path d="M0 100 C40 0 60 0 100 100 Z"/>
+    </svg>
+    <svg id="bigHalfCircle" class="hide-on-desktop" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="30" viewBox="0 0 100 100" preserveAspectRatio="none">
       <path d="M0 100 C40 0 60 0 100 100 Z"/>
     </svg>
     <div id="map"></div>
@@ -244,7 +292,8 @@
   <section id="about">
     <div class="grid-container">
       <div class="grid-100 mobile-grid-100">
-        <h2>What you should expect.</h2>
+        <h2 class="hide-on-mobile">What you should expect.</h2>
+        <h2 class="hide-on-desktop">What you should expect.</h2>
       </div>
       <div class="grid-25 mobile-grid-100">
         <p>Making new friends.</p>
@@ -347,7 +396,7 @@
           Logo and branding by <a href="http://www.jeremyteff.com/">Jeremy Teff</a>. Site design and coding by <a href="http://www.arlton.com/">Arlton Lowry</a>. Site refinement and optimization by <a href="http://davidhudson.me/">David Hudson</a>.<br />
           © 2014 Made by Few. All Rights Reserved.
         </p>
-        <div class="social">
+        <div class="social hide-on-mobile">
           <a href="http://www.twitter.com/madebyfew"><i class="icon-twitter"></i></a>
           <a href="http://www.facebook.com/madebyfew"><i class="icon-facebook"></i></a>
           <a href="http://lanyrd.com/2014/mxf2014"><i class="icon-lanyrd"></i></a>

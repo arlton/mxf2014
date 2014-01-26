@@ -174,6 +174,19 @@ footer {
 #welcome a.register:hover {
   background: #9e813d;
 }
+#welcome a.register-mobile {
+  padding: 10px 25px;
+  margin: 30px auto 10px auto;
+  line-height: 32px;
+  color: white;
+  border: 1px solid #9e813d;
+  border-radius: 2px;
+  display: block;
+  text-align: center;
+}
+#welcome a.register-mobile:hover {
+  background: #9e813d;
+}
 #welcome p {
   font-weight: 300;
   font-size: 18px;
@@ -182,6 +195,12 @@ footer {
 }
 #welcome h1 img {
   display: block;
+}
+#welcome h1 img.hide-on-desktop {
+  width: 90%;
+  margin: 20px auto 40px auto;
+}
+#welcome h1 img.hide-on-mobile {
   width: 70%;
   margin: 40px auto 80px auto;
 }
@@ -194,6 +213,15 @@ footer {
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.2em;
+}
+#welcome h2.hide-on-desktop {
+  font-size: 30px;
+}
+#welcome h2.hide-on-desktop span {
+  line-height: 16px;
+  font-size: 12px;
+  display: block;
+  margin-top: 20px;
 }
 #navbar {
   background: #9e813d;
@@ -263,6 +291,9 @@ footer {
 #speakers h2 {
   margin-top: 100px;
   margin-bottom: 60px;
+}
+#speakers h2.hide-on-desktop {
+  margin-top: 40px;
 }
 #speakers p {
   text-align: center;
@@ -373,6 +404,12 @@ footer {
   border-radius: 2px;
   overflow: hidden;
 }
+#speakers .tba img {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  position: relative;
+}
 svg#bigTriangleColor {
   pointer-events: none;
 }
@@ -472,19 +509,33 @@ svg#bigTriangleColor path {
   font-size: 24px;
   line-height: 32px;
 }
-#details .event-details h3 {
+#details .event-details .details-block {
+  margin-bottom: 30px;
+}
+#details .event-details .details-block h3 {
   font-weight: 600;
   font-size: 20px;
   margin-bottom: 10px;
 }
-#details .event-details h3.hotel {
+#details .event-details .details-block h3.hotel {
   margin-top: 30px;
 }
-#details .event-details p {
+#details .event-details .details-block p {
   line-height: 20px;
 }
-#details .event-details p strong {
+#details .event-details .details-block p strong {
   font-weight: 600;
+}
+#details .event-details.hide-on-desktop {
+  padding-bottom: 0;
+}
+#details .event-details.hide-on-desktop .event-description {
+  margin-bottom: 40px;
+}
+#details .event-details.hide-on-desktop .event-description p.emphasis-mobile {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
 }
 #details #bigHalfCircle {
   margin-bottom: -600px;
@@ -508,6 +559,9 @@ svg#bigTriangleColor path {
 }
 #about h2 {
   margin-bottom: 60px;
+}
+#about h2.hide-on-desktop {
+  margin-top: 50px;
 }
 #about p {
   color: #9e813d;
