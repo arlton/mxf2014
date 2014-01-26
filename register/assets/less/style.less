@@ -133,6 +133,7 @@ body {
           float: left;
           margin: 0;
           padding: 0;
+          width: 60%;
           span {
             font-weight: 400;
             font-size: 14px;
@@ -140,7 +141,7 @@ body {
         }
         div {
           float: right;
-          width: 200px;
+          width: 40%;
           span {
             float: right;
             font-size: 16px;
@@ -170,13 +171,19 @@ body {
         color: @gold;
         margin: 3px 0 0 0;
         padding: 0;
+        &.mobile {
+          margin: -7px 0 4px 0; 
+        }
       }
       input {
         float: right;
       }
       input[type="text"] {
-        width: 160px;
-        margin-right: 10px;
+        width: 70%;
+        margin-right: 2%;
+      }
+      input[type="submit"] {
+        width: 28%;
       }
     }
   }

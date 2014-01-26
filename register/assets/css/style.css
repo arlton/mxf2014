@@ -6084,6 +6084,7 @@ body {
   float: left;
   margin: 0;
   padding: 0;
+  width: 60%;
 }
 .wrapper .tickets ul li h4 span {
   font-weight: 400;
@@ -6091,7 +6092,7 @@ body {
 }
 .wrapper .tickets ul li div {
   float: right;
-  width: 200px;
+  width: 40%;
 }
 .wrapper .tickets ul li div span {
   float: right;
@@ -6121,12 +6122,18 @@ body {
   margin: 3px 0 0 0;
   padding: 0;
 }
+.wrapper .tickets .promo-code p.mobile {
+  margin: -7px 0 4px 0;
+}
 .wrapper .tickets .promo-code input {
   float: right;
 }
 .wrapper .tickets .promo-code input[type="text"] {
-  width: 160px;
-  margin-right: 10px;
+  width: 70%;
+  margin-right: 2%;
+}
+.wrapper .tickets .promo-code input[type="submit"] {
+  width: 28%;
 }
 .wrapper .billing-info {
   padding: 30px;
