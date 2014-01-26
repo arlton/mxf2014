@@ -6011,8 +6011,8 @@ hr {
   color: #9e813d;
   background-color: #9e813d;
   height: 1px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 h1,
 h2,
@@ -6064,13 +6064,19 @@ body {
   font-size: 20px;
 }
 .wrapper .tickets ul li {
-  padding: 5px 30px;
+  padding: 10px 30px;
   width: 100%;
   float: left;
   border-bottom: 1px solid #cccccc;
 }
 .wrapper .tickets ul li h4 {
   float: left;
+  margin: 0;
+  padding: 0;
+}
+.wrapper .tickets ul li h4 span {
+  font-weight: 400;
+  font-size: 14px;
 }
 .wrapper .tickets ul li div {
   float: right;
@@ -6079,7 +6085,10 @@ body {
 .wrapper .tickets ul li div span {
   float: right;
   font-size: 16px;
-  margin-top: 7px;
+  margin: 7px 0 0 0;
+}
+.wrapper .tickets ul li div span.not-available {
+  margin: -2px 0 0 0;
 }
 .wrapper .tickets ul li div input {
   width: 40px;
@@ -6112,7 +6121,7 @@ body {
   padding: 30px;
 }
 .wrapper .billing-info h4 {
-  text-align: center;
+  text-align: left;
   margin-bottom: 30px;
 }
 .wrapper .bottom {

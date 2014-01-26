@@ -44,7 +44,8 @@
                 <div class="col-md-12">
                   <ul>
                     <li>
-                      <h4>Early Bird Ticket</h4>
+                      <div class=""></div>
+                      <h4>Early Bird Ticket<br /><span>Ends May 31st, 2014</span></h4>
                       <div>
                         <input type="text" class="form-control parsley-validated" id="" name="" value="1" placeholder="" data-notblank="true" data-required="true">
                         <span>$185 x </span>
@@ -53,7 +54,7 @@
                     <li>
                       <h4>Regular Ticket</h4>
                       <div>
-                        <span>Not available.</span>
+                        <span class="not-available">Not available.</span>
                       </div>
                     </li>
                   </ul>
@@ -71,6 +72,84 @@
             </div>
             <form class="form-horizontal" role="form" data-validate="parsley" action="/api/payment/send" method="post">
               <div class="billing-info">
+                <h4>Ticket Holder #1 Information</h4>
+                <div class="form-group">
+                  <div class="col-lg-6">
+                    <label for="name" class="control-label">First Name *</label>
+                    <input type="text" class="form-control parsley-validated" id="first_name" name="first_name" placeholder="" value="" data-notblank="true" data-required="true">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="name" class="control-label">Last Name *</label>
+                    <input type="text" class="form-control parsley-validated" id="last_name" name="last_name" placeholder="" value="" data-notblank="true" data-required="true">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-6">
+                    <label for="organization" class="control-label">Organization</label>
+                    <input type="text" class="form-control" id="organization" name="organization" placeholder="">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="title" class="control-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="" value="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-6">
+                    <label for="twitter_handle" class="control-label">Twitter Handle </label>
+                    <input type="text" class="form-control" id="first_name" name="twitter_handle" placeholder="" value="">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="shirt_size" class="control-label">Shirt Size *</label>
+                    <select class="form-control parsley-validated" id="shirt_size" name="shirt_size" data-notblank="true" data-required="true">
+                      <option></option>
+                      <option>Small</option>
+                      <option>Medium</option>
+                      <option>Large</option>
+                      <option>X-Large</option>
+                      <option>XX-Large</option>
+                    </select>
+                  </div>
+                </div>
+                <hr />
+                <h4>Ticket Holder #2 Information</h4>
+                <div class="form-group">
+                  <div class="col-lg-6">
+                    <label for="name" class="control-label">First Name *</label>
+                    <input type="text" class="form-control parsley-validated" id="first_name" name="first_name" placeholder="" value="" data-notblank="true" data-required="true">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="name" class="control-label">Last Name *</label>
+                    <input type="text" class="form-control parsley-validated" id="last_name" name="last_name" placeholder="" value="" data-notblank="true" data-required="true">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-6">
+                    <label for="organization" class="control-label">Organization</label>
+                    <input type="text" class="form-control" id="organization" name="organization" placeholder="">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="title" class="control-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="" value="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-6">
+                    <label for="twitter_handle" class="control-label">Twitter Handle </label>
+                    <input type="text" class="form-control" id="first_name" name="twitter_handle" placeholder="" value="">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="shirt_size" class="control-label">Shirt Size *</label>
+                    <select class="form-control parsley-validated" id="shirt_size" name="shirt_size" data-notblank="true" data-required="true">
+                      <option></option>
+                      <option>Small</option>
+                      <option>Medium</option>
+                      <option>Large</option>
+                      <option>X-Large</option>
+                      <option>XX-Large</option>
+                    </select>
+                  </div>
+                </div>
+                <hr />
                 <h4>Billing Information</h4>
                 <div class="form-group">
                   <div class="col-lg-6">
@@ -83,87 +162,13 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <div class="col-lg-12">
-                    <label for="name" class="control-label">Organization</label>
-                    <input type="text" class="form-control" id="organziation" name="organziation" placeholder="">
+                  <div class="col-lg-6">
+                    <label for="name" class="control-label">Email Address *</label>
+                    <input type="text" class="form-control parsley-validated" id="first_name" name="email_address" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-12">
-                    <label for="name" class="control-label">Address 1 *</label>
-                    <input type="text" class="form-control parsley-validated" id="address1" name="address1" placeholder="" value="" data-notblank="true" data-required="true">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-12">
-                    <label for="name" class="control-label">Address 2</label>
-                    <input type="text" class="form-control" id="address2" name="address2" placeholder="">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-7">
-                    <label for="name" class="control-label">City *</label>
-                    <input type="text" class="form-control parsley-validated" id="city" name="city" placeholder="" value="" data-notblank="true" data-required="true">
-                  </div>
-                  <div class="col-lg-2">
-                    <label for="name" class="control-label">State *</label>
-                    <select class="form-control parsley-validated" id="state" name="state" data-notblank="true" data-required="true">
-                      <option value="AL">AL</option>
-                      <option value="AK">AK</option>
-                      <option value="AZ">AZ</option>
-                      <option value="AR">AR</option>
-                      <option value="CA">CA</option>
-                      <option value="CO">CO</option>
-                      <option value="CT">CT</option>
-                      <option value="DE">DE</option>
-                      <option value="DC">DC</option>
-                      <option value="FL">FL</option>
-                      <option value="GA">GE</option>
-                      <option value="HI">HI</option>
-                      <option value="ID">ID</option>
-                      <option value="IL">IL</option>
-                      <option value="IN">IN</option>
-                      <option value="IA">IA</option>
-                      <option value="KS">KS</option>
-                      <option value="KY">KY</option>
-                      <option value="LA">LA</option>
-                      <option value="ME">ME</option>
-                      <option value="MD">MD</option>
-                      <option value="MA">MA</option>
-                      <option value="MI">MI</option>
-                      <option value="MN">MN</option>
-                      <option value="MS">MS</option>
-                      <option value="MO">MO</option>
-                      <option value="MT">MT</option>
-                      <option value="NE">NE</option>
-                      <option value="NV">NV</option>
-                      <option value="NH">NH</option>
-                      <option value="NJ">NJ</option>
-                      <option value="NM">NM</option>
-                      <option value="NY">NY</option>
-                      <option value="NC">NC</option>
-                      <option value="ND">ND</option>
-                      <option value="OH">OH</option>
-                      <option value="OK">OK</option>
-                      <option value="OR">OR</option>
-                      <option value="PA">PA</option>
-                      <option value="RI">RI</option>
-                      <option value="SC">SC</option>
-                      <option value="SD">SD</option>
-                      <option value="TN">TN</option>
-                      <option value="TX">TX</option>
-                      <option value="UT">UT</option>
-                      <option value="VT">VT</option>
-                      <option value="VA">VA</option>
-                      <option value="WA">WA</option>
-                      <option value="WV">WV</option>
-                      <option value="WI">WI</option>
-                      <option value="WY">WY</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-3">
-                    <label for="name" class="control-label">Zipcode *</label>
-                    <input type="text" class="form-control parsley-validated" id="zipcode" name="zipcode" placeholder="12345" value="72205" data-notblank="true" data-required="true">
+                  <div class="col-lg-6">
+                    <label for="name" class="control-label">Confirm Email Address *</label>
+                    <input type="text" class="form-control parsley-validated" id="last_name" name="confirm_email_address" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">

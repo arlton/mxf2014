@@ -62,8 +62,8 @@ hr {
   color: @gold;
   background-color: @gold;
   height: 1px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -114,12 +114,18 @@ body {
     }
     ul {
       li {
-        padding: 5px 30px;
+        padding: 10px 30px;
         width: 100%;
         float: left;
         border-bottom: 1px solid @grey;
         h4 {
           float: left;
+          margin: 0;
+          padding: 0;
+          span {
+            font-weight: 400;
+            font-size: 14px;
+          }
         }
         div {
           float: right;
@@ -127,7 +133,10 @@ body {
           span {
             float: right;
             font-size: 16px;
-            margin-top: 7px;
+            margin: 7px 0 0 0;
+            &.not-available {
+              margin: -2px 0 0 0;
+            }
           }
           input {
             width: 40px;
@@ -163,7 +172,7 @@ body {
   .billing-info {
     padding: 30px;
     h4 {
-      text-align: center;
+      text-align: left;
       margin-bottom: 30px;
     }
   }
