@@ -76,6 +76,9 @@ a {
   color: #9e813d;
   text-decoration: none;
 }
+a:hover {
+  color: #0d1416;
+}
 h2 {
   text-align: center;
   font-size: 56px;
@@ -437,6 +440,12 @@ svg#bigTriangleColor path {
   text-align: center;
   padding-top: 14px;
   margin-top: -17px;
+}
+#schedule ul li a {
+  color: #0d1416;
+}
+#schedule ul li a:hover {
+  color: #9e813d;
 }
 #details h2 {
   color: #0d1416;
