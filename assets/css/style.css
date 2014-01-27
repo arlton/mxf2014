@@ -526,13 +526,13 @@ svg#bigTriangleColor path {
 #details .event-details .details-block p strong {
   font-weight: 600;
 }
-#details .event-details.hide-on-desktop {
+#details .event-details.mobile {
   padding-bottom: 0;
 }
-#details .event-details.hide-on-desktop .event-description {
+#details .event-details.mobile .event-description {
   margin-bottom: 40px;
 }
-#details .event-details.hide-on-desktop .event-description p.emphasis-mobile {
+#details .event-details.mobile .event-description p.emphasis {
   font-size: 18px;
   line-height: 24px;
   font-weight: 400;
