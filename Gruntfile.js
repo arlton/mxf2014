@@ -81,7 +81,7 @@ module.exports = function(grunt) {
         tasks: ['recess', 'clean', 'jshint', 'uglify']
       },
       javascript: {
-        files: ['assets/js/*.js'],
+        files: ['assets/js/custom.js'],
         tasks: ['clean', 'uglify']
       },
       stylesheets: {
