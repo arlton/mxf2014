@@ -1,0 +1,4 @@
+*.sublime*
+assets/css/style.css
+assets/js/scripts.min.js
+node_modules/
