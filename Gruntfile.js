@@ -28,6 +28,7 @@ module.exports = function(grunt) {
         boss: true,
         eqnull: true,
         browser: true,
+        laxcomma: true,
         globals: {
           console: true,
           define: true
@@ -42,33 +43,33 @@ module.exports = function(grunt) {
       }
     },
 
-    recess: {
-      options: {
-        compile: true
-      },
+    less: {
       all: {
         options: {
+          paths: ["assets/less", "assets/css"],
           compress: true
         },
-        src: ['assets/less/style.less'],
-        dest: 'assets/css/style.min.css'
+        files: {
+          "assets/css/style.css": "assets/less/style.less"
+        }
       }
     },
 
     uglify: {
       options: {
         compress: true,
-        mangle: true
+        mangle: false
       },
       all: {
         files: {
           'assets/js/scripts.min.js': [
               'assets/js/jquery.js'
-            , 'assets/js/jquery.stellar.min.js',
+            , 'assets/js/jquery.stellar.min.js'
             , 'assets/js/scrollit.js'
             , 'assets/js/headroom.min.js'
             , 'assets/js/jQuery.headroom.js'
             , 'assets/js/jquery.sticky-div.js'
+            , 'assets/js/custom.js'
           ]
         }
       }
@@ -95,7 +96,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-recess');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  //grunt.loadNpmTasks('grunt-recess');
   //grunt.loadNpmTasks('grunt-contrib-concat');
   //grunt.loadNpmTasks('grunt-contrib-handlebars');
   //grunt.loadNpmTasks('grunt-rsync');
@@ -105,7 +107,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-js', ['clean', 'jshint', 'uglify']);
 
   // CSS distribution task.
-  grunt.registerTask('dist-css', ['recess']);
+  grunt.registerTask('dist-css', ['less']);
 
   // Full distribution task.
   grunt.registerTask('dist', ['dist-css', 'dist-js']);
