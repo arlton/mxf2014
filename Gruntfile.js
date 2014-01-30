@@ -97,11 +97,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
-  //grunt.loadNpmTasks('grunt-recess');
-  //grunt.loadNpmTasks('grunt-contrib-concat');
-  //grunt.loadNpmTasks('grunt-contrib-handlebars');
-  //grunt.loadNpmTasks('grunt-rsync');
-  //grunt.loadNpmTasks('grunt-ssh');
 
   // JS distribution task.
   grunt.registerTask('dist-js', ['clean', 'jshint', 'uglify']);
@@ -111,8 +106,6 @@ module.exports = function(grunt) {
 
   // Full distribution task.
   grunt.registerTask('dist', ['dist-css', 'dist-js']);
-
-  //grunt.registerTask('deploy', ['dist']);
 
   // Default task.
   grunt.registerTask('default', ['dist']);
