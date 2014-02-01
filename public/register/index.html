@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The conference for makers of the web.">
     <meta name="author" content="Arlton Lowry and David Hudson">
-    <link rel="shortcut icon" href=".assets/img/favicon.png">
+    <link rel="shortcut icon" href="/assets/img/favicon.png">
 
     <title>Made by Few 2014 | Registration</title>
 
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="/register/assets/css/style.css" rel="stylesheet">
 
     <script type="text/javascript" src="//use.typekit.net/dle5ptb.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -48,7 +48,7 @@
                       <div class=""></div>
                       <h4>Early Bird Ticket<br /><span>Ends May 31st, 2014</span></h4>
                       <div>
-                        <input type="text" class="form-control parsley-validated" id="" name="" value="1" placeholder="" data-notblank="true" data-required="true">
+                        <input type="text" class="form-control parsley-validated" id="ticket-number" name="ticket_number" value="1" placeholder="" data-notblank="true" data-required="true">
                         <span>$185 x </span>
                       </div>
                     </li>
@@ -80,84 +80,48 @@
             </div>
             <form class="form-horizontal" role="form" data-validate="parsley" action="/api/payment/send" method="post">
               <div class="billing-info">
-                <h4>Ticket Holder #1 Information</h4>
-                <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="name" class="control-label">First Name *</label>
-                    <input type="text" class="form-control parsley-validated" id="first_name" name="first_name" placeholder="" value="" data-notblank="true" data-required="true">
+                <script id="attendee-template" type="text/x-handlebars-template">
+                  <h4>Ticket Holder #{{attendeeNumber}} Information</h4>
+                  <div class="form-group">
+                    <div class="col-lg-6">
+                      <label for="name" class="control-label">First Name *</label>
+                      <input type="text" class="form-control parsley-validated first-name" name="firstName" placeholder="" value="" data-notblank="true" data-required="true">
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="name" class="control-label">Last Name *</label>
+                      <input type="text" class="form-control parsley-validated last-name" name="lastName" placeholder="" value="" data-notblank="true" data-required="true">
+                    </div>
                   </div>
-                  <div class="col-lg-6">
-                    <label for="name" class="control-label">Last Name *</label>
-                    <input type="text" class="form-control parsley-validated" id="last_name" name="last_name" placeholder="" value="" data-notblank="true" data-required="true">
+                  <div class="form-group">
+                    <div class="col-lg-6">
+                      <label for="organization" class="control-label">Organization</label>
+                      <input type="text" class="form-control organization" name="organization" placeholder="">
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="title" class="control-label">Title</label>
+                      <input type="text" class="form-control title" name="title" placeholder="" value="">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="organization" class="control-label">Organization</label>
-                    <input type="text" class="form-control" id="organization" name="organization" placeholder="">
+                  <div class="form-group">
+                    <div class="col-lg-6">
+                      <label for="twitter_handle" class="control-label">Twitter Handle </label>
+                      <input type="text" class="form-control twitter-handle" name="twitterHandle" placeholder="" value="">
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="shirt_size" class="control-label">Shirt Size *</label>
+                      <select class="form-control parsley-validated shirt-size" name="shirtSize" data-notblank="true" data-required="true">
+                        <option></option>
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                        <option>X-Large</option>
+                        <option>XX-Large</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-lg-6">
-                    <label for="title" class="control-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="" value="">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="twitter_handle" class="control-label">Twitter Handle </label>
-                    <input type="text" class="form-control" id="first_name" name="twitter_handle" placeholder="" value="">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="shirt_size" class="control-label">Shirt Size *</label>
-                    <select class="form-control parsley-validated" id="shirt_size" name="shirt_size" data-notblank="true" data-required="true">
-                      <option></option>
-                      <option>Small</option>
-                      <option>Medium</option>
-                      <option>Large</option>
-                      <option>X-Large</option>
-                      <option>XX-Large</option>
-                    </select>
-                  </div>
-                </div>
-                <hr />
-                <h4>Ticket Holder #2 Information</h4>
-                <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="name" class="control-label">First Name *</label>
-                    <input type="text" class="form-control parsley-validated" id="first_name" name="first_name" placeholder="" value="" data-notblank="true" data-required="true">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="name" class="control-label">Last Name *</label>
-                    <input type="text" class="form-control parsley-validated" id="last_name" name="last_name" placeholder="" value="" data-notblank="true" data-required="true">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="organization" class="control-label">Organization</label>
-                    <input type="text" class="form-control" id="organization" name="organization" placeholder="">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="title" class="control-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="" value="">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="twitter_handle" class="control-label">Twitter Handle </label>
-                    <input type="text" class="form-control" id="first_name" name="twitter_handle" placeholder="" value="">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="shirt_size" class="control-label">Shirt Size *</label>
-                    <select class="form-control parsley-validated" id="shirt_size" name="shirt_size" data-notblank="true" data-required="true">
-                      <option></option>
-                      <option>Small</option>
-                      <option>Medium</option>
-                      <option>Large</option>
-                      <option>X-Large</option>
-                      <option>XX-Large</option>
-                    </select>
-                  </div>
-                </div>
-                <hr />
+                  <hr />
+                </script>
+                <div id="attendees"></div>
                 <h4>Additional Information</h4>
                 <div class="form-group">
                   <div class="col-lg-12">
@@ -249,5 +213,7 @@
         </div>
       </div>
     </div>
+    <script src="/register/assets/js/handlebars.js"></script>
+    <script src="/register/assets/js/custom.js"></script>
   </body>
 </html>
