@@ -1,8 +1,8 @@
 {
   "name": "MxF2014",
-  "description": "",
+  "description": "Made By Few 2014",
   "version": "0.0.1",
-  "keywords": [],
+  "keywords": ["your", "mom"],
   "homepage": "http://madebyfew.com/",
   "author": "Arlton Lowry and David Hudson",
   "devDependencies": {
@@ -21,5 +21,9 @@
   "main": "web.js",
   "scripts": {
     "start": "node web.js"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arlton/mxf2014"
+  },
 }
