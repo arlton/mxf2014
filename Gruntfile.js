@@ -34,23 +34,23 @@ module.exports = function(grunt) {
           define: true
         }
       },
-      all: ["assets/js/custom.js"]
+      all: ["public/assets/js/custom.js"]
     },
 
     clean: {
       all: {
-        src: ["assets/js/scripts.min.js"]
+        src: ["public/assets/js/scripts.min.js"]
       }
     },
 
     less: {
       all: {
         options: {
-          paths: ["assets/less", "assets/css"],
+          paths: ["public/assets/less", "public/assets/css"],
           compress: true
         },
         files: {
-          "assets/css/style.css": "assets/less/style.less"
+          "public/assets/css/style.css": "public/assets/less/style.less"
         }
       }
     },
@@ -62,14 +62,14 @@ module.exports = function(grunt) {
       },
       all: {
         files: {
-          'assets/js/scripts.min.js': [
-              'assets/js/jquery.js'
-            , 'assets/js/jquery.stellar.min.js'
-            , 'assets/js/scrollit.js'
-            , 'assets/js/headroom.min.js'
-            , 'assets/js/jQuery.headroom.js'
-            , 'assets/js/jquery.sticky-div.js'
-            , 'assets/js/custom.js'
+          'public/assets/js/scripts.min.js': [
+              'public/assets/js/jquery.js'
+            , 'public/assets/js/jquery.stellar.min.js'
+            , 'public/assets/js/scrollit.js'
+            , 'public/assets/js/headroom.min.js'
+            , 'public/assets/js/jQuery.headroom.js'
+            , 'public/assets/js/jquery.sticky-div.js'
+            , 'public/assets/js/custom.js'
           ]
         }
       }
@@ -81,11 +81,11 @@ module.exports = function(grunt) {
         tasks: ['recess', 'clean', 'jshint', 'uglify']
       },
       javascript: {
-        files: ['assets/js/custom.js'],
+        files: ['public/assets/js/custom.js'],
         tasks: ['clean', 'uglify']
       },
       stylesheets: {
-        files: ['assets/less/*.less'],
+        files: ['public/assets/less/*.less'],
         tasks: ['recess']
       }
     }
