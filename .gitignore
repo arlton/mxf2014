@@ -1,3 +1,5 @@
+.DS_Store
+.env
 *.sublime*
 assets/css/style.css
 assets/js/scripts.min.js
