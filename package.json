@@ -19,6 +19,6 @@
     "logfmt": "~0.20.0"
   },
   "scripts": {
-    "start": "web.js"
+    "start": "node web.js"
   }
 }
