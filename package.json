@@ -20,7 +20,8 @@
   "dependencies": {
     "express": "~3.4.8",
     "logfmt": "~0.20.0",
-    "stripe": "~2.4.0"
+    "stripe": "~2.4.0",
+    "mongoose": "~3.8.6"
   },
   "main": "web.js",
   "scripts": {
