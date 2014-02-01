@@ -18,6 +18,7 @@
     "express": "~3.4.8",
     "logfmt": "~0.20.0"
   },
+  "main": "web.js",
   "scripts": {
     "start": "node web.js"
   }
