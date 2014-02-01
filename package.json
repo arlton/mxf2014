@@ -2,7 +2,10 @@
   "name": "MxF2014",
   "description": "Made By Few 2014",
   "version": "0.0.1",
-  "keywords": ["your", "mom"],
+  "keywords": [
+    "your",
+    "mom"
+  ],
   "homepage": "http://madebyfew.com/",
   "author": "Arlton Lowry and David Hudson",
   "devDependencies": {
@@ -16,7 +19,8 @@
   },
   "dependencies": {
     "express": "~3.4.8",
-    "logfmt": "~0.20.0"
+    "logfmt": "~0.20.0",
+    "stripe": "~2.4.0"
   },
   "main": "web.js",
   "scripts": {
