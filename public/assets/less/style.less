@@ -246,7 +246,11 @@ footer {
 } 
 
 #speakers {
-  background: @gold;
+  background: @gold url('../img/speakers-bg.png') center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   padding-bottom: 100px;
   h2 {
     margin-top: 100px;
@@ -360,7 +364,7 @@ footer {
     }
   }
   .tba {
-    border: 5px solid @black;
+    border: 5px solid @white;
     margin: 0 0 20px 0;
     position: relative;
     border-radius: 2px;
