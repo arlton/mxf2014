@@ -22,7 +22,8 @@
     "logfmt": "~0.20.0",
     "stripe": "~2.4.0",
     "mongoose": "~3.8.6",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "sendgrid": "~1.0.0-rc.1.0"
   },
   "main": "web.js",
   "scripts": {
