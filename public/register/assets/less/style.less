@@ -52,6 +52,24 @@ ul {
   }
 }
 
+.btn-secondary {
+  background: @gold;
+  border: none;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: @white;
+  &:hover,
+  &:active,
+  &:focus {
+    background: @black;
+    border: @white;
+    outline: none;
+    color: @white;
+  }
+}
+
 hr {
   display: block;
   -webkit-margin-before: 0.5em;
@@ -73,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
 body {
   -webkit-font-smoothing: antialiased;
   font-family: "iskra",sans-serif;
-  background: #191919 url('../img/welcome.png') center center no-repeat;
+  background: @white;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -82,6 +100,7 @@ body {
 
 .wrapper {
   background: @white;
+  border: 1px solid @black;
   border-radius: 2px;
   margin: 30px 0;
   .header {
@@ -147,7 +166,7 @@ body {
             font-size: 16px;
             margin: 7px 0 0 0;
             &.not-available {
-              margin: -2px 0 0 0;
+              margin: 6px 0 0 0;
             }
           }
           input {
@@ -159,31 +178,9 @@ body {
             float: right;
           }
         }
-      }
-    }
-    .promo-code {
-      background: @black;
-      padding: 10px 30px;
-      float: left;
-      width: 100%;
-      p {
-        float: left;
-        color: @gold;
-        margin: 3px 0 0 0;
-        padding: 0;
-        &.mobile {
-          margin: -7px 0 4px 0; 
+        &:last-child {
+          border-bottom: 10px solid @black;
         }
-      }
-      input {
-        float: right;
-      }
-      input[type="text"] {
-        width: 70%;
-        margin-right: 2%;
-      }
-      input[type="submit"] {
-        width: 28%;
       }
     }
   }
@@ -192,15 +189,109 @@ body {
     h4 {
       text-align: left;
       margin-bottom: 30px;
+      span.remove {
+        color: @gold;
+        float: right;
+        font-weight: 500;
+        font-size: 14px;
+        margin-top: 4px;
+        cursor: pointer;
+        &:hover {
+          color: @black;
+        }
+      }
+    }
+  }
+  .promo-code {
+    background: @white;
+    padding: 0 30px 30px 30px;
+    float: left;
+    width: 100%;
+    h4 {
+      float: left;
+      color: @gold;
+      margin: 5px 0 0 -5px;
+      padding: 0;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      &.mobile {
+        margin: -7px 0 4px 0; 
+      }
+      &:hover {
+        color: @black;
+      }
+    }
+    input {
+      float: right;
+    }
+    input[type="text"] {
+      width: 70%;
+      margin-right: 2%;
+    }
+    input[type="submit"] {
+      width: 28%;
+    }
+    ul {
+      li {
+        margin-top: 10px;
+        padding: 10px 15px;
+        width: 100%;
+        float: left;
+        border: 1px solid @grey;
+        border-radius: 2px;
+        p {
+          float: left;
+          margin: 0;
+          padding: 0;
+          width: 60%;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 16px;
+          span {
+            font-size: 12px;
+            font-weight: 400;
+            &.remove {
+              text-align: left;
+              width: 100%;
+            }
+          }
+          &.mobile {
+            width: 100%;
+          }
+        }
+        span.remove {
+          float: right;
+          text-align: right;
+          width: 40%;
+          color: @gold;
+          cursor: pointer;
+          margin-top: 5px;
+          &:hover {
+            color: @black;
+          }
+        }
+        &:hover {
+          border-color: @gold;
+        }
+        &.invalid {
+          border-color: @gold;
+          background: @gold;
+          color: @white;
+          p {
+            width: 100%;
+          }
+        }
+      }
     }
   }
   .bottom {
     background: @black;
-    padding: 10px 30px 25px 30px;
+    padding: 64px 30px 25px 30px;
     .btn-primary {
       float: right;
       padding: 15px 55px;
-      margin-top: 20px;
+      margin-top: 29px;
       &.btn-mobile {
         width: 100%;
         float: none;
@@ -212,7 +303,7 @@ body {
       font-size: 26px;
       font-weight: 600;
       color: @gold;
-      margin-top: 24px;
+      margin-top: 34px;
       span {
         font-weight: 400;
       }
@@ -227,7 +318,7 @@ body {
 p.stripe {
   margin-bottom: 100px;
   text-align: center;
-  color: @white;
+  color: @black;
   img {
     height: 20px;
     margin-left: 2px;
