@@ -181,13 +181,11 @@ footer {
 
 #navbar {
   background: @gold;
-  img {
-    width: 40px;
-  }
   #nav-wrapper {
     z-index: 9999;
     background: @gold;
     padding: 19px 0 21px 0;
+    opacity: 0.9;
     nav {
       text-align: center;
       ul {
@@ -199,8 +197,14 @@ footer {
             font-weight: 600;
             cursor: pointer;
             color: @white;
+            -webkit-transition: all 0.2s;
+            -moz-transition: all 0.2s;
+            transition: all 0.2s;
             &:hover {
               color: @black;
+              -webkit-transition: all 0.2s;
+              -moz-transition: all 0.2s;
+              transition: all 0.2s;
             }
           }
           &.active {
@@ -572,8 +576,12 @@ svg#bigTriangleColor {
 }
 
 #sponsors {
+  background: @black url('../img/sponsors-bg.png') center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   padding: 0 0 60px 0;
-  background: @black;
   h2 {
     margin-bottom: 20px;
     margin-top: 100px;
@@ -603,6 +611,44 @@ footer {
   background: @gold;
   padding: 40px 0 60px 0;
   color: @white;
+  h5 {
+    float: right;
+    margin-bottom: 25px;
+    font-size: 18px;
+    &.mobile {
+      font-size: 16px;
+      float: none;
+      text-align: left;
+      line-height: 24px;
+    }
+  }
+  ul {
+    clear: both;
+    li {
+      float: right;
+      margin-left: 10px;
+      img {
+        border-radius: 100%;
+        background: @gold;
+        height: 50px;
+        border: 1px solid @gold;
+        opacity: 0.7;
+        &:hover {
+          opacity: 1;
+        }
+      }
+      &:last-child {
+        margin-left: 0;
+      }
+    }
+    &.mobile {
+      li {
+        float: left;
+        margin-left: 0;
+        margin-right: 10px;
+      }
+    }
+  }
   .social {
     a {
       font-size: 20px;
@@ -615,14 +661,20 @@ footer {
   }
   p {
     float: right;
+    clear: both;
     text-align: right;
     font-size: 14px;
     line-height: 20px;
+    margin-top: 20px;
     a {
       color: @white;
       &:hover {
         color: @black;
       }
+    }
+    &.mobile {
+      float: left;
+      text-align: left;
     }
   }
 }

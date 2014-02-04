@@ -229,13 +229,11 @@ footer {
 #navbar {
   background: #9e813d;
 }
-#navbar img {
-  width: 40px;
-}
 #navbar #nav-wrapper {
   z-index: 9999;
   background: #9e813d;
   padding: 19px 0 21px 0;
+  opacity: 0.9;
 }
 #navbar #nav-wrapper nav {
   text-align: center;
@@ -249,9 +247,15 @@ footer {
   font-weight: 600;
   cursor: pointer;
   color: #ffffff;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
 }
 #navbar #nav-wrapper nav ul li a:hover {
   color: #0d1416;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
 }
 #navbar #nav-wrapper nav ul li.active a {
   color: #0d1416;
@@ -599,8 +603,12 @@ svg#bigTriangleColor path {
   background: #9e813d;
 }
 #sponsors {
+  background: #0d1416 url('../img/sponsors-bg.png') center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   padding: 0 0 60px 0;
-  background: #0d1416;
 }
 #sponsors h2 {
   margin-bottom: 20px;
@@ -630,6 +638,42 @@ footer {
   padding: 40px 0 60px 0;
   color: #ffffff;
 }
+footer h5 {
+  float: right;
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+footer h5.mobile {
+  font-size: 16px;
+  float: none;
+  text-align: left;
+  line-height: 24px;
+}
+footer ul {
+  clear: both;
+}
+footer ul li {
+  float: right;
+  margin-left: 10px;
+}
+footer ul li img {
+  border-radius: 100%;
+  background: #9e813d;
+  height: 50px;
+  border: 1px solid #9e813d;
+  opacity: 0.7;
+}
+footer ul li img:hover {
+  opacity: 1;
+}
+footer ul li:last-child {
+  margin-left: 0;
+}
+footer ul.mobile li {
+  float: left;
+  margin-left: 0;
+  margin-right: 10px;
+}
 footer .social a {
   font-size: 20px;
   color: #ffffff;
@@ -640,13 +684,19 @@ footer .social a:hover {
 }
 footer p {
   float: right;
+  clear: both;
   text-align: right;
   font-size: 14px;
   line-height: 20px;
+  margin-top: 20px;
 }
 footer p a {
   color: #ffffff;
 }
 footer p a:hover {
   color: #0d1416;
+}
+footer p.mobile {
+  float: left;
+  text-align: left;
 }

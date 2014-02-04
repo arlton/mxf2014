@@ -6001,6 +6001,23 @@ ul li {
   outline: none;
   color: #9e813d;
 }
+.btn-secondary {
+  background: #9e813d;
+  border: none;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+}
+.btn-secondary:hover,
+.btn-secondary:active,
+.btn-secondary:focus {
+  background: #0d1416;
+  border: #ffffff;
+  outline: none;
+  color: #ffffff;
+}
 hr {
   display: block;
   -webkit-margin-before: 0.5em;
@@ -6025,7 +6042,7 @@ h6 {
 body {
   -webkit-font-smoothing: antialiased;
   font-family: "iskra", sans-serif;
-  background: #191919 url('../img/welcome.png') center center no-repeat;
+  background: #ffffff;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -6033,6 +6050,7 @@ body {
 }
 .wrapper {
   background: #ffffff;
+  border: 1px solid #0d1416;
   border-radius: 2px;
   margin: 30px 0;
 }
@@ -6100,7 +6118,7 @@ body {
   margin: 7px 0 0 0;
 }
 .wrapper .tickets ul li div span.not-available {
-  margin: -2px 0 0 0;
+  margin: 6px 0 0 0;
 }
 .wrapper .tickets ul li div input {
   width: 40px;
@@ -6110,30 +6128,8 @@ body {
   margin-top: 2px;
   float: right;
 }
-.wrapper .tickets .promo-code {
-  background: #0d1416;
-  padding: 10px 30px;
-  float: left;
-  width: 100%;
-}
-.wrapper .tickets .promo-code p {
-  float: left;
-  color: #9e813d;
-  margin: 3px 0 0 0;
-  padding: 0;
-}
-.wrapper .tickets .promo-code p.mobile {
-  margin: -7px 0 4px 0;
-}
-.wrapper .tickets .promo-code input {
-  float: right;
-}
-.wrapper .tickets .promo-code input[type="text"] {
-  width: 70%;
-  margin-right: 2%;
-}
-.wrapper .tickets .promo-code input[type="submit"] {
-  width: 28%;
+.wrapper .tickets ul li:last-child {
+  border-bottom: 10px solid #0d1416;
 }
 .wrapper .billing-info {
   padding: 30px;
@@ -6142,14 +6138,106 @@ body {
   text-align: left;
   margin-bottom: 30px;
 }
+.wrapper .billing-info h4 span.remove {
+  color: #9e813d;
+  float: right;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+.wrapper .billing-info h4 span.remove:hover {
+  color: #0d1416;
+}
+.wrapper .promo-code {
+  background: #ffffff;
+  padding: 0 30px 30px 30px;
+  float: left;
+  width: 100%;
+}
+.wrapper .promo-code h4 {
+  float: left;
+  color: #9e813d;
+  margin: 5px 0 0 -5px;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.wrapper .promo-code h4.mobile {
+  margin: -7px 0 4px 0;
+}
+.wrapper .promo-code h4:hover {
+  color: #0d1416;
+}
+.wrapper .promo-code input {
+  float: right;
+}
+.wrapper .promo-code input[type="text"] {
+  width: 70%;
+  margin-right: 2%;
+}
+.wrapper .promo-code input[type="submit"] {
+  width: 28%;
+}
+.wrapper .promo-code ul li {
+  margin-top: 10px;
+  padding: 10px 15px;
+  width: 100%;
+  float: left;
+  border: 1px solid #cccccc;
+  border-radius: 2px;
+}
+.wrapper .promo-code ul li p {
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 60%;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16px;
+}
+.wrapper .promo-code ul li p span {
+  font-size: 12px;
+  font-weight: 400;
+}
+.wrapper .promo-code ul li p span.remove {
+  text-align: left;
+  width: 100%;
+}
+.wrapper .promo-code ul li p.mobile {
+  width: 100%;
+}
+.wrapper .promo-code ul li span.remove {
+  float: right;
+  text-align: right;
+  width: 40%;
+  color: #9e813d;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.wrapper .promo-code ul li span.remove:hover {
+  color: #0d1416;
+}
+.wrapper .promo-code ul li:hover {
+  border-color: #9e813d;
+}
+.wrapper .promo-code ul li.invalid {
+  border-color: #9e813d;
+  background: #9e813d;
+  color: #ffffff;
+}
+.wrapper .promo-code ul li.invalid p {
+  width: 100%;
+}
 .wrapper .bottom {
   background: #0d1416;
-  padding: 10px 30px 25px 30px;
+  padding: 64px 30px 25px 30px;
 }
 .wrapper .bottom .btn-primary {
   float: right;
   padding: 15px 55px;
-  margin-top: 20px;
+  margin-top: 29px;
 }
 .wrapper .bottom .btn-primary.btn-mobile {
   width: 100%;
@@ -6161,7 +6249,7 @@ body {
   font-size: 26px;
   font-weight: 600;
   color: #9e813d;
-  margin-top: 24px;
+  margin-top: 34px;
 }
 .wrapper .bottom p span {
   font-weight: 400;
@@ -6173,7 +6261,7 @@ body {
 p.stripe {
   margin-bottom: 100px;
   text-align: center;
-  color: #ffffff;
+  color: #0d1416;
 }
 p.stripe img {
   height: 20px;
