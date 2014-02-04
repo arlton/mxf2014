@@ -229,13 +229,11 @@ footer {
 #navbar {
   background: #9e813d;
 }
-#navbar img {
-  width: 40px;
-}
 #navbar #nav-wrapper {
   z-index: 9999;
   background: #9e813d;
   padding: 19px 0 21px 0;
+  opacity: 0.9;
 }
 #navbar #nav-wrapper nav {
   text-align: center;
