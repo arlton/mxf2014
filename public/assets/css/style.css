@@ -599,8 +599,12 @@ svg#bigTriangleColor path {
   background: #9e813d;
 }
 #sponsors {
+  background: #0d1416 url('../img/sponsors-bg.png') center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   padding: 0 0 60px 0;
-  background: #0d1416;
 }
 #sponsors h2 {
   margin-bottom: 20px;
