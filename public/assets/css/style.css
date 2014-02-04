@@ -247,9 +247,15 @@ footer {
   font-weight: 600;
   cursor: pointer;
   color: #ffffff;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
 }
 #navbar #nav-wrapper nav ul li a:hover {
   color: #0d1416;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
 }
 #navbar #nav-wrapper nav ul li.active a {
   color: #0d1416;
