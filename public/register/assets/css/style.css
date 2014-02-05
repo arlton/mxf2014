@@ -6267,3 +6267,23 @@ p.stripe img {
   height: 20px;
   margin-left: 2px;
 }
+.confirmation {
+  background: #ffffff;
+  border: 1px solid #0d1416;
+  border-radius: 2px;
+  margin: 100px 0;
+  padding: 30px;
+  text-align: center;
+}
+.confirmation img {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+}
+.confirmation h1 {
+  margin: 20px 0;
+  font-size: 30px;
+}
+.confirmation p {
+  font-size: 16px;
+}
