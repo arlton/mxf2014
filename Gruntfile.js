@@ -67,6 +67,7 @@ module.exports = function(grunt) {
             , 'public/assets/js/scrollit.js'
             , 'public/assets/js/waypoints.js'
             , 'public/assets/js/waypoints-sticky.js'
+            , 'public/assets/js/tipr.js'
             , 'public/assets/js/custom.js'
           ]
         }
