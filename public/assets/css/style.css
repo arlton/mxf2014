@@ -626,6 +626,7 @@ svg#bigTriangleColor path {
   margin-bottom: 60px;
   font-size: 24px;
   font-weight: 300;
+  line-height: 30px;
 }
 #sponsors p.become-sponsor {
   margin-top: 40px;
