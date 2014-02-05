@@ -4,3 +4,4 @@
 assets/css/style.css
 assets/js/scripts.min.js
 node_modules/
+public/assets/js/custom-ck.js

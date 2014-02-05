@@ -64,10 +64,7 @@ module.exports = function(grunt) {
         files: {
           'public/assets/js/scripts.min.js': [
               'public/assets/js/jquery.js'
-            , 'public/assets/js/jquery.stellar.min.js'
             , 'public/assets/js/scrollit.js'
-            , 'public/assets/js/headroom.min.js'
-            , 'public/assets/js/jQuery.headroom.js'
             , 'public/assets/js/jquery.sticky-div.js'
             , 'public/assets/js/custom.js'
           ]

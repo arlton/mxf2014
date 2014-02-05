@@ -1,8 +1,6 @@
 /* global $ */
 $(function(){
   "use strict";
-  
-  $.stellar();
 
   $.scrollIt();
 
