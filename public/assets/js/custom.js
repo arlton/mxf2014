@@ -22,5 +22,5 @@ $(function(){
       fading.show(); // Forces parallax to not fuck everything. Dirty.
   });
 
-  $('#nav-wrapper').sticky_div();
+  $('#nav-wrapper').waypoint('sticky');
 });

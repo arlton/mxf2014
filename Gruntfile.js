@@ -65,7 +65,8 @@ module.exports = function(grunt) {
           'public/assets/js/scripts.min.js': [
               'public/assets/js/jquery.js'
             , 'public/assets/js/scrollit.js'
-            , 'public/assets/js/jquery.sticky-div.js'
+            , 'public/assets/js/waypoints.js'
+            , 'public/assets/js/waypoints-sticky.js'
             , 'public/assets/js/custom.js'
           ]
         }
