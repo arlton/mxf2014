@@ -249,6 +249,13 @@ footer {
   }
 } 
 
+.stuck {
+  position:fixed;
+  top:0;
+  box-shadow:0 2px 4px rgba(0, 0, 0, .3);
+  width: 100%;
+}
+
 #speakers {
   background: @gold url('../img/speakers-bg.png') center center no-repeat;
   -webkit-background-size: cover;
@@ -392,7 +399,7 @@ svg#bigTriangleColor {
 }
 
 #photos {
-  min-height: 400px;
+  min-height: 500px;
   background: url('../img/collage.png') no-repeat center center; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -401,7 +408,7 @@ svg#bigTriangleColor {
   a {
     display: block;
     max-width: 300px;
-    margin: 165px auto 0 auto;
+    margin: 220px auto 0 auto;
     color: @black;
     background: @white;
     text-transform: uppercase;
@@ -592,6 +599,7 @@ svg#bigTriangleColor {
     margin-bottom: 60px;
     font-size: 24px;
     font-weight: 300;
+    line-height: 30px;
     &.become-sponsor {
       margin-top: 40px;
       a:hover {
@@ -677,4 +685,72 @@ footer {
       text-align: left;
     }
   }
+}
+
+.tipr_content {
+  font: 13px/1.7 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: @white; 
+  background-color: @black;
+  color: @white;
+  padding: 4px 17px;
+}
+.tipr_container_bottom {
+  display: none;
+  position: absolute;
+  margin-top: 13px;
+  z-index: 1000;
+}
+.tipr_container_top {
+  display: none;
+  position: absolute;
+  margin-top: -95px;
+  z-index: 1000;
+}
+.tipr_point_top, .tipr_point_bottom {
+  position: relative;
+  background: @white;
+  border: 1px solid @black;
+  border-radius: 2px;
+}
+.tipr_point_top:after, .tipr_point_top:before {
+  position: absolute;
+  pointer-events: none;
+  border: solid transparent;
+  top: 100%;
+  content: "";
+  height: 0;
+  width: 0;
+}
+.tipr_point_top:after {
+  border-top-color: @black;
+  border-width: 8px;
+  left: 50%;
+  margin-left: -8px;
+}
+.tipr_point_top:before {
+  border-top-color: @black;
+  border-width: 9px;
+  left: 50%;
+  margin-left: -9px;
+}
+.tipr_point_bottom:after, .tipr_point_bottom:before {
+  position: absolute;
+  pointer-events: none;
+  border: solid transparent;
+  bottom: 100%;
+  content: "";
+  height: 0;
+  width: 0;
+}
+.tipr_point_bottom:after {
+  border-bottom-color: @black;
+  border-width: 8px;
+  left: 50%;
+  margin-left: -8px;
+}
+.tipr_point_bottom:before  {
+  border-bottom-color: @black;
+  border-width: 9px;
+  left: 50%;
+  margin-left: -9px;
 }

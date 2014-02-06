@@ -1,20 +1,8 @@
 /* global $ */
 $(function(){
   "use strict";
-  
-  $.stellar();
 
   $.scrollIt();
-
-  $("#navbar").headroom({
-    "tolerance": 5,
-    "offset": 205,
-    "classes": {
-      "initial": "animated",
-      "pinned": "slideDown",
-      "unpinned": "slideUp"
-    }
-  });
 
   var fadeStart = 100 // 100px scroll or less will equiv to 1 opacity
       , fadeUntil = 270 // 200px scroll or more will equiv to 0 opacity
@@ -34,5 +22,12 @@ $(function(){
       fading.show(); // Forces parallax to not fuck everything. Dirty.
   });
 
-  $('#nav-wrapper').sticky_div();
+  $(document).ready(function() {
+     $('.tip').tipr({
+          'speed': 300,
+          'mode': 'top'
+     });
+});
+
+  $('#nav-wrapper').waypoint('sticky');
 });
