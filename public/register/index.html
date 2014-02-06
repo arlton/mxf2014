@@ -15,26 +15,12 @@
     <script type="text/javascript" src="//use.typekit.net/dle5ptb.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
   </head>
   <body>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div class="confirmation">
-            <img src="assets/img/logo.png">
-            <h1>Registration Successful</h1>
-            <p>You're now registered for Made by Few 2014. You should receive a confirmation email shortly with your order details.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -58,7 +44,6 @@
                 <div class="col-md-12">
                   <ul>
                     <li>
-                      <div class=""></div>
                       <h4>Early Bird Ticket<br /><span>Ends May 31st, 2014</span></h4>
                       <div>
                         <input type="text" class="form-control parsley-validated" id="ticket-number" name="ticket_number" value="1" placeholder="" data-notblank="true" data-required="true">
@@ -78,7 +63,7 @@
             <form class="form-horizontal" role="form" data-validate="parsley" action="/api/payment/send" method="post">
               <div class="billing-info">
                 <script id="attendee-template" type="text/x-handlebars-template">
-                  <h4>Early Bird Ticket #{{attendeeNumber}}<span class="remove">Remove</span></h4>
+                  <h4>Early Bird Ticket #{{attendeeNumber}}{{#if hasRemove}}<span class="remove">Remove</span>{{/if}}</h4>
                   <div class="form-group">
                     <div class="col-lg-6">
                       <label for="name" class="control-label">First Name *</label>
@@ -216,23 +201,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                      <ul>
-                        <li class="invalid">
-                          <p>Sorry, but that was an invalid code. Try again.</p>
-                        </li>
-                        <li>
-                          <p class="mobile hidden-md hidden-lg">W5Fy589CDQmw$vuj6YOX1<br /><span>Silver Sponsorship Ticket</span><br /><span class="remove">Remove</span></p>
-                          <p class="hidden-xs hidden-sm">W5Fy589CDQmw$vuj6YOX1<br /><span>Silver Sponsorship Ticket</span></p>
-                          <span class="remove hidden-xs hidden-sm">Remove</span>
-                        </li>
-                        <li>
-                          <p class=" mobile hidden-md hidden-lg">W5Fy589CDQmw$vuj6YOX1<br /><span>Silver Sponsorship Ticket</span><br /><span class="remove">Remove</span></p>
-                          <p class="hidden-xs hidden-sm">W5Fy589CDQmw$vuj6YOX1<br /><span>Silver Sponsorship Ticket</span></p>
-                          <span class="remove hidden-xs hidden-sm">Remove</span>
-                        </li>
-                      </ul>
-                  </div>
+                  <div id="promo-code-messaging"></div>
                 </div>
               </div>
               <div class="bottom">
@@ -253,6 +222,43 @@
         </div>
       </div>
     </div>
+
+    <script id="promo-failure-template" type="text/x-handlebars-template"> 
+      <div class="row">
+        <ul>
+          <li class="invalid">
+            <p>Sorry, but that was an invalid code. Try again.</p>
+          </li>
+          {{#each promoError}}
+            <li>
+              {{{> promo-message-template}}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </script>
+
+    <script id="promo-message-template" type="text/x-handlebars-template"> 
+      <p class="mobile hidden-md hidden-lg">{{promoCode}}<br /><span>{{promoTitle}}</span><br /><span class="remove">Remove</span></p>
+      <p class="hidden-xs hidden-sm">{{promoCode}}<br /><span>{{promoTitle}}</span></p>
+      <span class="remove hidden-xs hidden-sm">Remove</span>
+    </script>
+
+    <script id="register-success-template" type="text/x-handlebars-template"> 
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="confirmation">
+              <img src="assets/img/logo.png">
+              <h1>Registration Successful</h1>
+              <p>You're now registered for Made by Few 2014. You should receive a confirmation email shortly with your order details.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="/register/assets/js/handlebars.js"></script>
     <script src="/register/assets/js/custom.js"></script>
   </body>
