@@ -16,6 +16,8 @@ var AMASS = (function() {
     // Nodes
     attendeesEl           = document.getElementById('attendees'),
     ticketNumberEl        = document.getElementById('ticket-number'),
+    amassFormEl           = document.getElementById('amass-form'),
+    billingInfoEl         = document.getElementById('billing-info'),
 
     settings = {
       transitions: {}
@@ -90,7 +92,7 @@ var AMASS = (function() {
       if (typeof _events.onAttendeeRemove === 'function') {
         _events.onAttendeeRemove(attendee);
       }
-      
+
       _list.splice(attendee.index,1);
 
       if (typeof settings.transitions.removeAttendee === 'function') {
@@ -102,13 +104,17 @@ var AMASS = (function() {
       }
     };
 
-    that.serialize = function() {
+    that.all = function() {
       var result = [];
       for (var i = 0; i < that.count(); i++) {
         result.push(_list[i].attributes);
       }
 
-      return JSON.stringify(result);
+      return result;
+    };
+
+    that.serialize = function() {
+      return JSON.stringify(that.all());
     };
 
     that.count = function() {
@@ -192,6 +198,29 @@ var AMASS = (function() {
         attendees.remove(attendees.count()-1);
       }
     }
+  };
+
+  amassFormEl.onsubmit = function(event) {
+    var order, billingInputs, billingInfo, billingInfoResult;
+
+    event.preventDefault();
+
+    billingInputs = billingInfoEl.getElementsByTagName('input');
+    billingInfo = [];
+
+    for (var i = 0; i < billingInputs.length; i++) {
+      billingInfoResult = {};
+      billingInfoResult[billingInputs[i].name] = billingInputs[i].value;
+
+      billingInfo.push(billingInfoResult);
+    }
+
+    order = {
+      attendees: attendees.all(),
+      billingInfo: billingInfo
+    };
+
+    console.log(order);
   };
 
   // Expose a few methods so users can make their own magic happen
