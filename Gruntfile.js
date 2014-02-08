@@ -81,11 +81,11 @@ module.exports = function(grunt) {
       },
       javascript: {
         files: ['public/assets/js/custom.js'],
-        tasks: ['clean', 'uglify']
+        tasks: ['dist-js']
       },
       stylesheets: {
         files: ['public/assets/less/*.less'],
-        tasks: ['recess']
+        tasks: ['dist-css']
       }
     }
   });
@@ -107,5 +107,5 @@ module.exports = function(grunt) {
   grunt.registerTask('dist', ['dist-css', 'dist-js']);
 
   // Default task.
-  grunt.registerTask('default', ['dist']);
+  grunt.registerTask('default', ['dist', 'watch']);
 };
