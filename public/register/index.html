@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The conference for makers of the web.">
     <meta name="author" content="Arlton Lowry and David Hudson">
+    <meta property="og:title" content="Made by Few" />
+    <meta property="og:site_name" content="Made by Few">
+    <meta property="og:description" content="The conference for makers of the web." />
+    <meta property="og:image" content="http://mxf2014.herokuapp.com/assets/img/mxf-facebook.png" />
+    <meta property="og:site_name" content="Made by Few">
+    <meta property="og:type" content="website">
     <link rel="shortcut icon" href="./assets/img/favicon.ico">
 
     <title>Made by Few 2014 | Registration</title>
@@ -21,7 +27,6 @@
     <![endif]-->
   </head>
   <body>
-
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -256,13 +261,17 @@
               <div class="share">
                 <div class="row">
                   <div class="col-md-4">
-                    <a class="btn btn-twitter btn-sm" href="http://www.twitter.com/madebyfew"><i class="icon-twitter"></i><span>Share on Twitter</span></a>
+                    <a class="btn btn-twitter btn-sm twitter_link" href="http://twitter.com/intent/tweet?text=I+just+registered+for+Made+by+Few+2014%21++%23mxf2014&url=http%3A//www.madebyfew.com" target="_blank"><i class="icon-twitter"></i><span>Share on Twitter</span></a>
                   </div>
                   <div class="col-md-4">
-                    <a class="btn btn-facebook btn-sm" href="http://www.facebook.com/madebyfew"><i class="icon-facebook"></i><span>Share on Facebook</span></a>
+                    <script>
+                      function fbs_click()
+                      {u="http://www.madebyfew.com";t="Made by Few 2014";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
+                    </script>
+                    <a class="btn btn-facebook btn-sm fb_link" onclick="return fbs_click()" href="#"><i class="icon-facebook"></i><span>Share on Facebook</span></a>
                   </div>
                   <div class="col-md-4">
-                    <a class="btn btn-lanyrd btn-sm" href="http://lanyrd.com/2014/mxf2014"><i class="icon-lanyrd"></i><span>Share on Lanyrd</span></a>
+                    <a class="btn btn-lanyrd btn-sm" href="http://lanyrd.com/2014/mxf2014" target="_blank"><i class="icon-lanyrd"></i><span>Share on Lanyrd</span></a>
                   </div>
                 </div>
               </div>
