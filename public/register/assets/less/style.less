@@ -1,5 +1,6 @@
 @import "bootstrap/bootstrap.less";
 @import "variables.less";
+@import "fonts.less";
 
 *,
 *:after,
@@ -65,6 +66,60 @@ ul {
   &:focus {
     background: @black;
     border: @white;
+    outline: none;
+    color: @white;
+  }
+}
+
+.btn-twitter {
+  background: @twitter;
+  color: @white;
+  border: none;
+  border-radius: 2px;
+  font-weight: 300;
+  width: 100%;
+  padding: 6px 0 8px 0;
+  &:hover,
+  &:active,
+  &:focus {
+    background: darken(@twitter, 5%);
+    border: @twitter;
+    outline: none;
+    color: @white;
+  }
+}
+
+.btn-facebook {
+  background: @facebook;
+  color: @white;
+  border: none;
+  border-radius: 2px;
+  font-weight: 300;
+  width: 100%;
+  padding: 6px 0 8px 0;
+  &:hover,
+  &:active,
+  &:focus {
+    background: darken(@facebook, 5%);
+    border: @facebook;
+    outline: none;
+    color: @white;
+  }
+}
+
+.btn-lanyrd {
+  background: @lanyrd;
+  color: @white;
+  border: none;
+  border-radius: 2px;
+  font-weight: 300;
+  width: 100%;
+  padding: 6px 0 8px 0;
+  &:hover,
+  &:active,
+  &:focus {
+    background: darken(@lanyrd, 5%);
+    border: @lanyrd;
     outline: none;
     color: @white;
   }
@@ -343,5 +398,15 @@ p.stripe {
   }
   p {
     font-size: 16px;
+    margin-bottom: 15px;
+  }
+  .share {
+    .btn {
+      margin-top: 10px;
+      i {
+        margin-right: 10px;
+        font-size: 14px;
+      }
+    }
   }
 }
