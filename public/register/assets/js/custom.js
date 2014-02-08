@@ -5,19 +5,19 @@ var AMASS = (function() {
     amassEvent,   // Instantiated event object
 
     Attendees,    // Attendees object
-    Attendee,     // Single attendee object
     attendees,    // Instantiated attendees object
 
     Cart,         // Cart object
     cart,         // Instantiated cart object
 
-    attendeeTemplateSrc   = document.getElementById('attendee-template').innerHTML,
+    attendeeTemplateSrc           = document.getElementById('attendee-template').innerHTML,
+    registerSuccessTemplateSrc    = document.getElementById('register-success-template').innerHTML,
 
     // Nodes
+    mainEl                = document.getElementById('main'),
     attendeesEl           = document.getElementById('attendees'),
     ticketNumberEl        = document.getElementById('ticket-number'),
     amassFormEl           = document.getElementById('amass-form'),
-    billingInfoEl         = document.getElementById('billing-info'),
 
     settings = {
       transitions: {}
@@ -26,33 +26,40 @@ var AMASS = (function() {
     _events = {};
   
   Attendees = function() {
-    var that, _list;
+    var that, _list, Attendee;
 
     that = this;
     _list = [];
 
     Attendee = function(parent, attributes) {
-      var that, container, inputs, removeBtns;
+      var that, container, formTagsEl, inputsEl, selectsEl, removeBtns;
 
       that = this;
 
       that.parent = parent;
 
-      that.attributes = attributes || {};
-
+      that.attributes = attributes;
       that.attributes.attendeeNumber = that.parent.count()+1;
 
-      that.attributes.hasRemove = that.attributes.attendeeNumber > 1;
+      that.hasRemove = (that.attributes.attendeeNumber > 1);
+      that.index = that.parent.count();
 
       container = document.createElement('div');
-      container.innerHTML = that.template(that.attributes);
+      container.innerHTML = that.template(that);
 
-      inputs = container.getElementsByTagName('input');
+      inputsEl = container.getElementsByTagName('input');
+      inputsEl = Array.prototype.slice.call(inputsEl);
+
+      selectsEl = container.getElementsByTagName('select');
+      selectsEl = Array.prototype.slice.call(selectsEl);
+
+      formTagsEl = inputsEl.concat(selectsEl);
+
       removeBtns = container.getElementsByClassName('remove');
 
       // Bind inputs live
-      for (var i = 0; i < inputs.length; i++) {
-        inputs[i].onkeyup = function() {
+      for (var i = 0; i < formTagsEl.length; i++) {
+        formTagsEl[i].onchange = function() {
           var thisInput = this;
           attributes[thisInput.name] = thisInput.value;
         };
@@ -79,9 +86,7 @@ var AMASS = (function() {
     Attendee.prototype.template = Handlebars.compile(attendeeTemplateSrc);
 
     that.add = function(attributes) {
-      attributes = attributes || {};
-      attributes.index = that.count();
-      _list.push(new Attendee(that, attributes));
+      _list.push(new Attendee(that, attributes || {}));
     };
 
     that.remove = function(attendee) {
@@ -201,26 +206,25 @@ var AMASS = (function() {
   };
 
   amassFormEl.onsubmit = function(event) {
-    var order, billingInputs, billingInfo, billingInfoResult;
-
+    var data, input, successTemplate;
     event.preventDefault();
 
-    billingInputs = billingInfoEl.getElementsByTagName('input');
-    billingInfo = [];
+    data = [];
 
-    for (var i = 0; i < billingInputs.length; i++) {
-      billingInfoResult = {};
-      billingInfoResult[billingInputs[i].name] = billingInputs[i].value;
+    for (var i in amassFormEl.elements) {
+      // Validate the element FIXME
+      
+      // Add to data object
+      input = {};
+      input[amassFormEl.elements[i].name] = amassFormEl.elements[i].value;
 
-      billingInfo.push(billingInfoResult);
+      data.push(input);
     }
 
-    order = {
-      attendees: attendees.all(),
-      billingInfo: billingInfo
-    };
-
-    console.log(order);
+    // Pretend success
+    console.log(data);
+    successTemplate = Handlebars.compile(registerSuccessTemplateSrc);
+    mainEl.innerHTML = successTemplate(registerSuccessTemplateSrc);
   };
 
   // Expose a few methods so users can make their own magic happen

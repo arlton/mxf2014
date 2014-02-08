@@ -1,157 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The conference for makers of the web.">
-    <meta name="author" content="Arlton Lowry and David Hudson">
-    <link rel="shortcut icon" href="/assets/img/favicon.png">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The conference for makers of the web.">
+  <meta name="author" content="Arlton Lowry and David Hudson">
+  <link rel="shortcut icon" href="/assets/img/favicon.png">
 
-    <title>Made by Few 2014 | Registration</title>
+  <title>Made by Few 2014 | Registration</title>
 
-    <link href="/register/assets/css/style.css" rel="stylesheet">
+  <link href="/register/assets/css/style.css" rel="stylesheet">
 
-    <script type="text/javascript" src="//use.typekit.net/dle5ptb.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript" src="//use.typekit.net/dle5ptb.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div class="wrapper">
-            <div class="header">
-              <div class="row">
-                <div class="col-md-6">
-                  <img src="assets/img/logo.png">
-                </div>
-                <div class="col-md-6">
-                  <p class="hidden-xs hidden-sm"><strong>Event Registration</strong><br />Made by Few 2014<br />August 22nd – 23rd<br />Little Rock, Arkansas</p>
-                  <p class="mobile hidden-md hidden-lg"><strong>Event Registration</strong><br />Made by Few 2014 | August 22nd – 23rd Little Rock, Arkansas</p>
-                </div>
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="container" id="main">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="wrapper">
+          <div class="header">
+            <div class="row">
+              <div class="col-md-6">
+                <img src="assets/img/logo.png">
+              </div>
+              <div class="col-md-6">
+                <p class="hidden-xs hidden-sm"><strong>Event Registration</strong><br />Made by Few 2014<br />August 22nd – 23rd<br />Little Rock, Arkansas</p>
+                <p class="mobile hidden-md hidden-lg"><strong>Event Registration</strong><br />Made by Few 2014 | August 22nd – 23rd Little Rock, Arkansas</p>
               </div>
             </div>
-            <div class="tickets">
-              <div class="row">
-                <div class="col-md-12">
-                  <h3>Tickets</h3>
-                </div>
-                <div class="col-md-12">
-                  <ul>
-                    <li>
-                      <h4>Early Bird Ticket<br /><span>Ends May 31st, 2014</span></h4>
-                      <div>
-                        <input type="text" class="form-control parsley-validated" id="ticket-number" name="ticket_number" value="1" placeholder="" data-notblank="true" data-required="true">
-                        <span>$185 x </span>
-                      </div>
-                    </li>
-                    <li>
-                      <h4>Regular Ticket<br /><span>Starts June 1st, 2014</span></h4>
-                      <div>
-                        <span class="not-available">Not available.</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+          </div>
+          <div class="tickets">
+            <div class="row">
+              <div class="col-md-12">
+                <h3>Tickets</h3>
+              </div>
+              <div class="col-md-12">
+                <ul>
+                  <li>
+                    <h4>Early Bird Ticket<br /><span>Ends May 31st, 2014</span></h4>
+                    <div>
+                      <input type="text" class="form-control parsley-validated" id="ticket-number" name="ticket_number" value="1" placeholder="" data-notblank="true" data-required="true">
+                      <span>$185 x </span>
+                    </div>
+                  </li>
+                  <li>
+                    <h4>Regular Ticket<br /><span>Starts June 1st, 2014</span></h4>
+                    <div>
+                      <span class="not-available">Not available.</span>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
-            <form class="form-horizontal" id="amass-form" role="form" data-validate="parsley" action="/api/order" method="post">
-              <div class="billing-info">
-                <script id="attendee-template" type="text/x-handlebars-template">
-                  <h4>Early Bird Ticket #{{attendeeNumber}}{{#if hasRemove}}<span class="remove">Remove</span>{{/if}}</h4>
-                  <div class="form-group">
-                    <div class="col-lg-6">
-                      <label for="name" class="control-label">First Name *</label>
-                      <input type="text" class="form-control parsley-validated first-name" name="firstName" placeholder="" value="" data-notblank="true" data-required="true">
-                    </div>
-                    <div class="col-lg-6">
-                      <label for="name" class="control-label">Last Name *</label>
-                      <input type="text" class="form-control parsley-validated last-name" name="lastName" placeholder="" value="" data-notblank="true" data-required="true">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="name" class="control-label">Email Address *</label>
-                    <input type="text" class="form-control parsley-validated" id="first_name" name="email_address" placeholder="" value="" data-notblank="true" data-required="true">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="name" class="control-label">Confirm Email Address *</label>
-                    <input type="text" class="form-control parsley-validated" id="last_name" name="confirm_email_address" placeholder="" value="" data-notblank="true" data-required="true">
-                  </div>
-                </div>
-                  <div class="form-group">
-                    <div class="col-lg-6">
-                      <label for="organization" class="control-label">Organization</label>
-                      <input type="text" class="form-control organization" name="organization" placeholder="">
-                    </div>
-                    <div class="col-lg-6">
-                      <label for="title" class="control-label">Title</label>
-                      <input type="text" class="form-control title" name="title" placeholder="" value="">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-lg-6">
-                      <label for="twitter_handle" class="control-label">Twitter Handle </label>
-                      <input type="text" class="form-control twitter-handle" name="twitterHandle" placeholder="" value="">
-                    </div>
-                    <div class="col-lg-6">
-                      <label for="shirt_size" class="control-label">Shirt Size *</label>
-                      <select class="form-control parsley-validated shirt-size" name="shirtSize" data-notblank="true" data-required="true">
-                        <option></option>
-                        <option>Small</option>
-                        <option>Medium</option>
-                        <option>Large</option>
-                        <option>X-Large</option>
-                        <option>XX-Large</option>
-                      </select>
-                    </div>
-                  </div>
-                  <hr />
-                </script>
-                <div id="attendees"></div>
-                <h4>Additional Information</h4>
+          </div>
+          <form class="form-horizontal" id="amass-form" role="form" data-validate="parsley" action="/api/order" method="post">
+            <div class="billing-info">
+              <script id="attendee-template" type="text/x-handlebars-template">
+                <h4>Early Bird Ticket #{{attributes.attendeeNumber}}{{#if hasRemove}}<span class="remove">Remove</span>{{/if}}</h4>
                 <div class="form-group">
-                  <div class="col-lg-12">
-                    <textarea class="form-control" rows="3"></textarea>
-                  </div>
-                </div>
-                <hr />
-                <h4>Billing Information</h4>
-                <div class="form-group" id="billing-info">
                   <div class="col-lg-6">
                     <label for="name" class="control-label">First Name *</label>
-                    <input type="text" class="form-control parsley-validated" id="first_name" name="first_name" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated first-name" name="first_name[]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                   <div class="col-lg-6">
                     <label for="name" class="control-label">Last Name *</label>
-                    <input type="text" class="form-control parsley-validated" id="last_name" name="last_name" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated last-name" name="last_mame[]" placeholder="" value="" data-notblank="true" data-required="true">
+                  </div>
+                </div>
+                <div class="form-group">
+                <div class="col-lg-6">
+                  <label for="name" class="control-label">Email Address *</label>
+                  <input type="text" class="form-control parsley-validated" id="first_name" name="email_address[]" placeholder="" value="" data-notblank="true" data-required="true">
+                </div>
+                <div class="col-lg-6">
+                  <label for="name" class="control-label">Confirm Email Address *</label>
+                  <input type="text" class="form-control parsley-validated" id="last_name" name="confirm_email_address[]" placeholder="" value="" data-notblank="true" data-required="true">
+                </div>
+              </div>
+                <div class="form-group">
+                  <div class="col-lg-6">
+                    <label for="organization" class="control-label">Organization</label>
+                    <input type="text" class="form-control organization" name="organization[]" placeholder="">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="title" class="control-label">Title</label>
+                    <input type="text" class="form-control title" name="title[]" placeholder="" value="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-6">
+                    <label for="twitter_handle" class="control-label">Twitter Handle </label>
+                    <input type="text" class="form-control twitter-handle" name="twitter_handle[]" placeholder="" value="">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="shirt_size" class="control-label">Shirt Size *</label>
+                    <select class="form-control parsley-validated shirt-size" name="shirt_size[]" data-notblank="true" data-required="true">
+                      <option></option>
+                      <option>Small</option>
+                      <option>Medium</option>
+                      <option>Large</option>
+                      <option>X-Large</option>
+                      <option>XX-Large</option>
+                    </select>
+                  </div>
+                </div>
+                <hr />
+              </script>
+              <div id="attendees"></div>
+              <h4>Additional Information</h4>
+              <div class="form-group">
+                <div class="col-lg-12">
+                  <textarea class="form-control" rows="3"></textarea>
+                </div>
+              </div>
+              <hr />
+              <h4>Billing Information</h4>
+              <div id="cc-info">
+                <div class="form-group">
+                  <div class="col-lg-6">
+                    <label for="name" class="control-label">First Name *</label>
+                    <input type="text" class="form-control parsley-validated" id="cc_first_name" name="cc_first_name" placeholder="" value="" data-notblank="true" data-required="true">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="name" class="control-label">Last Name *</label>
+                    <input type="text" class="form-control parsley-validated" id="cc_last_name" name="cc_last_name" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-6">
                     <label for="name" class="control-label">Email Address *</label>
-                    <input type="text" class="form-control parsley-validated" id="email_address" name="email_address" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated" id="cc_email_address" name="cc_email_address" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                   <div class="col-lg-6">
                     <label for="name" class="control-label">Confirm Email Address *</label>
-                    <input type="text" class="form-control parsley-validated" id="email_address_confirm" name="confirm_email_address" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated" id="cc_email_address_confirm" name="cc_email_address_confirm" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
                     <label for="number" class="control-label">Card Number *</label>
-                    <input type="text" class="form-control parsley-validated" id="number" name="number" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated" id="cc_number" name="cc_number" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
                     <label for="type" class="control-label">Card Type *</label>
-                    <select class="form-control parsley-validated" id="type" name="type" data-notblank="true" data-required="true">
+                    <select class="form-control parsley-validated" id="cc_type" name="cc_type" data-notblank="true" data-required="true">
                       <option value="visa">VISA</option>
                       <option value="mastercard">MASTERCARD</option>
                       <option value="discover">DISCOVER</option>
@@ -162,7 +163,7 @@
                 <div class="form-group">
                   <div class="col-lg-4">
                     <label for="cc_month" class="control-label">Card Expiry Month *</label>
-                    <select class="form-control parsley-validated" id="month" name="month" data-notblank="true" data-required="true">
+                    <select class="form-control parsley-validated" id="cc_month" name="cc_month" data-notblank="true" data-required="true">
                       <option>01</option>
                       <option>02</option>
                       <option>03</option>
@@ -179,87 +180,88 @@
                   </div>
                   <div class="col-lg-4">
                     <label for="cc_month" class="control-label">Card Expiry Year *</label>
-                    <select class="form-control parsley-validated" id="year" name="year" data-notblank="true" data-required="true"><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option></select>
+                    <select class="form-control parsley-validated" id="cc_year" name="cc_year" data-notblank="true" data-required="true"><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option></select>
                   </div>
                   <div class="col-lg-4">
                     <label for="cvv" class="control-label">CVV *</label>
-                    <input type="text" class="form-control parsley-validated" id="cvv" name="cvv" placeholder="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated" id="cc_cvv" name="cc_cvv" placeholder="" data-notblank="true" data-required="true">
                   </div>
                 </div>
               </div>
-              <div class="promo-code">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4">
-                      <h4 class="hidden-xs hidden-sm">Promo code?</h4>
-                      <h4 class="mobile hidden-md hidden-lg">Promo code?</h4>
+            </div>
+            <div class="promo-code">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-4">
+                    <h4 class="hidden-xs hidden-sm">Promo code?</h4>
+                    <h4 class="mobile hidden-md hidden-lg">Promo code?</h4>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-8">
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-sm btn-secondary" value="Apply">
+                      <input type="text" class="form-control input-sm parsley-validated" id="" name="" value="" placeholder="" data-notblank="true" data-required="true">
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8">
-                      <div class="form-group">
-                        <input type="submit" class="btn btn-sm btn-secondary" value="Apply">
-                        <input type="text" class="form-control input-sm parsley-validated" id="" name="" value="" placeholder="" data-notblank="true" data-required="true">
-                      </div>
-                    </div>
-                  </div>
-                  <div id="promo-code-messaging"></div>
-                </div>
-              </div>
-              <div class="bottom">
-                <div class="form-group">
-                  <div class="col-lg-5">
-                    <p class=" hidden-md hidden-sm hidden-xs">Total Cost: <span>$185</span></p>
-                    <p class="mobile hidden-lg">Total Cost: <span>$185</span></p>
-                  </div>
-                  <div class="col-lg-7">
-                    <input type="submit" class="btn btn-lg btn-primary hidden-md hidden-sm hidden-xs" value="Register">
-                    <input type="submit" class="btn btn-lg btn-primary btn-mobile hidden-lg" value="Register">
                   </div>
                 </div>
+                <div id="promo-code-messaging"></div>
               </div>
-            </form>
+            </div>
+            <div class="bottom">
+              <div class="form-group">
+                <div class="col-lg-5">
+                  <p class=" hidden-md hidden-sm hidden-xs">Total Cost: <span>$185</span></p>
+                  <p class="mobile hidden-lg">Total Cost: <span>$185</span></p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="submit" class="btn btn-lg btn-primary hidden-md hidden-sm hidden-xs" value="Register">
+                  <input type="submit" class="btn btn-lg btn-primary btn-mobile hidden-lg" value="Register">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <p class="stripe">Your payment will be processed by <a href="http://stripe.com" tabindex="-1"><img alt="Stripe" src="assets/img/stripe@2x.png" target="_blank"></a> — you’re in safe hands.</p>
+      </div>
+    </div>
+  </div>
+
+  <script id="promo-failure-template" type="text/x-handlebars-template"> 
+    <div class="row">
+      <ul>
+        <li class="invalid">
+          <p>Sorry, but that was an invalid code. Try again.</p>
+        </li>
+        {{#each promoError}}
+          <li>
+            {{{> promo-message-template}}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </script>
+
+  <script id="promo-message-template" type="text/x-handlebars-template"> 
+    <p class="mobile hidden-md hidden-lg">{{promoCode}}<br /><span>{{promoTitle}}</span><br /><span class="remove">Remove</span></p>
+    <p class="hidden-xs hidden-sm">{{promoCode}}<br /><span>{{promoTitle}}</span></p>
+    <span class="remove hidden-xs hidden-sm">Remove</span>
+  </script>
+
+  <script id="register-success-template" type="text/x-handlebars-template"> 
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="confirmation">
+            <img src="assets/img/logo.png">
+            <h1>Registration Successful</h1>
+            <p>You're now registered for Made by Few 2014. You should receive a confirmation email shortly with your order details.</p>
           </div>
-          <p class="stripe">Your payment will be processed by <a href="http://stripe.com" tabindex="-1"><img alt="Stripe" src="assets/img/stripe@2x.png" target="_blank"></a> — you’re in safe hands.</p>
         </div>
       </div>
     </div>
+  </script>
 
-    <script id="promo-failure-template" type="text/x-handlebars-template"> 
-      <div class="row">
-        <ul>
-          <li class="invalid">
-            <p>Sorry, but that was an invalid code. Try again.</p>
-          </li>
-          {{#each promoError}}
-            <li>
-              {{{> promo-message-template}}}
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-    </script>
-
-    <script id="promo-message-template" type="text/x-handlebars-template"> 
-      <p class="mobile hidden-md hidden-lg">{{promoCode}}<br /><span>{{promoTitle}}</span><br /><span class="remove">Remove</span></p>
-      <p class="hidden-xs hidden-sm">{{promoCode}}<br /><span>{{promoTitle}}</span></p>
-      <span class="remove hidden-xs hidden-sm">Remove</span>
-    </script>
-
-    <script id="register-success-template" type="text/x-handlebars-template"> 
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-            <div class="confirmation">
-              <img src="assets/img/logo.png">
-              <h1>Registration Successful</h1>
-              <p>You're now registered for Made by Few 2014. You should receive a confirmation email shortly with your order details.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="/register/assets/js/handlebars.js"></script>
-    <script src="/register/assets/js/custom.js"></script>
-  </body>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="/register/assets/js/handlebars.js"></script>
+  <script src="/register/assets/js/custom.js"></script>
+</body>
 </html>
