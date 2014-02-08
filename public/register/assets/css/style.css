@@ -5954,6 +5954,68 @@ td.visible-print {
     display: none !important;
   }
 }
+@font-face {
+  font-family: 'fontello';
+  src: url('../font/fontello.eot?88253292');
+  src: url('../font/fontello.eot?88253292#iefix') format('embedded-opentype'), url('../font/fontello.woff?88253292') format('woff'), url('../font/fontello.ttf?88253292') format('truetype'), url('../font/fontello.svg?88253292#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?88253292#fontello') format('svg');
+  }
+}
+*/
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+.icon-globe:before {
+  content: '\e804';
+}
+/* '' */
+.icon-lanyrd:before {
+  content: '\e800';
+}
+/* '' */
+.icon-dribbble:before {
+  content: '\e803';
+}
+/* '' */
+.icon-twitter:before {
+  content: '\e801';
+}
+/* '' */
+.icon-facebook:before {
+  content: '\e802';
+}
+/* '' */
 *,
 *:after,
 *::before {
@@ -6015,6 +6077,57 @@ ul li {
 .btn-secondary:focus {
   background: #0d1416;
   border: #ffffff;
+  outline: none;
+  color: #ffffff;
+}
+.btn-twitter {
+  background: #55acee;
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  font-weight: 300;
+  width: 100%;
+  padding: 6px 0 8px 0;
+}
+.btn-twitter:hover,
+.btn-twitter:active,
+.btn-twitter:focus {
+  background: #3ea1ec;
+  border: #55acee;
+  outline: none;
+  color: #ffffff;
+}
+.btn-facebook {
+  background: #4a65a0;
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  font-weight: 300;
+  width: 100%;
+  padding: 6px 0 8px 0;
+}
+.btn-facebook:hover,
+.btn-facebook:active,
+.btn-facebook:focus {
+  background: #425a8f;
+  border: #4a65a0;
+  outline: none;
+  color: #ffffff;
+}
+.btn-lanyrd {
+  background: #142e51;
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  font-weight: 300;
+  width: 100%;
+  padding: 6px 0 8px 0;
+}
+.btn-lanyrd:hover,
+.btn-lanyrd:active,
+.btn-lanyrd:focus {
+  background: #0f223d;
+  border: #142e51;
   outline: none;
   color: #ffffff;
 }
@@ -6286,4 +6399,12 @@ p.stripe img {
 }
 .confirmation p {
   font-size: 16px;
+  margin-bottom: 15px;
+}
+.confirmation .share .btn {
+  margin-top: 10px;
+}
+.confirmation .share .btn i {
+  margin-right: 10px;
+  font-size: 14px;
 }
