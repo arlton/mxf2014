@@ -1,4 +1,4 @@
-var AMASS = (function() {
+var AMASS = (function($) {
   "use strict";
 
   var AmassEvent, // Event object
@@ -16,8 +16,9 @@ var AMASS = (function() {
     // Nodes
     mainEl                = document.getElementById('main'),
     attendeesEl           = document.getElementById('attendees'),
-    ticketNumberEl        = document.getElementById('ticket-number'),
+    ticketNumbersEl       = document.getElementsByClassName('ticket-number'),
     amassFormEl           = document.getElementById('amass-form'),
+    totalCostEl           = document.getElementsByClassName('total-cost'),
 
     settings = {
       transitions: {}
@@ -25,6 +26,20 @@ var AMASS = (function() {
 
     _events = {};
   
+  // FIXME: This should be brought in by ajax at some point
+  var tickets = [
+      {
+        id: 1,
+        title: 'Early Bird',
+        price: 185.00
+      },
+      {
+        id: 2,
+        title: 'Regular',
+        price: 0.00
+      }
+    ];
+
   Attendees = function() {
     var that, _list, Attendee;
 
@@ -86,7 +101,11 @@ var AMASS = (function() {
     Attendee.prototype.template = Handlebars.compile(attendeeTemplateSrc);
 
     that.add = function(attributes) {
-      _list.push(new Attendee(that, attributes || {}));
+      var attendee = new Attendee(that, attributes || {});
+      _list.push(attendee);
+      if (typeof _events.onAttendeeAdd === 'function') {
+        _events.onAttendeeAdd(attendee);
+      }
     };
 
     that.remove = function(attendee) {
@@ -122,8 +141,22 @@ var AMASS = (function() {
       return JSON.stringify(that.all());
     };
 
-    that.count = function() {
-      return _list.length;
+    that.count = function(query) {
+      var count;
+      if (!query) {
+        return _list.length;
+      }
+
+      if (typeof query === 'function') {
+        count = 0;
+        for (var i in _list) {
+          if (query(_list[i])) {
+            count += 1;
+          }
+        }
+
+        return count;
+      }
     };
   };
 
@@ -137,8 +170,10 @@ var AMASS = (function() {
 
     that.addItem = function(item) {
       if (item.id && item.price && item.title) {
-        that._items.push(item);
+        _items.push(item);
       }
+
+      that.updateTotal();
 
       return (item.id && item.price && item.title);
     };
@@ -147,14 +182,16 @@ var AMASS = (function() {
       for (var i = 0; i < _items.length; i++) {
         if (_items[i].id === item.id) {
           _items.splice(i, 1);
+
           that.updateTotal();
+
           return _items;
         }
-      }
+      }      
     };
 
     that.getItems = function() {
-      return JSON.parse(JSON.stringify(that._items));
+      return JSON.parse(JSON.stringify(_items));
     };
 
     that.updateTotal = function() {
@@ -165,11 +202,16 @@ var AMASS = (function() {
         _total += items[i].price;
       }
 
+      for (var i in totalCostEl) {
+        totalCostEl[i].innerHTML = that.getTotal({ formatted: true });
+      }
+
       return that.getTotal();
     };
 
-    that.getTotal = function() {
-      return _total.toString();
+    that.getTotal = function(options) {
+      options = options || {};
+      return options.formatted ? '$' + _total.toFixed(2).toString() : _total.toString();
     };
 
     that.empty = function() {
@@ -182,49 +224,67 @@ var AMASS = (function() {
   attendees = new Attendees();
   cart = new Cart();
 
-  attendees.add();
+  // Artificially adding an early bird ticket. FIXME THIS IS SHITTTTTTTT
+  attendees.add({ ticket: tickets[0] });
 
   // ** EVENTS
-  _events.onAttendeeRemove = function() {
-    ticketNumberEl.value = attendees.count();
+  _events.onAttendeeAdd = function(attendee) {
+    cart.addItem(attendee.attributes.ticket);
+  };
+
+  _events.onAttendeeRemove = function(attendee) {
+    for (var i = 0; i < ticketNumbersEl.length; i++) {
+      if (Number(ticketNumbersEl[i].getAttribute('data-ticket-id')) === attendee.attributes.ticket.id) {
+        ticketNumbersEl[i].value = attendees.count(function(attendee) {
+          return attendee.attributes.ticket.id === 
+            Number(ticketNumbersEl[i].getAttribute('data-ticket-id'));
+        });
+      }
+    }
+
+    cart.removeItem(attendee.attributes.ticket);
   };
 
   // Ticket numbers changed
-  ticketNumberEl.onblur = function() {
-    var attendeesCount = attendees.count(),
-      ticketsCount = Number(ticketNumberEl.value);
+  for (var i in ticketNumbersEl) {
+    ticketNumbersEl[i].onblur = function() {
+      var attendeesCount = attendees.count(),
+        ticket = {},
+        ticketsCount = Number(this.value),
+        ticketId = Number(this.getAttribute('data-ticket-id'));
 
-    if (ticketsCount > attendeesCount) {
-      for (var i = 0; i < (ticketsCount - attendeesCount); i++) {
-        attendees.add();
+      for (var i in tickets) {
+        if (tickets[i].id === ticketId) {
+          ticket = tickets[i];
+          break;
+        }
       }
-    } else {
-      for (var i = 0; i < (attendeesCount - ticketsCount); i++) {
-        attendees.remove(attendees.count()-1);
+
+      if (ticketsCount > attendeesCount) {
+        for (var i = 0; i < (ticketsCount - attendeesCount); i++) {
+          attendees.add({ticket: ticket});
+        }
+      } else {
+        for (var i = 0; i < (attendeesCount - ticketsCount); i++) {
+          attendees.remove(attendees.count()-1);
+        }
       }
-    }
-  };
+    };
+  }
 
   amassFormEl.onsubmit = function(event) {
-    var data, input, successTemplate;
+    var successTemplate;
     event.preventDefault();
 
-    data = [];
-
-    for (var i in amassFormEl.elements) {
-      // Validate the element FIXME
-      
-      // Add to data object
-      input = {};
-      input[amassFormEl.elements[i].name] = amassFormEl.elements[i].value;
-
-      data.push(input);
-    }
-
-    // Pretend success
-    console.log(data);
-    successTemplate = Handlebars.compile(registerSuccessTemplateSrc);
-    mainEl.innerHTML = successTemplate(registerSuccessTemplateSrc);
+    $.ajax({
+      url: '/api/order',
+      type: 'POST',
+      dataType: 'json',
+      data: $(amassFormEl).serialize()
+    }).done(function(result) {
+      successTemplate = Handlebars.compile(registerSuccessTemplateSrc);
+      mainEl.innerHTML = successTemplate(registerSuccessTemplateSrc);
+    });
   };
 
   // Expose a few methods so users can make their own magic happen
@@ -247,7 +307,7 @@ var AMASS = (function() {
 
     return that;
   };
-})();
+})(jQuery);
 
 // ** EVERYTHING BELOW NOT PART OF OUT OF BOX AMASS CODE
 var amass = new AMASS();

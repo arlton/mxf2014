@@ -51,7 +51,7 @@
                   <li>
                     <h4>Early Bird Ticket<br /><span>Ends May 31st, 2014</span></h4>
                     <div>
-                      <input type="text" class="form-control parsley-validated" id="ticket-number" name="ticket_number" value="1" placeholder="" data-notblank="true" data-required="true">
+                      <input type="text" class="form-control parsley-validated ticket-number" data-ticket-id="1" value="1" placeholder="" data-notblank="true" data-required="true">
                       <span>$185 x </span>
                     </div>
                   </li>
@@ -68,45 +68,45 @@
           <form class="form-horizontal" id="amass-form" role="form" data-validate="parsley" action="/api/order" method="post">
             <div class="billing-info">
               <script id="attendee-template" type="text/x-handlebars-template">
-                <h4>Early Bird Ticket #{{attributes.attendeeNumber}}{{#if hasRemove}}<span class="remove">Remove</span>{{/if}}</h4>
+                <h4>{{attributes.ticket.title}} Ticket #{{attributes.attendeeNumber}}{{#if hasRemove}}<span class="remove">Remove</span>{{/if}}</h4>
                 <div class="form-group">
                   <div class="col-lg-6">
                     <label for="name" class="control-label">First Name *</label>
-                    <input type="text" class="form-control parsley-validated first-name" name="first_name[]" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated first-name" name="first_name[{{index}}]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                   <div class="col-lg-6">
                     <label for="name" class="control-label">Last Name *</label>
-                    <input type="text" class="form-control parsley-validated last-name" name="last_mame[]" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated last-name" name="last_name[{{index}}]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                 <div class="col-lg-6">
                   <label for="name" class="control-label">Email Address *</label>
-                  <input type="text" class="form-control parsley-validated" id="first_name" name="email_address[]" placeholder="" value="" data-notblank="true" data-required="true">
+                  <input type="text" class="form-control parsley-validated" id="first_name" name="email_address[{{index}}]" placeholder="" value="" data-notblank="true" data-required="true">
                 </div>
                 <div class="col-lg-6">
                   <label for="name" class="control-label">Confirm Email Address *</label>
-                  <input type="text" class="form-control parsley-validated" id="last_name" name="confirm_email_address[]" placeholder="" value="" data-notblank="true" data-required="true">
+                  <input type="text" class="form-control parsley-validated" id="last_name" name="confirm_email_address[{{index}}]" placeholder="" value="" data-notblank="true" data-required="true">
                 </div>
               </div>
                 <div class="form-group">
                   <div class="col-lg-6">
                     <label for="organization" class="control-label">Organization</label>
-                    <input type="text" class="form-control organization" name="organization[]" placeholder="">
+                    <input type="text" class="form-control organization" name="organization[{{index}}]" placeholder="">
                   </div>
                   <div class="col-lg-6">
                     <label for="title" class="control-label">Title</label>
-                    <input type="text" class="form-control title" name="title[]" placeholder="" value="">
+                    <input type="text" class="form-control title" name="title[{{index}}]" placeholder="" value="">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-6">
                     <label for="twitter_handle" class="control-label">Twitter Handle </label>
-                    <input type="text" class="form-control twitter-handle" name="twitter_handle[]" placeholder="" value="">
+                    <input type="text" class="form-control twitter-handle" name="twitter_handle[{{index}}]" placeholder="" value="">
                   </div>
                   <div class="col-lg-6">
                     <label for="shirt_size" class="control-label">Shirt Size *</label>
-                    <select class="form-control parsley-validated shirt-size" name="shirt_size[]" data-notblank="true" data-required="true">
+                    <select class="form-control parsley-validated shirt-size" name="shirt_size[{{index}}]" data-notblank="true" data-required="true">
                       <option></option>
                       <option>Small</option>
                       <option>Medium</option>
@@ -116,6 +116,7 @@
                     </select>
                   </div>
                 </div>
+                <input type="hidden" name="ticket_id[{{index}}]" value="{{attributes.ticket.id}}">
                 <hr />
               </script>
               <div id="attendees"></div>
@@ -214,8 +215,8 @@
             <div class="bottom">
               <div class="form-group">
                 <div class="col-lg-5">
-                  <p class=" hidden-md hidden-sm hidden-xs">Total Cost: <span>$185</span></p>
-                  <p class="mobile hidden-lg">Total Cost: <span>$185</span></p>
+                  <p class=" hidden-md hidden-sm hidden-xs">Total Cost: <span class="total-cost">$185.00</span></p>
+                  <p class="mobile hidden-lg">Total Cost: <span class="total-cost">$185.00</span></p>
                 </div>
                 <div class="col-lg-7">
                   <input type="submit" class="btn btn-lg btn-primary hidden-md hidden-sm hidden-xs" value="Register">

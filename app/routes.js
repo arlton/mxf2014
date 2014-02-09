@@ -20,7 +20,6 @@ module.exports = (function() {
 
   app.post('/api/order', function(req, res) {
     res.writeHead(200, {'content-type':'text/html'});
-
     // Validate cart
     
     // Validate CC info
