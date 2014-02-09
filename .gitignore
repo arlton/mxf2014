@@ -7,3 +7,9 @@ node_modules/
 public/assets/js/custom-ck.js
 
 Gruntfile-ck.js
+
+app/routes-ck.js
+
+web-ck.js
+
+public/register/assets/js/custom-ck.js
