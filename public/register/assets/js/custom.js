@@ -94,11 +94,11 @@ var AMASS = (function() {
         attendee = _list[attendee];
       }
 
+      _list.splice(attendee.index,1);
+
       if (typeof _events.onAttendeeRemove === 'function') {
         _events.onAttendeeRemove(attendee);
       }
-
-      _list.splice(attendee.index,1);
 
       if (typeof settings.transitions.removeAttendee === 'function') {
         settings.transitions.removeAttendee(attendee.el, function() {
@@ -190,7 +190,7 @@ var AMASS = (function() {
   };
 
   // Ticket numbers changed
-  ticketNumberEl.onkeyup = function() {
+  ticketNumberEl.onblur = function() {
     var attendeesCount = attendees.count(),
       ticketsCount = Number(ticketNumberEl.value);
 
