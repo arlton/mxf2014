@@ -41,29 +41,29 @@
               </div>
             </div>
           </div>
-          <div class="tickets">
-            <div class="row">
-              <div class="col-md-12">
-                <h3>Tickets</h3>
+          <div class="tickets" id="tickets">
+            <script id="tickets-template" type="text/x-handlebars-template">
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>Tickets</h3>
+                </div>
+                <div class="col-md-12">
+                  <ul>
+                    {{#each tickets}}
+                    <li>
+                      <h4>{{title}}<br /><span>{{dateSentance}}</span></h4>
+                      <div>
+                        {{#if isAvailable}}
+                          <input type="text" class="form-control parsley-validated ticket-number" data-ticket-id="{{id}}" value="1" placeholder="" data-notblank="true" data-required="true">
+                          <span>{{formattedPrice}}</span>
+                        {{/if}}
+                      </div>
+                    </li>
+                    {{/each}}
+                  </ul>
+                </div>
               </div>
-              <div class="col-md-12">
-                <ul>
-                  <li>
-                    <h4>Early Bird Ticket<br /><span>Ends May 31st, 2014</span></h4>
-                    <div>
-                      <input type="text" class="form-control parsley-validated ticket-number" data-ticket-id="1" value="1" placeholder="" data-notblank="true" data-required="true">
-                      <span>$185 x </span>
-                    </div>
-                  </li>
-                  <li>
-                    <h4>Regular Ticket<br /><span>Starts June 1st, 2014</span></h4>
-                    <div>
-                      <span class="not-available">Not available.</span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            </script>
           </div>
           <form class="form-horizontal" id="amass-form" role="form" data-validate="parsley" action="/api/order" method="post">
             <div class="billing-info">
@@ -284,6 +284,7 @@
   </script>
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script src="/register/assets/js/handlebars.js"></script>
+  <script src="/register/assets/js/dateformat.js"></script>
   <script src="/register/assets/js/custom.js"></script>
 </body>
 </html>

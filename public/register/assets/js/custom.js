@@ -1,4 +1,4 @@
-var AMASS = (function($) {
+var AMASS = (function($, DateFormat) {
   "use strict";
 
   var AmassEvent, // Event object
@@ -12,10 +12,13 @@ var AMASS = (function($) {
 
     attendeeTemplateSrc           = document.getElementById('attendee-template').innerHTML,
     registerSuccessTemplateSrc    = document.getElementById('register-success-template').innerHTML,
+    ticketsTemplateSrc            = document.getElementById('tickets-template').innerHTML,
+    ticketsTemplate               = Handlebars.compile(ticketsTemplateSrc),
 
     // Nodes
     mainEl                = document.getElementById('main'),
     attendeesEl           = document.getElementById('attendees'),
+    ticketsEl             = document.getElementById('tickets'),
     ticketNumbersEl       = document.getElementsByClassName('ticket-number'),
     amassFormEl           = document.getElementById('amass-form'),
     totalCostEl           = document.getElementsByClassName('total-cost'),
@@ -27,18 +30,51 @@ var AMASS = (function($) {
     _events = {};
   
   // FIXME: This should be brought in by ajax at some point
-  var tickets = [
+  amassEvent = {
+    title: 'Made By Few 2014',
+    logo_url: '/register/assets/img/logo.png',
+    dates: {
+      range: {
+        from: '2014-08-22 00:00:00',
+        to: '2014-08-23 23:59:59'
+      }
+    },
+    location: {
+      address1: '',
+      address2: '',
+      city: 'Little Rock',
+      state: 'Arkansas',
+      zipcode: '',
+      zipcodeplus: ''
+    },
+    tickets: [
       {
         id: 1,
         title: 'Early Bird',
-        price: 185.00
+        price: 185.00,
+        availability: {
+          range: {
+            from: '2014-01-01 00:00:00',
+            to: '2014-05-31 23:59:59'
+          }
+        }
       },
       {
         id: 2,
         title: 'Regular',
-        price: 0.00
+        price: 0.00,
+        availability: {
+          range: {
+            from: '2014-06-01 00:00:00',
+            to: '2014-08-22 23:59:59'
+          }
+        }
       }
-    ];
+    ],
+    settings: {
+      dateFormat: 'MMMM D, yyyy'
+    }
+  };
 
   Attendees = function() {
     var that, _list, Attendee;
@@ -221,11 +257,85 @@ var AMASS = (function($) {
   };
 
   // ** INIT
-  attendees = new Attendees();
-  cart = new Cart();
+  function init() {
+    var ticketsContainer;
 
-  // Artificially adding an early bird ticket. FIXME THIS IS SHITTTTTTTT
-  attendees.add({ ticket: tickets[0] });
+    // Update AMASS Event with some dynamicness
+    amassEvent.tickets = $.map(amassEvent.tickets, function(ticket) {
+      var avail, today, from, to;
+
+      avail = ticket.availability;
+      today = new Date();
+      today.setHours(0);
+      today.setMinutes(0);
+      today.setSeconds(0);
+      today.setMilliseconds(0);
+
+      if (!avail) {
+        ticket.dateSentance = 'Not available';
+        return ticket;
+      }
+
+      if (avail.range) {
+        from = new Date(avail.range.from);
+        from.setHours(0);
+        from.setMinutes(0);
+        from.setSeconds(0);
+        from.setMilliseconds(0);
+
+        to = new Date(avail.range.to);
+        to.setHours(0);
+        to.setMinutes(0);
+        to.setSeconds(0);
+        to.setMilliseconds(0);
+
+        // Ticket available today or earlier and ends later than today
+        if (from <= today && to > today) {
+          ticket.dateSentance = 'Ends ' + DateFormat.format.date(to, amassEvent.settings.dateFormat);
+          ticket.isAvailable = true;
+        }
+
+        // Ticket available today only (last day included)
+        if (today === to) {
+          ticket.dateSentance = 'Ends today';
+          ticket.isAvailable = true;
+        }
+
+        // Ticket starts today or earlier and ends on or past event date FIXME
+
+
+        // Ticket starts later than today and ends later than the day it starts and is multiple days
+        if (from > today && to > today && from !== to) {
+          ticket.dateSentance = 'Available from ' + DateFormat.format.date(from, amassEvent.settings.dateFormat) 
+                                  + ' to ' + DateFormat.format.date(to, amassEvent.settings.dateFormat);
+          ticket.isAvailable = false;
+        }
+
+        // Ticket starts later than today and ends later than today and is only for one day
+        if (from > today && to > today && from === to) {
+          ticket.dateSentance = 'Available only on ' + DateFormat.format.date(to, amassEvent.settings.dateFormat);
+          ticket.isAvailable = false;
+        }
+
+        ticket.formattedPrice = '$' + ticket.price.toFixed(2).toString();
+
+        return ticket;
+      }
+    });
+
+    ticketsContainer = document.createElement('div');
+    ticketsContainer.innerHTML = ticketsTemplate(amassEvent);
+
+    ticketsEl.appendChild(ticketsContainer);
+
+    attendees = new Attendees();
+    cart = new Cart();
+
+    // Artificially adding an early bird ticket. FIXME THIS IS SHITTTTTTTT
+    attendees.add({ ticket: amassEvent.tickets[0] });
+  };
+
+  init();
 
   // ** EVENTS
   _events.onAttendeeAdd = function(attendee) {
@@ -253,9 +363,9 @@ var AMASS = (function($) {
         ticketsCount = Number(this.value),
         ticketId = Number(this.getAttribute('data-ticket-id'));
 
-      for (var i in tickets) {
-        if (tickets[i].id === ticketId) {
-          ticket = tickets[i];
+      for (var i in amassEvent.tickets) {
+        if (amassEvent.tickets[i].id === ticketId) {
+          ticket = amassEvent.tickets[i];
           break;
         }
       }
@@ -307,7 +417,7 @@ var AMASS = (function($) {
 
     return that;
   };
-})(jQuery);
+})(jQuery, DateFormat);
 
 // ** EVERYTHING BELOW NOT PART OF OUT OF BOX AMASS CODE
 var amass = new AMASS();
