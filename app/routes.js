@@ -182,21 +182,64 @@ module.exports = (function() {
     res.writeHead(200, {'content-type':'text/html'});
     // Get single event from database
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
-      if (err) { return logfmt.error(new Error('Unable to retrieve event: ' + err)); }
+      if (err) { 
+        // We're fucked
+        res.write(JSON.stringify({ 'status': 'error', 'message': err, 'data': eventInfo }));
+        res.end();
+        return logfmt.error(new Error('Unable to retrieve event: ' + err)); 
+      }
+      
       res.write(JSON.stringify(eventInfo));
       res.end();
     });
   });
 
   app.post('/api/event/:event_id/order', function(req, res) {
-    var f, registrationData, registrationModel;
+    var f, registrationData, registrationModel, Cart, cart;
     res.writeHead(200, {'content-type':'text/html'});
 
     f = req.body;
     registrationData = {};
 
+    Cart = function() {
+      var that, _items, _total;
+
+      that = this;
+      _items = [];
+      _total = 0.00;
+
+      that.addItem = function(item) {
+        _items.push(item);
+      };
+
+      that.getItems = function() {
+        return JSON.parse(JSON.stringify(_items));
+      };
+
+      that.getTotal = function() {
+        var items;
+
+        items = that.getItems();
+
+        for (var i = 0; i < items.length; i++) {
+          _total += items[i].price;
+        }
+
+        return Number(_total);
+      };
+
+      return that;
+    };
+
+    cart = new Cart();
+
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
-      if (err) { return logfmt.error(new Error('Unable to retrieve event: ' + err )); }
+      if (err) { 
+        // We're fucked
+        res.write(JSON.stringify({ 'status': 'error', 'message': err, 'data': eventInfo }));
+        res.end();
+        return logfmt.error(new Error('Unable to retrieve event: ' + err )); 
+      }
 
       registrationData.event = req.params.event_id;
 
@@ -207,6 +250,7 @@ module.exports = (function() {
         for (var x = 0; x < eventInfo.tickets.length; x++) {
           if (f.attendees[i].ticket_id === String(eventInfo.tickets[x]._id)) {
             f.attendees[i].ticket = eventInfo.tickets[x]._id;
+            cart.addItem(eventInfo.tickets[x]);
             break;
           }
         }
@@ -216,7 +260,7 @@ module.exports = (function() {
 
       // Process payment
       stripe.charges.create({
-        amount: 185, // FIXME calc cart
+        amount: cart.getTotal(),
         currency: 'usd',
         card: f.cc
       }).then(function(charge) {
