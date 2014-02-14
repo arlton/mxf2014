@@ -155,7 +155,7 @@ var AMASS = (function($, DateFormat) {
     _total = 0.00;
 
     that.addItem = function(item) {
-      if (item.id && item.price && item.title) {
+      if (item._id && item.price && item.title) {
         _items.push(item);
       }
 
