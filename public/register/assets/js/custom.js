@@ -20,11 +20,48 @@ var AMASS = (function($, DateFormat) {
     amassFormEl                = document.getElementById('amass-form'),
     totalCostEl                = document.getElementsByClassName('total-cost'),
 
-    settings = {
-      transitions: {}
-    },
+    settings = {},
 
+    callEvent, 
     _events = {};
+
+  callEvent = function(name, callback, context) {
+    var async;
+
+    context = context || this;
+    callback = callback || function(){};
+
+    /**
+     * Takes an array of functions and waits for them all to return before continuing
+     * @param  {Array}   functions
+     * @param  {Function} callback  Ends the entire async process and executes callback
+     * @return {Object}             If any of the functions return anything, we add it to an object
+     */
+    async = function(functions, asyncCallback) {
+      var _completed, _results;
+
+      _completed = 0;
+      _results = [];
+
+      for (var i = 0; i < functions.length; i++) {
+        _results.push(functions[i](function() {
+          _completed += 1;
+
+          if (_completed === functions.length) {
+            asyncCallback(_results);
+          }
+        }));
+      }
+    };
+
+    if (typeof _events[name] === 'object' && _events[name].length > 0) {
+      return async($.map(_events[name], function(event) {
+        return event.bind(context);
+      }), callback);
+    }
+
+    return callback();
+  };
 
   Attendees = function() {
     var that, _list, Attendee;
@@ -75,13 +112,9 @@ var AMASS = (function($, DateFormat) {
 
       attendeesEl.appendChild(container);
 
-      if (typeof settings.transitions.addAttendee === 'function') {
-        container.style.display = 'none';
-
-        settings.transitions.addAttendee(container, function() {});
-      }
-
       that.el = container;
+
+      callEvent('addAttendee', function(){}, that);
     };
 
     Attendee.prototype.template = Handlebars.compile(attendeeTemplateSrc);
@@ -105,13 +138,9 @@ var AMASS = (function($, DateFormat) {
         _events.onAttendeeRemove(attendee);
       }
 
-      if (typeof settings.transitions.removeAttendee === 'function') {
-        settings.transitions.removeAttendee(attendee.el, function() {
-          attendee.el.parentNode.removeChild(attendee.el);
-        });
-      } else {
+      callEvent('removeAttendee', function() {
         attendee.el.parentNode.removeChild(attendee.el);
-      }
+      }, attendee);
     };
 
     that.all = function() {
@@ -318,7 +347,10 @@ var AMASS = (function($, DateFormat) {
   };
 
   // ** EVENTS
-  _events.onAttendeeAdd = function(attendee) {
+  _events.addAttendee = [];
+  _events.addAttendee.push(function(callback) {
+    var attendee = this;
+
     cart.addItem(attendee.attributes.ticket);
     $('input, select', attendee.el).each(function() {
       var $this = $(this);
@@ -327,9 +359,13 @@ var AMASS = (function($, DateFormat) {
         $(amassFormEl).parsley('addItem', '#' + $this.attr('id'));
       }
     });
-  };
 
-  _events.onAttendeeRemove = function(attendee) {
+    callback();
+  });
+
+  _events.removeAttendee = [];
+  _events.removeAttendee.push(function(callback) {
+    var attendee = this;
     for (var i = 0; i < ticketNumbersEl.length; i++) {
       if (ticketNumbersEl[i].getAttribute('data-ticket-id') === attendee.attributes.ticket._id) {
         ticketNumbersEl[i].value = attendees.count(function(attendee) {
@@ -348,11 +384,13 @@ var AMASS = (function($, DateFormat) {
         $(amassFormEl).parsley('removeItem', '#' + $this.attr('id'));
       }
     });
-  };
 
-  amassFormEl.onsubmit = function(event) {
+    callback();
+  });
+
+  _events.formSubmit = [];
+  _events.formSubmit.push(function(callback) {
     var successTemplate;
-    event.preventDefault();
 
     if ($(amassFormEl).parsley('validate')) {
       $.ajax({
@@ -360,11 +398,20 @@ var AMASS = (function($, DateFormat) {
         type: 'POST',
         dataType: 'json',
         data: $(amassFormEl).serialize()
-      }).done(function(result) {
+      }).done(function(data, textStatus, jqXHR) {
         successTemplate = Handlebars.compile(registerSuccessTemplateSrc);
         mainEl.innerHTML = successTemplate(registerSuccessTemplateSrc);
-      });
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR, jqXHR.responseJSON, textStatus, errorThrown);
+      }).always(callback);
     }
+
+    callback();
+  });
+
+  amassFormEl.onsubmit = function(event) {
+    event.preventDefault();
+    callEvent('formSubmit');
   };
 
   // Expose a few methods so users can make their own magic happen
@@ -373,17 +420,30 @@ var AMASS = (function($, DateFormat) {
 
     that = this;
 
-    that.setEvent = function(eventInfo) {
+    /**
+     * Instantiates the whole Amass event page
+     * @param {Object} eventInfo Check schema documentation for more info
+     */
+    that.setEventDetails = function(eventInfo) {
       if (typeof eventInfo === 'object') {
         settings.eventInfo = eventInfo;
         init();
       }
     };
 
-    that.setTransitions = function(transitions) {
-      if (typeof transitions === 'object') {
-        settings.transitions = transitions;
-      }
+    /**
+     * Allows user to create their own event hooks
+     * @param  {String}   eventType Title of event
+     * @param  {Function} callback  Function to call when event occurs
+     * @return {Boolean}            If event set properly, returns true             
+     */
+    that.on = function(name, action) {
+      if (typeof name !== 'string' || typeof action !== 'function') { return; }
+
+      _events[name] = _events[name] || [];
+      _events[name].push(action);
+
+      return true;
     };
 
     return that;
@@ -397,15 +457,15 @@ $.ajax({
 }).done(function(event) {
   var amass = new AMASS();
 
-  amass.setTransitions({
-    addAttendee: function(attendeeEl, callback) {
-      $(attendeeEl).fadeIn('fast', callback);
-    },
-
-    removeAttendee: function(attendeeEl, callback) {
-      $(attendeeEl).fadeOut('fast', callback);
-    }
+  amass.on('addAttendee', function(callback) {
+    var attendeeEl = this.el;
+    $(attendeeEl).fadeIn('fast', callback);
   });
 
-  amass.setEvent(event);
+  amass.on('removeAttendee', function(callback) {
+    var attendeeEl = this.el;
+    $(attendeeEl).fadeOut('fast', callback);
+  });
+
+  amass.setEventDetails(event);
 });

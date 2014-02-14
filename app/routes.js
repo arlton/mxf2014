@@ -8,6 +8,9 @@ logfmt    = require("logfmt");
 mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
   var eventSchema, registrationSchema;
   if (err) {
+    res.writeHead(500, {'content-type':'application/json'});
+    res.write(JSON.stringify({ 'status': 'error', 'message': err }));
+    res.end();
     return logfmt.error(new Error('Unable to connect: ' + err));
   } else {
     logfmt.log({ 'type': 'database', 'message': 'Connected' });
@@ -173,22 +176,23 @@ module.exports = (function() {
   app.use(express.bodyParser());
 
   app.get('/api/events', function(req, res) {
-    res.writeHead(200, {'content-type':'text/html'});
+    res.writeHead(200, {'content-type':'application/json'});
     // Get all events from database
     res.end();
   });
   
   app.get('/api/event/:event_id', function(req, res) {
-    res.writeHead(200, {'content-type':'text/html'});
     // Get single event from database
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
       if (err) { 
         // We're fucked
-        res.write(JSON.stringify({ 'status': 'error', 'message': err, 'data': eventInfo }));
+        es.writeHead(404, {'content-type':'application/json'});
+        res.write(JSON.stringify({ 'status': 'fail', 'message': 'Event not found', 'data': { 'event_id': req.params.event_id } })); // FIXME am I sure that findOne method would only error when unable to find an event?
         res.end();
         return logfmt.error(new Error('Unable to retrieve event: ' + err)); 
       }
-      
+
+      res.writeHead(200, {'content-type':'application/json'});
       res.write(JSON.stringify(eventInfo));
       res.end();
     });
@@ -196,7 +200,6 @@ module.exports = (function() {
 
   app.post('/api/event/:event_id/order', function(req, res) {
     var f, registrationData, registrationModel, Cart, cart;
-    res.writeHead(200, {'content-type':'text/html'});
 
     f = req.body;
     registrationData = {};
@@ -236,7 +239,8 @@ module.exports = (function() {
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
       if (err) { 
         // We're fucked
-        res.write(JSON.stringify({ 'status': 'error', 'message': err, 'data': eventInfo }));
+        res.writeHead(404, {'content-type':'application/json'});
+        res.write(JSON.stringify({ 'status': 'fail', 'message': 'Event not found', 'data': { 'event_id': req.params.event_id } })); // FIXME am I sure that findOne method would only error when unable to find an event?
         res.end();
         return logfmt.error(new Error('Unable to retrieve event: ' + err )); 
       }
@@ -277,17 +281,20 @@ module.exports = (function() {
         registrationModel.save(function(err) {
           if (err) {
             // We're fucked
-            res.write(JSON.stringify({ 'status': 'error', 'message': err, 'registration': registrationData }));
+            res.writeHead(500, {'content-type':'application/json'});
+            res.write(JSON.stringify({ 'status': 'error', 'message': 'Unable to store registration details', 'data': [err, registrationData] }));
             res.end();
             return logfmt.error(new Error('Unable to save registration: ' + err));
           }
 
           // Show response JSON
-          res.write(JSON.stringify({ 'status': 'success', 'registration': registrationData }));
+          res.writeHead(200, {'content-type':'application/json'});
+          res.write(JSON.stringify({ 'status': 'success', 'data': registrationData }));
           res.end();
         });
       }, function(err) {
-        res.write(JSON.stringify({ 'status': 'error', 'message': err, 'registration': registrationData }));
+        res.writeHead(400, {'content-type':'application/json'});
+        res.write(JSON.stringify({ 'status': 'fail', 'data': err })); // FIXME data should respond with which parts of the request failed in key/value pairs
         res.end();
         return logfmt.error(new Error('Error processing card: ' + err));
       });
