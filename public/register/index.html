@@ -54,7 +54,7 @@
                       <h4>{{title}}<br /><span>{{dateSentance}}</span></h4>
                       <div>
                         {{#if isAvailable}}
-                          <input type="text" class="form-control parsley-validated ticket-number" data-ticket-id="{{id}}" value="1" placeholder="" data-notblank="true" data-required="true">
+                          <input type="text" class="form-control parsley-validated ticket-number" data-ticket-id="{{_id}}" value="1" placeholder="" data-notblank="true" data-required="true">
                           <span>{{formattedPrice}}</span>
                         {{/if}}
                       </div>
@@ -72,41 +72,41 @@
                 <div class="form-group">
                   <div class="col-lg-6">
                     <label for="name" class="control-label">First Name *</label>
-                    <input type="text" class="form-control parsley-validated first-name" name="first_name[{{index}}]" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated first-name" id="first_name_{{attributes.attendeeNumber}}" name="attendees[{{index}}][first_name]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                   <div class="col-lg-6">
                     <label for="name" class="control-label">Last Name *</label>
-                    <input type="text" class="form-control parsley-validated last-name" name="last_name[{{index}}]" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated last-name" id="last_name_{{attributes.attendeeNumber}}" name="attendees[{{index}}][last_name]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                 <div class="col-lg-6">
                   <label for="name" class="control-label">Email Address *</label>
-                  <input type="text" class="form-control parsley-validated" id="first_name" name="email_address[{{index}}]" placeholder="" value="" data-notblank="true" data-required="true">
+                  <input type="text" class="form-control parsley-validated" id="email_address_{{attributes.attendeeNumber}}" name="attendees[{{index}}][email_address]" placeholder="" value="" data-notblank="true" data-required="true">
                 </div>
                 <div class="col-lg-6">
                   <label for="name" class="control-label">Confirm Email Address *</label>
-                  <input type="text" class="form-control parsley-validated" id="last_name" name="confirm_email_address[{{index}}]" placeholder="" value="" data-notblank="true" data-required="true">
+                  <input type="text" class="form-control parsley-validated" id="confirm_email_address_{{attributes.attendeeNumber}}" name="attendees[{{index}}][confirm_email_address]" placeholder="" value="" data-notblank="true" data-required="true">
                 </div>
               </div>
                 <div class="form-group">
                   <div class="col-lg-6">
                     <label for="organization" class="control-label">Organization</label>
-                    <input type="text" class="form-control organization" name="organization[{{index}}]" placeholder="">
+                    <input type="text" class="form-control organization" id="organization_{{attributes.attendeeNumber}}" name="attendees[{{index}}][organization]" placeholder="">
                   </div>
                   <div class="col-lg-6">
                     <label for="title" class="control-label">Title</label>
-                    <input type="text" class="form-control title" name="title[{{index}}]" placeholder="" value="">
+                    <input type="text" class="form-control title" id="title_{{attributes.attendeeNumber}}" name="attendees[{{index}}][title]" placeholder="" value="">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-6">
                     <label for="twitter_handle" class="control-label">Twitter Handle </label>
-                    <input type="text" class="form-control twitter-handle" name="twitter_handle[{{index}}]" placeholder="" value="">
+                    <input type="text" class="form-control twitter-handle" id="twitter_handle_{{attributes.attendeeNumber}}" name="attendees[{{index}}][twitter_handle]" placeholder="" value="">
                   </div>
                   <div class="col-lg-6">
                     <label for="shirt_size" class="control-label">Shirt Size *</label>
-                    <select class="form-control parsley-validated shirt-size" name="shirt_size[{{index}}]" data-notblank="true" data-required="true">
+                    <select class="form-control parsley-validated shirt-size" id="shirt_size_{{attributes.attendeeNumber}}" name="attendees[{{index}}][shirt_size]" data-notblank="true" data-required="true">
                       <option></option>
                       <option>Small</option>
                       <option>Medium</option>
@@ -116,60 +116,56 @@
                     </select>
                   </div>
                 </div>
-                <input type="hidden" name="ticket_id[{{index}}]" value="{{attributes.ticket.id}}">
+                <input type="hidden" name="attendees[{{index}}][ticket_id]" value="{{attributes.ticket._id}}">
                 <hr />
               </script>
               <div id="attendees"></div>
               <h4>Additional Information</h4>
               <div class="form-group">
                 <div class="col-lg-12">
-                  <textarea class="form-control" rows="3"></textarea>
+                  <textarea class="form-control" name="additional_information" rows="3"></textarea>
                 </div>
               </div>
               <hr />
               <h4>Billing Information</h4>
               <div id="cc-info">
                 <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="name" class="control-label">First Name *</label>
-                    <input type="text" class="form-control parsley-validated" id="cc_first_name" name="cc_first_name" placeholder="" value="" data-notblank="true" data-required="true">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="name" class="control-label">Last Name *</label>
-                    <input type="text" class="form-control parsley-validated" id="cc_last_name" name="cc_last_name" placeholder="" value="" data-notblank="true" data-required="true">
+                  <div class="col-lg-12">
+                    <label for="name" class="control-label">Name on Card *</label>
+                    <input type="text" class="form-control parsley-validated" id="cc_name" name="cc[name]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-6">
                     <label for="name" class="control-label">Email Address *</label>
-                    <input type="text" class="form-control parsley-validated" id="cc_email_address" name="cc_email_address" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated" id="cc_email_address" name="cc[email_address]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                   <div class="col-lg-6">
                     <label for="name" class="control-label">Confirm Email Address *</label>
-                    <input type="text" class="form-control parsley-validated" id="cc_email_address_confirm" name="cc_email_address_confirm" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated" id="cc_email_address_confirm" name="cc[email_address_confirm]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
                     <label for="number" class="control-label">Card Number *</label>
-                    <input type="text" class="form-control parsley-validated" id="cc_number" name="cc_number" placeholder="" value="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated" id="cc_number" name="cc[number]" placeholder="" value="4242424242424242" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
                     <label for="type" class="control-label">Card Type *</label>
-                    <select class="form-control parsley-validated" id="cc_type" name="cc_type" data-notblank="true" data-required="true">
-                      <option value="visa">VISA</option>
-                      <option value="mastercard">MASTERCARD</option>
-                      <option value="discover">DISCOVER</option>
-                      <option value="amex">AMERICAN EXPRESS</option>
+                    <select class="form-control parsley-validated" id="cc_type" name="cc[type]" data-notblank="true" data-required="true">
+                      <option value="Visa">VISA</option>
+                      <option value="MasterCard">MASTERCARD</option>
+                      <option value="Discover">DISCOVER</option>
+                      <option value="American Express">AMERICAN EXPRESS</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-4">
                     <label for="cc_month" class="control-label">Card Expiry Month *</label>
-                    <select class="form-control parsley-validated" id="cc_month" name="cc_month" data-notblank="true" data-required="true">
+                    <select class="form-control parsley-validated" id="cc_exp_month" name="cc[exp_month]" data-notblank="true" data-required="true">
                       <option>01</option>
                       <option>02</option>
                       <option>03</option>
@@ -186,11 +182,11 @@
                   </div>
                   <div class="col-lg-4">
                     <label for="cc_month" class="control-label">Card Expiry Year *</label>
-                    <select class="form-control parsley-validated" id="cc_year" name="cc_year" data-notblank="true" data-required="true"><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option></select>
+                    <select class="form-control parsley-validated" id="cc_exp_year" name="cc[exp_year]" data-notblank="true" data-required="true"><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option></select>
                   </div>
                   <div class="col-lg-4">
                     <label for="cvv" class="control-label">CVV *</label>
-                    <input type="text" class="form-control parsley-validated" id="cc_cvv" name="cc_cvv" placeholder="" data-notblank="true" data-required="true">
+                    <input type="text" class="form-control parsley-validated" id="cc_cvc" name="cc[cvc]" placeholder="" data-notblank="true" data-required="true">
                   </div>
                 </div>
               </div>
@@ -285,6 +281,7 @@
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script src="/register/assets/js/handlebars.js"></script>
   <script src="/register/assets/js/dateformat.js"></script>
+  <script src="/register/assets/js/parsley.js"></script>
   <script src="/register/assets/js/custom.js"></script>
 </body>
 </html>

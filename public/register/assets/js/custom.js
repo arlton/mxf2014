@@ -1,80 +1,30 @@
 var AMASS = (function($, DateFormat) {
   "use strict";
 
-  var AmassEvent, // Event object
-    amassEvent,   // Instantiated event object
-
-    Attendees,    // Attendees object
+  var Attendees,    // Attendees object
     attendees,    // Instantiated attendees object
 
     Cart,         // Cart object
     cart,         // Instantiated cart object
 
-    attendeeTemplateSrc           = document.getElementById('attendee-template').innerHTML,
-    registerSuccessTemplateSrc    = document.getElementById('register-success-template').innerHTML,
-    ticketsTemplateSrc            = document.getElementById('tickets-template').innerHTML,
-    ticketsTemplate               = Handlebars.compile(ticketsTemplateSrc),
+    attendeeTemplateSrc        = document.getElementById('attendee-template').innerHTML,
+    registerSuccessTemplateSrc = document.getElementById('register-success-template').innerHTML,
+    ticketsTemplateSrc         = document.getElementById('tickets-template').innerHTML,
+    ticketsTemplate            = Handlebars.compile(ticketsTemplateSrc),
+    ticketNumbersEl,           // Defined after tickets are pulled from server
 
     // Nodes
-    mainEl                = document.getElementById('main'),
-    attendeesEl           = document.getElementById('attendees'),
-    ticketsEl             = document.getElementById('tickets'),
-    ticketNumbersEl       = document.getElementsByClassName('ticket-number'),
-    amassFormEl           = document.getElementById('amass-form'),
-    totalCostEl           = document.getElementsByClassName('total-cost'),
+    mainEl                     = document.getElementById('main'),
+    attendeesEl                = document.getElementById('attendees'),
+    ticketsEl                  = document.getElementById('tickets'),
+    amassFormEl                = document.getElementById('amass-form'),
+    totalCostEl                = document.getElementsByClassName('total-cost'),
 
     settings = {
       transitions: {}
     },
 
     _events = {};
-  
-  // FIXME: This should be brought in by ajax at some point
-  amassEvent = {
-    title: 'Made By Few 2014',
-    logo_url: '/register/assets/img/logo.png',
-    dates: {
-      range: {
-        from: '2014-08-22 00:00:00',
-        to: '2014-08-23 23:59:59'
-      }
-    },
-    location: {
-      address1: '',
-      address2: '',
-      city: 'Little Rock',
-      state: 'Arkansas',
-      zipcode: '',
-      zipcodeplus: ''
-    },
-    tickets: [
-      {
-        id: 1,
-        title: 'Early Bird',
-        price: 185.00,
-        availability: {
-          range: {
-            from: '2014-01-01 00:00:00',
-            to: '2014-05-31 23:59:59'
-          }
-        }
-      },
-      {
-        id: 2,
-        title: 'Regular',
-        price: 0.00,
-        availability: {
-          range: {
-            from: '2014-06-01 00:00:00',
-            to: '2014-08-22 23:59:59'
-          }
-        }
-      }
-    ],
-    settings: {
-      dateFormat: 'MMMM D, yyyy'
-    }
-  };
 
   Attendees = function() {
     var that, _list, Attendee;
@@ -261,7 +211,7 @@ var AMASS = (function($, DateFormat) {
     var ticketsContainer;
 
     // Update AMASS Event with some dynamicness
-    amassEvent.tickets = $.map(amassEvent.tickets, function(ticket) {
+    settings.eventInfo.tickets = $.map(settings.eventInfo.tickets, function(ticket) {
       var avail, today, from, to;
 
       avail = ticket.availability;
@@ -291,7 +241,7 @@ var AMASS = (function($, DateFormat) {
 
         // Ticket available today or earlier and ends later than today
         if (from <= today && to > today) {
-          ticket.dateSentance = 'Ends ' + DateFormat.format.date(to, amassEvent.settings.dateFormat);
+          ticket.dateSentance = 'Ends ' + DateFormat.format.date(to, settings.eventInfo.settings.dateFormat);
           ticket.isAvailable = true;
         }
 
@@ -306,14 +256,14 @@ var AMASS = (function($, DateFormat) {
 
         // Ticket starts later than today and ends later than the day it starts and is multiple days
         if (from > today && to > today && from !== to) {
-          ticket.dateSentance = 'Available from ' + DateFormat.format.date(from, amassEvent.settings.dateFormat) 
-                                  + ' to ' + DateFormat.format.date(to, amassEvent.settings.dateFormat);
+          ticket.dateSentance = 'Available from ' + DateFormat.format.date(from, settings.eventInfo.settings.dateFormat) 
+                                  + ' to ' + DateFormat.format.date(to, settings.eventInfo.settings.dateFormat);
           ticket.isAvailable = false;
         }
 
         // Ticket starts later than today and ends later than today and is only for one day
         if (from > today && to > today && from === to) {
-          ticket.dateSentance = 'Available only on ' + DateFormat.format.date(to, amassEvent.settings.dateFormat);
+          ticket.dateSentance = 'Available only on ' + DateFormat.format.date(to, settings.eventInfo.settings.dateFormat);
           ticket.isAvailable = false;
         }
 
@@ -324,77 +274,97 @@ var AMASS = (function($, DateFormat) {
     });
 
     ticketsContainer = document.createElement('div');
-    ticketsContainer.innerHTML = ticketsTemplate(amassEvent);
+    ticketsContainer.innerHTML = ticketsTemplate(settings.eventInfo);
+
+    ticketNumbersEl = ticketsContainer.getElementsByClassName('ticket-number');
+
+    // Ticket numbers changed
+    for (var i in ticketNumbersEl) {
+      ticketNumbersEl[i].onblur = function() {
+        var attendeesCount = attendees.count(),
+          ticket = {},
+          ticketsCount = parseInt(this.value),
+          ticketId = this.getAttribute('data-ticket-id');
+
+        for (var i in settings.eventInfo.tickets) {
+          if (settings.eventInfo.tickets[i]._id === ticketId) {
+            ticket = settings.eventInfo.tickets[i];
+            break;
+          }
+        }
+
+        if (ticketsCount > attendeesCount) {
+          for (var i = 0; i < (ticketsCount - attendeesCount); i++) {
+            attendees.add({ticket: ticket});
+          }
+        } else {
+          for (var i = 0; i < (attendeesCount - ticketsCount); i++) {
+            attendees.remove(attendees.count()-1);
+          }
+        }
+      };
+    }
 
     ticketsEl.appendChild(ticketsContainer);
 
     attendees = new Attendees();
     cart = new Cart();
 
-    // Artificially adding an early bird ticket. FIXME THIS IS SHITTTTTTTT
-    attendees.add({ ticket: amassEvent.tickets[0] });
-  };
+    // Setup initial validation
+    $(amassFormEl).parsley();
 
-  init();
+    // Artificially adding an early bird ticket. FIXME THIS IS SHITTTTTTTT
+    attendees.add({ ticket: settings.eventInfo.tickets[0] });
+  };
 
   // ** EVENTS
   _events.onAttendeeAdd = function(attendee) {
     cart.addItem(attendee.attributes.ticket);
+    $('input, select', attendee.el).each(function() {
+      var $this = $(this);
+
+      if ($this.attr('id')) {
+        $(amassFormEl).parsley('addItem', '#' + $this.attr('id'));
+      }
+    });
   };
 
   _events.onAttendeeRemove = function(attendee) {
     for (var i = 0; i < ticketNumbersEl.length; i++) {
-      if (Number(ticketNumbersEl[i].getAttribute('data-ticket-id')) === attendee.attributes.ticket.id) {
+      if (ticketNumbersEl[i].getAttribute('data-ticket-id') === attendee.attributes.ticket._id) {
         ticketNumbersEl[i].value = attendees.count(function(attendee) {
-          return attendee.attributes.ticket.id === 
-            Number(ticketNumbersEl[i].getAttribute('data-ticket-id'));
+          return attendee.attributes.ticket._id === 
+            ticketNumbersEl[i].getAttribute('data-ticket-id');
         });
       }
     }
 
     cart.removeItem(attendee.attributes.ticket);
+
+    $('input, select', attendee.el).each(function() {
+      var $this = $(this);
+
+      if ($this.attr('id')) {
+        $(amassFormEl).parsley('removeItem', '#' + $this.attr('id'));
+      }
+    });
   };
-
-  // Ticket numbers changed
-  for (var i in ticketNumbersEl) {
-    ticketNumbersEl[i].onblur = function() {
-      var attendeesCount = attendees.count(),
-        ticket = {},
-        ticketsCount = Number(this.value),
-        ticketId = Number(this.getAttribute('data-ticket-id'));
-
-      for (var i in amassEvent.tickets) {
-        if (amassEvent.tickets[i].id === ticketId) {
-          ticket = amassEvent.tickets[i];
-          break;
-        }
-      }
-
-      if (ticketsCount > attendeesCount) {
-        for (var i = 0; i < (ticketsCount - attendeesCount); i++) {
-          attendees.add({ticket: ticket});
-        }
-      } else {
-        for (var i = 0; i < (attendeesCount - ticketsCount); i++) {
-          attendees.remove(attendees.count()-1);
-        }
-      }
-    };
-  }
 
   amassFormEl.onsubmit = function(event) {
     var successTemplate;
     event.preventDefault();
 
-    $.ajax({
-      url: '/api/order',
-      type: 'POST',
-      dataType: 'json',
-      data: $(amassFormEl).serialize()
-    }).done(function(result) {
-      successTemplate = Handlebars.compile(registerSuccessTemplateSrc);
-      mainEl.innerHTML = successTemplate(registerSuccessTemplateSrc);
-    });
+    if ($(amassFormEl).parsley('validate')) {
+      $.ajax({
+        url: '/api/event/' + settings.eventInfo._id + '/order',
+        type: 'POST',
+        dataType: 'json',
+        data: $(amassFormEl).serialize()
+      }).done(function(result) {
+        successTemplate = Handlebars.compile(registerSuccessTemplateSrc);
+        mainEl.innerHTML = successTemplate(registerSuccessTemplateSrc);
+      });
+    }
   };
 
   // Expose a few methods so users can make their own magic happen
@@ -406,6 +376,7 @@ var AMASS = (function($, DateFormat) {
     that.setEvent = function(eventInfo) {
       if (typeof eventInfo === 'object') {
         settings.eventInfo = eventInfo;
+        init();
       }
     };
 
@@ -420,14 +391,21 @@ var AMASS = (function($, DateFormat) {
 })(jQuery, DateFormat);
 
 // ** EVERYTHING BELOW NOT PART OF OUT OF BOX AMASS CODE
-var amass = new AMASS();
+$.ajax({
+  url: '/api/event/52fd903c133ae6bd9fcd2423',
+  dataType: 'json'
+}).done(function(event) {
+  var amass = new AMASS();
 
-amass.setTransitions({
-  addAttendee: function(attendeeEl, callback) {
-    $(attendeeEl).fadeIn('fast', callback);
-  },
+  amass.setTransitions({
+    addAttendee: function(attendeeEl, callback) {
+      $(attendeeEl).fadeIn('fast', callback);
+    },
 
-  removeAttendee: function(attendeeEl, callback) {
-    $(attendeeEl).fadeOut('fast', callback);
-  }
+    removeAttendee: function(attendeeEl, callback) {
+      $(attendeeEl).fadeOut('fast', callback);
+    }
+  });
+
+  amass.setEvent(event);
 });
