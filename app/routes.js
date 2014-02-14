@@ -229,7 +229,7 @@ module.exports = (function() {
 
         // Update database
         registrationModel = new Registration(registrationData);
-        console.log(registrationModel);
+
         registrationModel.save(function(err) {
           if (err) {
             // We're fucked
