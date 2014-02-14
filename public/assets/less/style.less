@@ -725,42 +725,67 @@ footer {
 }
 
 #contest {
-  background: @white;
+  background: transparent url('../img/contest.jpg') center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   padding: 40px 0 100px 0;
-  i {
-    text-align: center;
-    color: @gold;
-    font-size: 180px;
+  .ticket {
+    width: 20%;
     display: block;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
+    border-radius: 500px;
+    img {
+      width: 80%;
+      display: block;
+      margin: 29% auto;
+    }
+    &.mobile {
+      width: 40%;
+    }
   }
   h1 {
+    color: @white;
     text-align: center;
     margin-top: 60px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     font-size: 100px;
     text-transform: uppercase;
     font-weight: 900;
     font-style: italic;
+    &.mobile {
+      font-size: 50px;
+    }
   }
   h2 {
-    color: @black;
+    color: @white;
   }
   p {
-    font-size: 24px;
+    color: @white;
+    text-align: center;
+    font-size: 28px;
     font-weight: 300;
-    line-height: 30px;
+    line-height: 34px;
+    margin-bottom: 80px;
+    &.mobile {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 28px;
+    }
   }
-  #tweet {
+  .tweet {
     border: 1px solid @gold;
     background: @gold;
     padding: 30px 40px 40px 40px;
-    margin: 100px 0 0 0;
+    margin: 20px 0 0 0;
+    border-radius: 2px;
     p {
-      font-size: 40px;
-      line-height: 48px;
+      font-size: 28px;
+      line-height: 32px;
       font-style: italic;
       color: @white;
+      margin-bottom: 0;
     }
     a.twitter_link {
       display: block;
@@ -781,10 +806,41 @@ footer {
       }
     }
   }
-  img {
+  p.footer-text {
+    font-size: 15px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    &.mobile {
+      font-size: 17px;
+      font-weight: 300;
+    }
+    a:hover {
+      color: @white;
+    }
+  }
+  img.logo {
     width: 30%;
     display: block;
-    margin: 80px auto 0 auto;
+    margin: 0 auto;
+  }
+  .rules {
+    background: @white;
+    margin: 20px 0;
+    padding: 40px;
+    h2 {
+      color: @black;
+      text-align: left;
+      font-size: 36px;
+      line-height: 44px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    p {
+      color: @black;
+      text-align: left;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
   }
 }
 

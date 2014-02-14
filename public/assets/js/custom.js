@@ -5,7 +5,7 @@ $(function(){
   $.scrollIt();
 
   var fadeStart = 100 // 100px scroll or less will equiv to 1 opacity
-      , fadeUntil = 270 // 200px scroll or more will equiv to 0 opacity
+      , fadeUntil = 500 // 200px scroll or more will equiv to 0 opacity
       , fading = $('.fading')
   ;
 
