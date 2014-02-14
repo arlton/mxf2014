@@ -362,7 +362,7 @@ var AMASS = (function($, DateFormat) {
         data: $(amassFormEl).serialize()
       }).done(function(result) {
         successTemplate = Handlebars.compile(registerSuccessTemplateSrc);
-        //mainEl.innerHTML = successTemplate(registerSuccessTemplateSrc);
+        mainEl.innerHTML = successTemplate(registerSuccessTemplateSrc);
       });
     }
   };
