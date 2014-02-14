@@ -8,7 +8,7 @@ logfmt    = require("logfmt");
 mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
   var eventSchema, registrationSchema;
   if (err) {
-    return logfmt.error({ 'type': 'database', 'message': 'Unable to connect', 'data': err });
+    return logfmt.error(new Error('Unable to connect: ' + err));
   } else {
     logfmt.log({ 'type': 'database', 'message': 'Connected' });
   }
@@ -182,7 +182,7 @@ module.exports = (function() {
     res.writeHead(200, {'content-type':'text/html'});
     // Get single event from database
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
-      if (err) { return logfmt.error({ 'type': 'event', 'message': 'Unable to retrieve event', 'data': err }); }
+      if (err) { return logfmt.error(new Error('Unable to retrieve event: ' + err)); }
       res.write(JSON.stringify(eventInfo));
       res.end();
     });
@@ -196,7 +196,7 @@ module.exports = (function() {
     registrationData = {};
 
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
-      if (err) { return logfmt.error({ 'type': 'event', 'message': 'Unable to retrieve event', 'data': err }); }
+      if (err) { return logfmt.error(new Error('Unable to retrieve event: ' + err )); }
 
       registrationData.event = req.params.event_id;
 
@@ -233,7 +233,9 @@ module.exports = (function() {
         registrationModel.save(function(err) {
           if (err) {
             // We're fucked
-            return logfmt.error({ 'type': 'registration', 'message': 'Unable to save registration.', 'data': registrationData || '' });
+            res.write(JSON.stringify({ 'status': 'error', 'message': err, 'registration': registrationData }));
+            res.end();
+            return logfmt.error(new Error('Unable to save registration: ' + err));
           }
 
           // Show response JSON
@@ -241,9 +243,9 @@ module.exports = (function() {
           res.end();
         });
       }, function(err) {
-        logfmt.error({ 'type': 'charge', 'message': 'Error processing card', 'data': err });
         res.write(JSON.stringify({ 'status': 'error', 'message': err, 'registration': registrationData }));
         res.end();
+        return logfmt.error(new Error('Error processing card: ' + err));
       });
     });
   });
