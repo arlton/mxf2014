@@ -68,7 +68,7 @@ mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
 
     additional_info: { type: String },
 
-    paymentInfo: {
+    payment: {
       id: String,
       object: String,
       created: Number,
@@ -77,11 +77,11 @@ mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
       amount: Number,
       currency: String,
       refunded: Boolean,
-      card: { 
+      card: {
         id: { type: String },
         object: String,
         last4: String,
-        type: String,
+        card_type: String,
         exp_month: Number,
         exp_year: Number,
         fingerprint: String,
@@ -107,8 +107,7 @@ mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
       customer: String,
       invoice: String,
       description: String,
-      dispute: String,
-      metadata: 'Mixed'
+      dispute: String
     }
   });
 
@@ -180,10 +179,6 @@ module.exports = (function() {
   });
   
   app.get('/api/event/:event_id', function(req, res) {
-    Registration.findOne({ _id: req.params.event_id }).populate('event attendees.ticket').exec(function(err, result) {
-      console.log(err, result);
-    });
-
     res.writeHead(200, {'content-type':'text/html'});
     // Get single event from database
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
@@ -195,7 +190,6 @@ module.exports = (function() {
 
   app.post('/api/event/:event_id/order', function(req, res) {
     var f, registrationData, registrationModel;
-
     res.writeHead(200, {'content-type':'text/html'});
 
     f = req.body;
@@ -229,14 +223,13 @@ module.exports = (function() {
         logfmt.log({ 'type': 'charge', 'message': 'Successful charge', 'data': charge });
 
         // Add payment to main object
-        registrationData.paymentInfo = charge;
+        charge.card.card_type = charge.card.type; // Get around mongo reserved word issue
+
+        registrationData.payment = charge;
 
         // Update database
         registrationModel = new Registration(registrationData);
-
-        console.log(registrationData, registrationModel);
-
-
+        console.log(registrationModel);
         registrationModel.save(function(err) {
           if (err) {
             // We're fucked
