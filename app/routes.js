@@ -1,9 +1,13 @@
-var stripe, mongoose, _, Event, Registration;
+var stripe, sendgrid, mongoose, _, Event, Registration;
 
-stripe    = require("stripe")(process.env.STRIPE_API_KEY);
-mongoose  = require("mongoose");
-_         = require("underscore");
-logfmt    = require("logfmt");
+stripe    = require('stripe')(process.env.STRIPE_API_KEY);
+sendgrid  = require('sendgrid')(
+  process.env.SENDGRID_USERNAME,
+  process.env.SENDGRID_PASSWORD
+);
+mongoose  = require('mongoose');
+_         = require('underscore');
+logfmt    = require('logfmt');
 
 mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
   var eventSchema, registrationSchema;
@@ -287,6 +291,19 @@ module.exports = (function() {
             return logfmt.error(new Error('Unable to save registration: ' + err));
           }
 
+          // Send success email
+          /*
+          sendgrid.send({
+            to: 'example@example.com',
+            from: 'sender@example.com',
+            subject: 'Hello World',
+            text: 'Sending email with NodeJS through SendGrid!'
+          }, function(err, json) {
+          if (err) { return console.error(err); }
+            console.log(json);
+          });
+          */
+         
           // Show response JSON
           res.writeHead(200, {'content-type':'application/json'});
           res.write(JSON.stringify({ 'status': 'success', 'data': registrationData }));

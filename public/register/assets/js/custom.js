@@ -435,7 +435,7 @@ var AMASS = (function($, DateFormat) {
      * Allows user to create their own event hooks
      * @param  {String}   eventType Title of event
      * @param  {Function} callback  Function to call when event occurs
-     * @return {Boolean}            If event set properly, returns true             
+     * @return {Boolean}            If event set properly, returns true
      */
     that.on = function(name, action) {
       if (typeof name !== 'string' || typeof action !== 'function') { return; }
