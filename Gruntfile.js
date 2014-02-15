@@ -46,11 +46,12 @@ module.exports = function(grunt) {
     less: {
       all: {
         options: {
-          paths: ["public/assets/less", "public/assets/css"],
+          paths: ["public/assets/less", "public/assets/css", "public/register/assets/less", "public/register/assets/css"],
           compress: true
         },
         files: {
-          "public/assets/css/style.css": "public/assets/less/style.less"
+          "public/assets/css/style.css": "public/assets/less/style.less",
+          "public/register/assets/css/style.css": "public/register/assets/less/style.less"
         }
       }
     },
@@ -77,14 +78,14 @@ module.exports = function(grunt) {
     watch: {
       gruntfile: {
         files: ['Gruntfile.js'],
-        tasks: ['recess', 'clean', 'jshint', 'uglify']
+        tasks: ['less', 'uglify']
       },
       javascript: {
         files: ['public/assets/js/custom.js'],
         tasks: ['dist-js']
       },
       stylesheets: {
-        files: ['public/assets/less/*.less'],
+        files: ['public/assets/less/*.less', 'public/register/assets/less/*.less'],
         tasks: ['dist-css']
       }
     }
