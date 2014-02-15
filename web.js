@@ -7,6 +7,8 @@ logfmt   = require("logfmt");
 port     = Number(process.env.PORT || 5000);
 app      = express();
 
+app.set('view engine', 'hbs');
+
 app.use(logfmt.requestLogger());
 
 app.use(express.static('public/'));
