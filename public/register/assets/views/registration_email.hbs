@@ -458,7 +458,7 @@
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
                                         <tr>
                                             <td valign="top" class="bodyContent" mc:edit="body_content01">
-                                                <h2>Hi FIRST_NAME,</h2>
+                                                <h2>Hi {{payment.card.name}},</h2>
 																								Thanks for registering for Made by Few 2014! It’s going to be an amazing time. Please review your order information below and let us know if you have any questions. We look forward to seeing you in August.
 																								<br />
 																								<br />
@@ -470,24 +470,20 @@
 																								<br />
 																								<h2>Order confirmation:</h2>
                                                 <hr />
-                                                <h3>Ticket Holder #1:</h3>
-                                                <strong>First Name:</strong> Arlton<br />
-                                                <strong>Last Name:</strong> Lowry<br />
-                                                <strong>Orgainzation:</strong> Artletic<br />
-                                                <strong>Title:</strong> Designer<br />
-                                                <strong>Twitter:</strong> @arlton<br />
-                                                <strong>Shirt Size:</strong> XX-Large
-                                                <hr />
-                                                <h3>Ticket Holder #2:</h3>
-                                                <strong>First Name:</strong> Arlton<br />
-                                                <strong>Last Name:</strong> Lowry<br />
-                                                <strong>Orgainzation:</strong> Artletic<br />
-                                                <strong>Title:</strong> Designer<br />
-                                                <strong>Twitter:</strong> @arlton<br />
-                                                <strong>Shirt Size:</strong> XX-Large
-                                                <hr />
-                                                <h3>Additional Information:</h3>
-                                                I'm a vegitarian, so it would be great if you could have some options for me.
+                                                {{#each attendees}}
+                                                  <h3>Ticket Holder #{{@index}}:</h3>
+                                                  <strong>First Name:</strong> {{first_name}}<br />
+                                                  <strong>Last Name:</strong> {{last_name}}<br />
+                                                  <strong>Orgainzation:</strong> {{organization}}<br />
+                                                  <strong>Title:</strong> {{title}}<br />
+                                                  <strong>Twitter:</strong> {{twitter_handle}}<br />
+                                                  <strong>Shirt Size:</strong> {{shirt_size}}
+                                                  <hr />
+                                                {{/each}}
+                                                {{#if additional_information}}
+                                                  <h3>Additional Information:</h3>
+                                                  {{additional_information}}
+                                                {{/if}}
                                                 <hr />
                                                 <h3>Event Information:</h3>
                                                 <strong>Venue:</strong> Ron Robinson Theater<br />
