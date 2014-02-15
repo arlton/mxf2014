@@ -6408,3 +6408,17 @@ p.stripe img {
   margin-right: 10px;
   font-size: 14px;
 }
+ul.parsley-error-list {
+  padding: 5px 10px;
+  margin-top: 2px;
+  font-size: 12px;
+  color: #fff;
+  list-style: none;
+  background: #9e813d;
+  border: 1px solid #9e813d;
+  border-radius: 2px;
+}
+input.parsley-error,
+textarea.parsley-error {
+  border: 1px solid #9e813d;
+}
