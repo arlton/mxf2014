@@ -53,10 +53,10 @@
           <ul class="nav nav-sidebar">
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Tickets</a></li>
-            <li class="active"><a href="#">Attendees</a></li>
+            <li><a href="#">Attendees</a></li>
             <li><a href="#">Orders</a></li>
             <li><a href="#">Promo Codes</a></li>
-            <li><a href="#">Event Settings</a></li>
+            <li class="active"><a href="#">Event Settings</a></li>
             <li><a href="#">View Event Page</a></li>
           </ul>
         </div>
@@ -64,34 +64,213 @@
           <h1 class="page-header">Event Settings</h1>
           <form role="form">
             <div class="form-group">
-              <label for="first_name">First Name</label>
-              <input type="text" class="form-control" id="first_name" placeholder="">
+              <label for="event_name">Event Name</label>
+              <input type="text" class="form-control" id="event_name" placeholder="">
             </div>
             <div class="form-group">
-              <label for="last_name">Last Name</label>
-              <input type="text" class="form-control" id="last_name" placeholder="">
+              <label for="event_description">Event Description</label>
+              <textarea rows="3" type="text" class="form-control" id="event_description" placeholder=""></textarea>
             </div>
             <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="text" class="form-control" id="email" placeholder="">
+              <label for="event_location">Event Location</label>
+              <input type="text" class="form-control" id="event_location" placeholder="">
             </div>
             <div class="form-group">
-              <label for="organization">Organziation</label>
-              <input type="text" class="form-control" id="organziation" placeholder="">
+              <label for="event_address">Event Address</label>
+              <input type="text" class="form-control" id="event_address" placeholder="">
             </div>
             <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" class="form-control" id="title" placeholder="">
+              <label for="event_address2">Event Address 2</label>
+              <input type="text" class="form-control" id="event_address2" placeholder="">
             </div>
             <div class="form-group">
-              <label for="twitter_handle">Twitter Handle</label>
-              <input type="text" class="form-control" id="twitter_handle" placeholder="">
+              <label for="event_city">City</label>
+              <input type="text" class="form-control" id="evnet_city" placeholder="">
             </div>
             <div class="form-group">
-              <label for="shirt_size">Shirt Size</label>
-              <input type="text" class="form-control" id="shirt_size" placeholder="">
+              <label for="event_state">State</label>
+              <select class="form-control" id="event_state">
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="DC">DC</option>
+                <option value="FL">FL</option>
+                <option value="GA">GE</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+              </select>
             </div>
-            <button type="submit" class="btn btn-default">Add</button>
+            <div class="form-group">
+              <label for="event_zipcode">Zipcode</label>
+              <input type="text" class="form-control" id="event_zipcode" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="event_url">Event URL</label>
+              <input type="text" class="form-control" id="event_url" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="event_start_date">Start Date</label>
+              <input type="text" class="form-control" id="event_start_date" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="event_start_time">Start Time</label>
+              <select class="form-control" id="start_time">
+                <option>12:00 AM</option>
+                <option>12:30 AM</option>
+                <option>1:00 AM</option>
+                <option>1:30 AM</option>
+                <option>2:00 AM</option>
+                <option>2:30 AM</option>
+                <option>3:00 AM</option>
+                <option>3:30 AM</option>
+                <option>4:00 AM</option>
+                <option>4:30 AM</option>
+                <option>5:00 AM</option>
+                <option>5:30 AM</option>
+                <option>6:00 AM</option>
+                <option>6:30 AM</option>
+                <option>7:00 AM</option>
+                <option>7:30 AM</option>
+                <option>8:00 AM</option>
+                <option>8:30 AM</option>
+                <option>9:00 AM</option>
+                <option>9:30 AM</option>
+                <option>10:00 AM</option>
+                <option>10:30 AM</option>
+                <option>11:00 AM</option>
+                <option>11:30 AM</option>
+                <option>12:00 PM</option>
+                <option>12:30 PM</option>
+                <option>1:00  PM</option>
+                <option>1:30 PM</option>
+                <option>2:00 PM</option>
+                <option>2:30 PM</option>
+                <option>3:00 PM</option>
+                <option>3:30 PM</option>
+                <option>4:00 PM</option>
+                <option>4:30 PM</option>
+                <option>5:00 PM</option>
+                <option>5:30 PM</option>
+                <option>6:00 PM</option>
+                <option>6:30 PM</option>
+                <option>7:00 PM</option>
+                <option>7:30 PM</option>
+                <option>8:00 PM</option>
+                <option>8:30 PM</option>
+                <option>9:00 PM</option>
+                <option>9:30 PM</option>
+                <option>10:00 PM</option>
+                <option>10:30 PM</option>
+                <option>11:00 PM</option>
+                <option>11:30 PM</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="event_end_date">End Date</label>
+              <input type="text" class="form-control" id="event_end_date" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="event_end_time">End Time</label>
+              <select class="form-control" id="end_time">
+                <option>12:00 AM</option>
+                <option>12:30 AM</option>
+                <option>1:00 AM</option>
+                <option>1:30 AM</option>
+                <option>2:00 AM</option>
+                <option>2:30 AM</option>
+                <option>3:00 AM</option>
+                <option>3:30 AM</option>
+                <option>4:00 AM</option>
+                <option>4:30 AM</option>
+                <option>5:00 AM</option>
+                <option>5:30 AM</option>
+                <option>6:00 AM</option>
+                <option>6:30 AM</option>
+                <option>7:00 AM</option>
+                <option>7:30 AM</option>
+                <option>8:00 AM</option>
+                <option>8:30 AM</option>
+                <option>9:00 AM</option>
+                <option>9:30 AM</option>
+                <option>10:00 AM</option>
+                <option>10:30 AM</option>
+                <option>11:00 AM</option>
+                <option>11:30 AM</option>
+                <option>12:00 PM</option>
+                <option>12:30 PM</option>
+                <option>1:00  PM</option>
+                <option>1:30 PM</option>
+                <option>2:00 PM</option>
+                <option>2:30 PM</option>
+                <option>3:00 PM</option>
+                <option>3:30 PM</option>
+                <option>4:00 PM</option>
+                <option>4:30 PM</option>
+                <option>5:00 PM</option>
+                <option>5:30 PM</option>
+                <option>6:00 PM</option>
+                <option>6:30 PM</option>
+                <option>7:00 PM</option>
+                <option>7:30 PM</option>
+                <option>8:00 PM</option>
+                <option>8:30 PM</option>
+                <option>9:00 PM</option>
+                <option>9:30 PM</option>
+                <option>10:00 PM</option>
+                <option>10:30 PM</option>
+                <option>11:00 PM</option>
+                <option>11:30 PM</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="eventImage">Event Image</label>
+              <input type="file" id="eventImage">
+              <p class="help-block">JPG or PNG | 240x100 pixels | 5MB Max Size</p>
+            </div>
+            <button type="submit" class="btn btn-default">Save</button>
           </form>
         </div>
       </div>
