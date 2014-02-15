@@ -1,5 +1,6 @@
-var stripe, sendgrid, mongoose, _, Event, Registration;
+var Handlebars, stripe, sendgrid, mongoose, _, Event, Registration, fs;
 
+Handlebars = require('handlebars');
 stripe    = require('stripe')(process.env.STRIPE_API_KEY);
 sendgrid  = require('sendgrid')(
   process.env.SENDGRID_USERNAME,
@@ -8,9 +9,11 @@ sendgrid  = require('sendgrid')(
 mongoose  = require('mongoose');
 _         = require('underscore');
 logfmt    = require('logfmt');
+fs        = require('fs');
 
 mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
-  var eventSchema, registrationSchema;
+  var eventSchema, registrationSchema, promotionSchema;
+
   if (err) {
     res.writeHead(500, {'content-type':'application/json'});
     res.write(JSON.stringify({ 'status': 'error', 'message': err }));
@@ -21,34 +24,49 @@ mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
   }
 
   eventSchema = new mongoose.Schema({
-    title: { type: String, trim: true },
-    logo_url: { type: String, trim: true },
+    title    : { type: String, trim: true },
+    logo_url : { type: String, trim: true },
 
     dates: {
       range: {
-        from: Date,
-        to: Date
+        from : Date,
+        to   : Date
       }
     },
 
     location: {
-      address1: { type: String, trim: true },
-      address2: { type: String, trim: true },
-      city: { type: String, trim: true },
-      state: { type: String, trim: true },
-      zipcode: { type: String, trim: true },
-      zipcodeplus: { type: String, trim: true }
+      address1    : { type: String, trim: true },
+      address2    : { type: String, trim: true },
+      city        : { type: String, trim: true },
+      state       : { type: String, trim: true },
+      zipcode     : { type: String, trim: true },
+      zipcodeplus : { type: String, trim: true }
     },
 
     tickets: [
       {
-        id: mongoose.Schema.ObjectId,
-        title: { type: String, trim: true },
-        price: Number,
+        id    : mongoose.Schema.ObjectId,
+        title : { type: String, trim: true },
+        price : Number,
         availability: {
           range: {
-            from: Date,
-            to: Date
+            from : Date,
+            to   : Date
+          }
+        }
+      }
+    ],
+
+    promotions: [
+      {
+        id     : mongoose.Schema.ObjectId,
+        title  : { type: String, trim: true },
+        code   : { type: String, trim: true },
+        amount : { type: Number },
+        availability: {
+          range: {
+            from : Date,
+            to   : Date
           }
         }
       }
@@ -63,119 +81,82 @@ mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
     event: { type: mongoose.Schema.ObjectId, ref: 'Events' },
     
     attendees: [{
-      first_name: { type: String, trim: true },
-      last_name: { type: String, trim: true },
-      email_address: { type: String, trim: true },
-      organization: { type: String, trim: true },
-      shirt_size: { type: String, trim: true },
-      ticket: { type: mongoose.Schema.ObjectId, ref: 'Events' },
-      title: { type: String, trim: true },
-      twitter_handle: { type: String, trim: true }
+      first_name     : { type: String, trim: true },
+      last_name      : { type: String, trim: true },
+      email_address  : { type: String, trim: true },
+      organization   : { type: String, trim: true },
+      shirt_size     : { type: String, trim: true },
+      ticket         : { type: mongoose.Schema.ObjectId, ref: 'Events' },
+      title          : { type: String, trim: true },
+      twitter_handle : { type: String, trim: true }
     }],
 
-    additional_info: { type: String },
+    additional_information: { type: String, trim: true },
+
+    customer: {
+      name            : { type: String, trim: true },
+      email_address   : { type: String, trim: true },
+      address_line1   : { type: String, trim: true },
+      address_line2   : { type: String, trim: true },
+      address_city    : { type: String, trim: true },
+      address_state   : { type: String, trim: true },
+      address_zip     : { type: String, trim: true },
+      address_country : { type: String, trim: true }
+    },
 
     payment: {
-      id: String,
-      object: String,
-      created: Number,
-      livemode: Boolean,
-      paid: Boolean,
-      amount: Number,
-      currency: String,
-      refunded: Boolean,
+      id       : String,
+      object   : String,
+      created  : Number,
+      livemode : Boolean,
+      paid     : Boolean,
+      amount   : Number,
+      currency : String,
+      refunded : Boolean,
       card: {
-        id: { type: String },
-        object: String,
-        last4: String,
-        card_type: String,
-        exp_month: Number,
-        exp_year: Number,
-        fingerprint: String,
-        customer: String,
-        country: String,
-        name: String,
-        address_line1: String,
-        address_line2: String,
-        address_city: String,
-        address_state: String,
-        address_zip: String,
-        address_country: String,
-        cvc_check: String,
-        address_line1_check: String,
-        address_zip_check: String 
+        id                  : String,
+        object              : String,
+        last4               : String,
+        card_type           : String,
+        exp_month           : Number,
+        exp_year            : Number,
+        fingerprint         : String,
+        customer            : String,
+        country             : String,
+        name                : String,
+        address_line1       : String,
+        address_line2       : String,
+        address_city        : String,
+        address_state       : String,
+        address_zip         : String,
+        address_country     : String,
+        cvc_check           : String,
+        address_line1_check : String,
+        address_zip_check   : String
       },
-      captured: Boolean,
-      refunds: Array,
-      balance_transaction: String,
-      failure_message: String,
-      failure_code: String,
-      amount_refunded: Number,
-      customer: String,
-      invoice: String,
-      description: String,
-      dispute: String
+      captured            : Boolean,
+      refunds             : Array,
+      balance_transaction : String,
+      failure_message     : String,
+      failure_code        : String,
+      amount_refunded     : Number,
+      customer            : String,
+      invoice             : String,
+      description         : String,
+      dispute             : String
     }
   });
 
   Event = mongoose.model('Events', eventSchema);
   Registration = mongoose.model('Registrations', registrationSchema);
-
-  /*
-  var amassEvent = new Event({
-    title: "Made By Few 2014",
-    logo_url: "/register/assets/img/logo.png",
-    settings: {
-      dateFormat: "MMMM D, yyyy"
-    },
-    tickets: [
-      {
-        title: "Early Bird",
-        price: 185,
-        availability: {
-          range: {
-            from: "2014-01-01T06:00:00Z",
-            to: "2014-06-01T04:59:59Z"
-          }
-        }
-      },
-      {
-        title: "Regular",
-        price: 235,
-        availability: {
-          range: {
-            from: "2014-06-01T05:00:00Z",
-            to: "2014-08-23T04:59:59Z"
-          }
-        }
-      }
-    ],
-    location: {
-      address1: "",
-      address2: "",
-      city: "Little Rock",
-      state: "Arkansas",
-      zipcode: "",
-      zipcodeplus: ""
-    },
-    dates: {
-      range: {
-        from: "2014-08-22T05:00:00Z",
-        to: "2014-08-24T04:59:59Z"
-      }
-    }
-  });
-  amassEvent.save(function(err) {
-    console.log('Error?' + err);
-  });
-  */
 });
 
 module.exports = (function() {
-  var express, app;
+  var express, app, hbs;
   
   express = require('express');
-  app = express();
+  app     = express();
+  hbs     = require('hbs');
 
   app.use(express.bodyParser());
 
@@ -184,14 +165,19 @@ module.exports = (function() {
     // Get all events from database
     res.end();
   });
-  
+
   app.get('/api/event/:event_id', function(req, res) {
     // Get single event from database
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
       if (err) { 
         // We're fucked
         es.writeHead(404, {'content-type':'application/json'});
-        res.write(JSON.stringify({ 'status': 'fail', 'message': 'Event not found', 'data': { 'event_id': req.params.event_id } })); // FIXME am I sure that findOne method would only error when unable to find an event?
+        res.write(JSON.stringify({ 
+          'status': 'fail', 
+          'message': 'Event not found', 
+          'data': { 'event_id': req.params.event_id } 
+        })); // FIXME am I sure that findOne method would only error when unable to find an event?
+
         res.end();
         return logfmt.error(new Error('Unable to retrieve event: ' + err)); 
       }
@@ -199,6 +185,47 @@ module.exports = (function() {
       res.writeHead(200, {'content-type':'application/json'});
       res.write(JSON.stringify(eventInfo));
       res.end();
+    });
+  });
+
+  app.get('/api/event/:event_id/promo/:code', function(req, res) {
+    Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
+      if (err) { 
+        // We're fucked
+        es.writeHead(404, {'content-type':'application/json'});
+        res.write(JSON.stringify({ 
+          'status': 'fail', 
+          'message': 'Event not found', 
+          'data': { 'event_id': req.params.event_id } 
+        })); // FIXME am I sure that findOne method would only error when unable to find an event?
+
+        res.end();
+        return logfmt.error(new Error('Unable to retrieve event: ' + err)); 
+      }
+
+      if (eventInfo.promotions && eventInfo.promotions.length > 0) {
+        for (var i = 0; i < eventInfo.promotions.length; i++) {
+          if (eventInfo.promotions[i].code === req.params.code) { // FIXME add date check
+            res.writeHead(200, {'content-type':'application/json'});
+            res.write(JSON.stringify({
+              'status': 'success',
+              'data': eventInfo.promotions[i]
+            }));
+            res.end();
+            return;
+          }
+        }
+
+        res.writeHead(404, {'content-type':'application/json'});
+        res.write(JSON.stringify({
+          'status': 'fail',
+          'message': 'Promotional code not valid',
+          'data': {
+            'code': req.params.code
+          }
+        }));
+        res.end();
+      }
     });
   });
 
@@ -251,6 +278,11 @@ module.exports = (function() {
 
       registrationData.event = req.params.event_id;
 
+      registrationData.customer = {
+        name: f.cc.name,
+        email_address: f.cc.email_address
+      };
+
       // Validate cart FIXME
 
       // Attach ticket info to attendees
@@ -265,12 +297,14 @@ module.exports = (function() {
       }
 
       registrationData.attendees = f.attendees;
+      registrationData.additional_information = f.additional_information;
 
       // Process payment
       stripe.charges.create({
         amount: cart.getTotal(),
         currency: 'usd',
-        card: f.cc
+        card: f.cc,
+        metadata: f.cc.email_address
       }).then(function(charge) {
         logfmt.log({ 'type': 'charge', 'message': 'Successful charge', 'data': charge });
 
@@ -292,17 +326,19 @@ module.exports = (function() {
           }
 
           // Send success email
-          /*
-          sendgrid.send({
-            to: 'example@example.com',
-            from: 'sender@example.com',
-            subject: 'Hello World',
-            text: 'Sending email with NodeJS through SendGrid!'
-          }, function(err, json) {
-          if (err) { return console.error(err); }
-            console.log(json);
+          fs.readFile('./public/register/assets/views/registration_email.hbs', 'utf8', function(err, template) {
+            template = Handlebars.compile(template);
+
+            sendgrid.send({
+              to: f.cc.email_address,
+              from: 'hello@madebyfew.com',
+              subject: 'Made By Few 2014 Registration',
+              html: template(registrationModel)
+            }, function(err, json) {
+            if (err) { return logfmt.error(new Error('Error sending registration email')); }
+              logfmt.log({ 'type': 'email', 'message': json });
+            });
           });
-          */
          
           // Show response JSON
           res.writeHead(200, {'content-type':'application/json'});

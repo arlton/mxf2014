@@ -9,6 +9,8 @@ var AMASS = (function($, DateFormat) {
 
     attendeeTemplateSrc        = document.getElementById('attendee-template').innerHTML,
     registerSuccessTemplateSrc = document.getElementById('register-success-template').innerHTML,
+    promocodeFailureTemplateSrc = document.getElementById('promocode-failure-template').innerHTML,
+    promocodeSuccessTemplateSrc = document.getElementById('promocode-success-template').innerHTML,
     ticketsTemplateSrc         = document.getElementById('tickets-template').innerHTML,
     ticketsTemplate            = Handlebars.compile(ticketsTemplateSrc),
     ticketNumbersEl,           // Defined after tickets are pulled from server
@@ -18,6 +20,9 @@ var AMASS = (function($, DateFormat) {
     attendeesEl                = document.getElementById('attendees'),
     ticketsEl                  = document.getElementById('tickets'),
     amassFormEl                = document.getElementById('amass-form'),
+    promocodeSubmitEl          = document.getElementById('test-promocode'),
+    promocodeInputEl           = document.getElementById('promocode'),
+    promocodeMessagingEl       = document.getElementById('promocode-messaging'),
     totalCostEl                = document.getElementsByClassName('total-cost'),
 
     settings = {},
@@ -388,6 +393,24 @@ var AMASS = (function($, DateFormat) {
     callback();
   });
 
+  _events.promocodeSubmit = [];
+  _events.promocodeSubmit.push(function(callback) {
+    var template;
+    $.ajax({
+      url: '/api/event/' + settings.eventInfo._id + '/promo/' + promocodeInputEl.value,
+      type: 'GET',
+      dataType: 'json'
+    }).done(function(data, textStatus, jqXHR) {
+      template = Handlebars.compile(promocodeSuccessTemplateSrc);
+      promocodeMessagingEl.innerHTML = template(data);
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      template = Handlebars.compile(promocodeFailureTemplateSrc);
+      promocodeMessagingEl.innerHTML = template(jqXHR.responseJSON);
+    }).always(callback);
+
+    callback();
+  });
+
   _events.formSubmit = [];
   _events.formSubmit.push(function(callback) {
     var successTemplate;
@@ -408,6 +431,11 @@ var AMASS = (function($, DateFormat) {
 
     callback();
   });
+
+  promocodeSubmitEl.onclick = function(event) {
+    event.preventDefault();
+    callEvent('promocodeSubmit');
+  };
 
   amassFormEl.onsubmit = function(event) {
     event.preventDefault();

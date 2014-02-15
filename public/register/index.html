@@ -191,7 +191,7 @@
                 </div>
               </div>
             </div>
-            <div class="promo-code">
+            <div class="promocode">
               <div class="col-md-12">
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-4">
@@ -200,12 +200,12 @@
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-8">
                     <div class="form-group">
-                      <input type="submit" class="btn btn-sm btn-secondary" value="Apply">
-                      <input type="text" class="form-control input-sm" id="promo_code" name="promo_code" value="" placeholder="">
+                      <input type="button" class="btn btn-sm btn-secondary" id="test-promocode" value="Apply">
+                      <input type="text" class="form-control input-sm" id="promocode" name="promocode" value="" placeholder="">
                     </div>
                   </div>
                 </div>
-                <div id="promo-code-messaging"></div>
+                <div id="promocode-messaging"></div>
               </div>
             </div>
             <div class="bottom">
@@ -227,25 +227,26 @@
     </div>
   </div>
 
-  <script id="promo-failure-template" type="text/x-handlebars-template"> 
+  <script id="promocode-failure-template" type="text/x-handlebars-template"> 
     <div class="row">
       <ul>
         <li class="invalid">
           <p>Sorry, but that was an invalid code. Try again.</p>
         </li>
-        {{#each promoError}}
-          <li>
-            {{{> promo-message-template}}}
-          </li>
-        {{/each}}
       </ul>
     </div>
   </script>
 
-  <script id="promo-message-template" type="text/x-handlebars-template"> 
-    <p class="mobile hidden-md hidden-lg">{{promoCode}}<br /><span>{{promoTitle}}</span><br /><span class="remove">Remove</span></p>
-    <p class="hidden-xs hidden-sm">{{promoCode}}<br /><span>{{promoTitle}}</span></p>
-    <span class="remove hidden-xs hidden-sm">Remove</span>
+  <script id="promocode-success-template" type="text/x-handlebars-template"> 
+    <div class="row">
+      <ul>
+        <li>
+          <p class="mobile hidden-md hidden-lg">{{data.code}}<br /><span>{{data.title}}</span><br /><span class="remove">Remove</span></p>
+          <p class="hidden-xs hidden-sm">{{data.code}}<br /><span>{{data.title}}</span></p>
+          <span class="remove hidden-xs hidden-sm">Remove</span>
+        </li>
+      </ul>
+    </div>
   </script>
 
   <script id="register-success-template" type="text/x-handlebars-template"> 
