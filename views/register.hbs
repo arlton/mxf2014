@@ -14,8 +14,8 @@
   <meta property="og:image" content="http://mxf2014.herokuapp.com/assets/img/mxf-facebook.png" />
   <meta property="og:site_name" content="Made by Few">
   <meta property="og:type" content="website">
-  <link rel="shortcut icon" href="./assets/img/favicon.ico">
-  <link href="/register/assets/css/style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico">
+  <link href="/assets/css/register.css" rel="stylesheet">
 
   <script type="text/javascript" src="//use.typekit.net/dle5ptb.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -42,28 +42,7 @@
             </div>
           </div>
           <div class="tickets" id="tickets">
-            <script id="tickets-template" type="text/x-handlebars-template">
-              <div class="row">
-                <div class="col-md-12">
-                  <h3>Tickets</h3>
-                </div>
-                <div class="col-md-12">
-                  <ul>
-                    {{#each tickets}}
-                    <li>
-                      <h4>{{title}}<br /><span>{{dateSentance}}</span></h4>
-                      <div>
-                        {{#if isAvailable}}
-                          <input type="text" class="form-control parsley-validated ticket-number" data-ticket-id="{{_id}}" value="1" placeholder="" data-notblank="true" data-required="true">
-                          <span>{{formattedPrice}}</span>
-                        {{/if}}
-                      </div>
-                    </li>
-                    {{/each}}
-                  </ul>
-                </div>
-              </div>
-            </script>
+            {{> _tickets}} 
           </div>
           <form class="form-horizontal" id="amass-form" role="form" data-validate="parsley" action="/api/order" method="post">
             <div class="billing-info">
@@ -230,63 +209,11 @@
     </div>
   </div>
 
-  <script id="promocode-failure-template" type="text/x-handlebars-template"> 
-    <div class="row">
-      <ul>
-        <li class="invalid">
-          <p>Sorry, but that was an invalid code. Try again.</p>
-        </li>
-      </ul>
-    </div>
-  </script>
-
-  <script id="promocode-success-template" type="text/x-handlebars-template"> 
-    <div class="row">
-      <ul>
-        <li>
-          <input type="hidden" name="promocode[]" value="{{data.code}}">
-          <p class="mobile hidden-md hidden-lg">{{data.code}}<br /><span>{{data.title}}</span><br /><span class="remove">Remove</span></p>
-          <p class="hidden-xs hidden-sm">{{data.code}}<br /><span>{{data.title}}</span></p>
-          <span class="remove hidden-xs hidden-sm">Remove</span>
-        </li>
-      </ul>
-    </div>
-  </script>
-
-  <script id="register-success-template" type="text/x-handlebars-template"> 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div class="confirmation">
-            <img src="assets/img/logo.png">
-            <h1>Registration Successful</h1>
-            <p>You're now registered for Made by Few 2014. You should receive a confirmation email shortly with your order details.</p>
-            <div class="share">
-              <div class="row">
-                <div class="col-md-4">
-                  <a class="btn btn-twitter btn-sm twitter_link" href="http://twitter.com/intent/tweet?text=Sweet%21+I+just+got+my+ticket+to+%23mxf2014%21+Tickets+are+going+fast%3A+&url=http%3A//madebyfew.com" target="_blank"><i class="icon-twitter"></i><span>Share on Twitter</span></a>
-                </div>
-                <div class="col-md-4">
-                  <a class="btn btn-facebook btn-sm fb_link" onclick="return fbs_click()" href="#"><i class="icon-facebook"></i><span>Share on Facebook</span></a>
-                </div>
-                <div class="col-md-4">
-                  <a class="btn btn-lanyrd btn-sm" href="http://lanyrd.com/2014/mxf2014" target="_blank"><i class="icon-lanyrd"></i><span>Share on Lanyrd</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </script>
   <script>
     function fbs_click()
     {u="http://www.madebyfew.com";t="Made by Few 2014";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
   </script>
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-  <script src="/register/assets/js/handlebars.js"></script>
-  <script src="/register/assets/js/dateformat.js"></script>
-  <script src="/register/assets/js/parsley.js"></script>
-  <script src="/register/assets/js/custom.js"></script>
+  <script src="/assets/js/register.min.js"></script>
 </body>
 </html>

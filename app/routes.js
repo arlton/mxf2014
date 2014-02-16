@@ -160,6 +160,16 @@ module.exports = (function() {
 
   app.use(express.bodyParser());
 
+  //** PAGES
+  app.get('/', function(req, res) {
+    res.render('home');
+  });
+
+  app.get('/register', function(req, res) {
+    res.render('register');
+  });
+
+  //** API
   app.get('/api/events', function(req, res) {
     res.writeHead(200, {'content-type':'application/json'});
     // Get all events from database

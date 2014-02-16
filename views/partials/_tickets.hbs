@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3>Tickets</h3>
+  </div>
+  <div class="col-md-12">
+    <ul>
+      {{#each tickets}}
+      <li>
+        <h4>{{title}}<br /><span>{{dateSentance}}</span></h4>
+        <div>
+          {{#if isAvailable}}
+            <input type="text" class="form-control parsley-validated ticket-number" data-ticket-id="{{_id}}" value="1" placeholder="" data-notblank="true" data-required="true">
+            <span>{{formattedPrice}}</span>
+          {{/if}}
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

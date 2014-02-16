@@ -56,6 +56,19 @@ module.exports = function(grunt) {
       }
     },
 
+    handlebars: {
+      compile: {
+        options: {
+          namespace: "HBS",
+          partialRegex: /.*/,
+          partialsPathRegex: /views\/partials\//
+        },
+        files: {
+          "public/assets/js/templates.js": "views/**/*.hbs"
+        }
+      }
+    },
+
     uglify: {
       options: {
         compress: true,
@@ -97,6 +110,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
 
   // JS distribution task.
   grunt.registerTask('dist-js', ['clean', 'jshint', 'uglify']);

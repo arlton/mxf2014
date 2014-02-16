@@ -395,14 +395,18 @@ var AMASS = (function($, DateFormat) {
 
   _events.promocodeSubmit = [];
   _events.promocodeSubmit.push(function(callback) {
-    var template;
+    var template, container;
+
+    container = document.createElement('div');
+
     $.ajax({
       url: '/api/event/' + settings.eventInfo._id + '/promo/' + promocodeInputEl.value,
       type: 'GET',
       dataType: 'json'
     }).done(function(data, textStatus, jqXHR) {
       template = Handlebars.compile(promocodeSuccessTemplateSrc);
-      promocodeMessagingEl.innerHTML = template(data);
+      container.innerHTML = template(data);
+      promocodeMessagingEl.appendChild(container);
     }).fail(function(jqXHR, textStatus, errorThrown) {
       template = Handlebars.compile(promocodeFailureTemplateSrc);
       promocodeMessagingEl.innerHTML = template(jqXHR.responseJSON);
