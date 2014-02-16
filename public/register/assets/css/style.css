@@ -6201,12 +6201,12 @@ body {
   background: #0d1416;
   color: #9e813d;
   display: block;
-  padding: 2px 30px 6px 30px;
+  padding: 2px 20px 6px 20px;
   margin: 0;
   font-size: 20px;
 }
 .wrapper .tickets ul li {
-  padding: 10px 30px;
+  padding: 10px 20px;
   width: 100%;
   float: left;
   border-bottom: 1px solid #cccccc;
@@ -6215,7 +6215,7 @@ body {
   float: left;
   margin: 0;
   padding: 0;
-  width: 60%;
+  width: 70%;
 }
 .wrapper .tickets ul li h4 span {
   font-weight: 400;
@@ -6223,7 +6223,7 @@ body {
 }
 .wrapper .tickets ul li div {
   float: right;
-  width: 40%;
+  width: 30%;
 }
 .wrapper .tickets ul li div span {
   float: right;
@@ -6245,11 +6245,12 @@ body {
   border-bottom: 10px solid #0d1416;
 }
 .wrapper .billing-info {
-  padding: 30px;
+  padding: 20px;
 }
 .wrapper .billing-info h4 {
   text-align: left;
-  margin-bottom: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .wrapper .billing-info h4 span.remove {
   color: #9e813d;
@@ -6264,7 +6265,7 @@ body {
 }
 .wrapper .promocode {
   background: #ffffff;
-  padding: 0 30px 30px 30px;
+  padding: 0 20px 20px 20px;
   float: left;
   width: 100%;
 }
@@ -6345,7 +6346,7 @@ body {
 }
 .wrapper .bottom {
   background: #0d1416;
-  padding: 64px 30px 25px 30px;
+  padding: 54px 20px 25px 20px;
 }
 .wrapper .bottom .btn-primary {
   float: right;
