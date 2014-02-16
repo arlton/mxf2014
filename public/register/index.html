@@ -71,22 +71,22 @@
                 <h4>{{attributes.ticket.title}} Ticket #{{attributes.attendeeNumber}}{{#if hasRemove}}<span class="remove">Remove</span>{{/if}}</h4>
                 <div class="form-group">
                   <div class="col-lg-6">
-                    <label for="name" class="control-label">First Name *</label>
+                    <label for="first_name" class="control-label">First Name *</label>
                     <input type="text" class="form-control parsley-validated first-name" id="first_name_{{attributes.attendeeNumber}}" name="attendees[{{index}}][first_name]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                   <div class="col-lg-6">
-                    <label for="name" class="control-label">Last Name *</label>
+                    <label for="last_name" class="control-label">Last Name *</label>
                     <input type="text" class="form-control parsley-validated last-name" id="last_name_{{attributes.attendeeNumber}}" name="attendees[{{index}}][last_name]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                 <div class="col-lg-6">
-                  <label for="name" class="control-label">Email Address *</label>
-                  <input type="text" class="form-control parsley-validated" id="email_address_{{attributes.attendeeNumber}}" name="attendees[{{index}}][email_address]" placeholder="" value="" data-notblank="true" data-required="true">
+                  <label for="email_address" class="control-label">Email Address *</label>
+                  <input type="email" class="form-control parsley-validated" id="email_address_{{attributes.attendeeNumber}}" name="attendees[{{index}}][email_address]" placeholder="" value="" data-notblank="true" data-required="true" parsley-type="email" parsley-equalto="#confirm_email_address_{{attributes.attendeeNumber}}">
                 </div>
                 <div class="col-lg-6">
-                  <label for="name" class="control-label">Confirm Email Address *</label>
-                  <input type="text" class="form-control parsley-validated" id="confirm_email_address_{{attributes.attendeeNumber}}" name="attendees[{{index}}][confirm_email_address]" placeholder="" value="" data-notblank="true" data-required="true">
+                  <label for="confirm_email_address" class="control-label">Confirm Email Address *</label>
+                  <input type="email" class="form-control parsley-validated" id="confirm_email_address_{{attributes.attendeeNumber}}" name="attendees[{{index}}][confirm_email_address]" placeholder="" value="" data-notblank="true" data-required="true" parsley-type="email" parsley-equalto="#email_address_{{attributes.attendeeNumber}}">
                 </div>
               </div>
                 <div class="form-group">
@@ -131,29 +131,29 @@
               <div id="cc-info">
                 <div class="form-group">
                   <div class="col-lg-12">
-                    <label for="name" class="control-label">Name on Card *</label>
+                    <label for="cc_name" class="control-label">Name on Card *</label>
                     <input type="text" class="form-control parsley-validated" id="cc_name" name="cc[name]" placeholder="" value="" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-6">
-                    <label for="name" class="control-label">Email Address *</label>
-                    <input type="text" class="form-control parsley-validated" id="cc_email_address" name="cc[email_address]" placeholder="" value="" data-notblank="true" data-required="true">
+                    <label for="cc_email_address" class="control-label">Email Address *</label>
+                    <input type="email" class="form-control parsley-validated" id="cc_email_address" name="cc[email_address]" placeholder="" value="" data-notblank="true" data-required="true" parsley-type="email" parsley-equalto="#cc_email_address_confirm">
                   </div>
                   <div class="col-lg-6">
-                    <label for="name" class="control-label">Confirm Email Address *</label>
-                    <input type="text" class="form-control parsley-validated" id="cc_email_address_confirm" name="cc[email_address_confirm]" placeholder="" value="" data-notblank="true" data-required="true">
+                    <label for="cc_email_address_confirm" class="control-label">Confirm Email Address *</label>
+                    <input type="email" class="form-control parsley-validated" id="cc_email_address_confirm" name="cc[email_address_confirm]" placeholder="" value="" data-notblank="true" data-required="true" parsley-type="email" parsley-equalto="#cc_email_address">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
-                    <label for="number" class="control-label">Card Number *</label>
+                    <label for="cc_number" class="control-label">Card Number *</label>
                     <input type="text" class="form-control parsley-validated" id="cc_number" name="cc[number]" placeholder="" value="4242424242424242" data-notblank="true" data-required="true">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
-                    <label for="type" class="control-label">Card Type *</label>
+                    <label for="cc_type" class="control-label">Card Type *</label>
                     <select class="form-control parsley-validated" id="cc_type" name="cc[type]" data-notblank="true" data-required="true">
                       <option value="Visa">VISA</option>
                       <option value="MasterCard">MASTERCARD</option>
@@ -164,7 +164,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-lg-4">
-                    <label for="cc_month" class="control-label">Card Expiry Month *</label>
+                    <label for="cc_exp_month" class="control-label">Card Expiry Month *</label>
                     <select class="form-control parsley-validated" id="cc_exp_month" name="cc[exp_month]" data-notblank="true" data-required="true">
                       <option>01</option>
                       <option>02</option>
@@ -181,11 +181,11 @@
                     </select>
                   </div>
                   <div class="col-lg-4">
-                    <label for="cc_month" class="control-label">Card Expiry Year *</label>
+                    <label for="cc_exp_year" class="control-label">Card Expiry Year *</label>
                     <select class="form-control parsley-validated" id="cc_exp_year" name="cc[exp_year]" data-notblank="true" data-required="true"><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option></select>
                   </div>
                   <div class="col-lg-4">
-                    <label for="cvv" class="control-label">CVV *</label>
+                    <label for="cc_cvc" class="control-label">CVV *</label>
                     <input type="text" class="form-control parsley-validated" id="cc_cvc" name="cc[cvc]" placeholder="" data-notblank="true" data-required="true">
                   </div>
                 </div>
@@ -194,11 +194,11 @@
             <div class="promocode">
               <div class="col-md-12">
                 <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-4">
+                  <div class="col-xs-4 col-sm-4 col-md-4">
                     <h4 class="hidden-xs hidden-sm">Promo code?</h4>
                     <h4 class="mobile hidden-md hidden-lg">Promo code?</h4>
                   </div>
-                  <div class="col-xs-12 col-sm-12 col-md-8">
+                  <div class="col-xs-8 col-sm-8 col-md-8">
                     <div class="form-group">
                       <input type="button" class="btn btn-sm btn-secondary" id="test-promocode" value="Apply">
                       <input type="text" class="form-control input-sm" id="promocode" name="promocode" value="" placeholder="">
@@ -210,11 +210,11 @@
             </div>
             <div class="bottom">
               <div class="form-group">
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                   <p class=" hidden-md hidden-sm hidden-xs">Total Cost: <span class="total-cost">$185.00</span></p>
                   <p class="mobile hidden-lg">Total Cost: <span class="total-cost">$185.00</span></p>
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                   <input type="submit" class="btn btn-lg btn-primary hidden-md hidden-sm hidden-xs" value="Register">
                   <input type="submit" class="btn btn-lg btn-primary btn-mobile hidden-lg" value="Register">
                 </div>
