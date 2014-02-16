@@ -6271,18 +6271,11 @@ body {
 }
 .wrapper .promocode h4 {
   float: left;
-  color: #9e813d;
+  color: #0d1416;
   margin: 5px 0 0 -5px;
   padding: 0;
   font-size: 15px;
   font-weight: 500;
-  cursor: pointer;
-}
-.wrapper .promocode h4.mobile {
-  margin: -7px 0 4px 0;
-}
-.wrapper .promocode h4:hover {
-  color: #0d1416;
 }
 .wrapper .promocode input {
   float: right;
