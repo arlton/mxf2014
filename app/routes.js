@@ -391,7 +391,7 @@ module.exports = (function() {
         amount: cart.getTotal(),
         currency: 'usd',
         card: f.cc,
-        metadata: f.cc.email_address
+        metadata: { 'email': f.cc.email_address }
       }).then(function(charge) {
         logfmt.log({ 'type': 'charge', 'message': 'Successful charge', 'data': charge });
 
@@ -413,16 +413,15 @@ module.exports = (function() {
           }
 
           // Send success email
-          fs.readFile('./public/register/assets/views/registration_email.hbs', 'utf8', function(err, template) {
-            template = Handlebars.compile(template);
-
+          res.render('registration_email', registrationModel, function(err, template) {
+            if (err) { return logfmt.error(new Error('Error sending registration email')); }
             sendgrid.send({
               to: f.cc.email_address,
               from: 'hello@madebyfew.com',
               subject: 'Made By Few 2014 Registration',
-              html: template(registrationModel)
+              html: template
             }, function(err, json) {
-            if (err) { return logfmt.error(new Error('Error sending registration email')); }
+              if (err) { return logfmt.error(new Error('Error sending registration email')); }
               logfmt.log({ 'type': 'email', 'message': json });
             });
           });
