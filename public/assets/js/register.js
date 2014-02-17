@@ -1,3 +1,4 @@
+/* global Handlebars, jQuery, DateFormat, $ */
 var AMASS = (function($, DateFormat) {
   "use strict";
 
@@ -43,19 +44,21 @@ var AMASS = (function($, DateFormat) {
      * @return {Object}             If any of the functions return anything, we add it to an object
      */
     async = function(functions, asyncCallback) {
-      var _completed, _results;
+      var _completed, _results, asyncCount;
 
       _completed = 0;
       _results = [];
+      
+      asyncCount = function() {
+        _completed += 1;
+
+        if (_completed === functions.length) {
+          asyncCallback(_results);
+        }
+      };
 
       for (var i = 0; i < functions.length; i++) {
-        _results.push(functions[i](function() {
-          _completed += 1;
-
-          if (_completed === functions.length) {
-            asyncCallback(_results);
-          }
-        }));
+        _results.push(functions[i](asyncCount));
       }
     };
 
@@ -75,7 +78,8 @@ var AMASS = (function($, DateFormat) {
     _list = [];
 
     Attendee = function(parent, attributes) {
-      var that, container, formTagsEl, inputsEl, selectsEl, removeBtns;
+      var that, container, formTagsEl, inputsEl, selectsEl, removeBtns,
+        bindInput, bindRemove;
 
       that = this;
 
@@ -101,18 +105,22 @@ var AMASS = (function($, DateFormat) {
       removeBtns = container.getElementsByClassName('remove');
 
       // Bind inputs live
-      for (var i = 0; i < formTagsEl.length; i++) {
-        formTagsEl[i].onchange = function() {
-          var thisInput = this;
-          attributes[thisInput.name] = thisInput.value;
-        };
+      bindInput = function() {
+        var thisInput = this;
+        attributes[thisInput.name] = thisInput.value;
+      };
+
+      for (var j = 0; j < formTagsEl.length; j++) {
+        formTagsEl[j].onchange = bindInput;
       }
 
+      bindRemove = function() {
+        that.parent.remove(that);
+      };
+
       // Bind remove buttons
-      for (var i = 0; i < removeBtns.length; i++) {
-        removeBtns[i].onclick = function() {
-          that.parent.remove(that);
-        };
+      for (var k = 0; k < removeBtns.length; k++) {
+        removeBtns[k].onclick = bindRemove;
       }
 
       attendeesEl.appendChild(container);
@@ -222,8 +230,8 @@ var AMASS = (function($, DateFormat) {
         _total += items[i].price;
       }
 
-      for (var i in totalCostEl) {
-        totalCostEl[i].innerHTML = that.getTotal({ formatted: true });
+      for (var j in totalCostEl) {
+        totalCostEl[j].innerHTML = that.getTotal({ formatted: true });
       }
 
       return that.getTotal();
@@ -242,7 +250,7 @@ var AMASS = (function($, DateFormat) {
 
   // ** INIT
   function init() {
-    var ticketsContainer;
+    var ticketsContainer, updateTicketNumber;
 
     // Update AMASS Event with some dynamicness
     settings.eventInfo.tickets = $.map(settings.eventInfo.tickets, function(ticket) {
@@ -290,8 +298,8 @@ var AMASS = (function($, DateFormat) {
 
         // Ticket starts later than today and ends later than the day it starts and is multiple days
         if (from > today && to > today && from !== to) {
-          ticket.dateSentance = 'Available from ' + DateFormat.format.date(from, settings.eventInfo.settings.dateFormat) 
-                                  + ' to ' + DateFormat.format.date(to, settings.eventInfo.settings.dateFormat);
+          ticket.dateSentance = 'Available from ' + DateFormat.format.date(from, settings.eventInfo.settings.dateFormat) + 
+            ' to ' + DateFormat.format.date(to, settings.eventInfo.settings.dateFormat);
           ticket.isAvailable = false;
         }
 
@@ -313,30 +321,32 @@ var AMASS = (function($, DateFormat) {
     ticketNumbersEl = ticketsContainer.getElementsByClassName('ticket-number');
 
     // Ticket numbers changed
+    updateTicketNumber = function() {
+      var attendeesCount = attendees.count(),
+        ticket = {},
+        ticketsCount = parseInt(this.value, 10),
+        ticketId = this.getAttribute('data-ticket-id');
+
+      for (var j in settings.eventInfo.tickets) {
+        if (settings.eventInfo.tickets[j]._id === ticketId) {
+          ticket = settings.eventInfo.tickets[j];
+          break;
+        }
+      }
+
+      if (ticketsCount > attendeesCount) {
+        for (var k = 0; k < (ticketsCount - attendeesCount); k++) {
+          attendees.add({ticket: ticket});
+        }
+      } else {
+        for (var l = 0; l < (attendeesCount - ticketsCount); l++) {
+          attendees.remove(attendees.count()-1);
+        }
+      }
+    };
+
     for (var i in ticketNumbersEl) {
-      ticketNumbersEl[i].onblur = function() {
-        var attendeesCount = attendees.count(),
-          ticket = {},
-          ticketsCount = parseInt(this.value),
-          ticketId = this.getAttribute('data-ticket-id');
-
-        for (var i in settings.eventInfo.tickets) {
-          if (settings.eventInfo.tickets[i]._id === ticketId) {
-            ticket = settings.eventInfo.tickets[i];
-            break;
-          }
-        }
-
-        if (ticketsCount > attendeesCount) {
-          for (var i = 0; i < (ticketsCount - attendeesCount); i++) {
-            attendees.add({ticket: ticket});
-          }
-        } else {
-          for (var i = 0; i < (attendeesCount - ticketsCount); i++) {
-            attendees.remove(attendees.count()-1);
-          }
-        }
-      };
+      ticketNumbersEl[i].onblur = updateTicketNumber;
     }
 
     ticketsEl.appendChild(ticketsContainer);
@@ -349,7 +359,7 @@ var AMASS = (function($, DateFormat) {
 
     // Artificially adding an early bird ticket. FIXME THIS IS SHITTTTTTTT
     attendees.add({ ticket: settings.eventInfo.tickets[0] });
-  };
+  }
 
   // ** EVENTS
   _events.addAttendee = [];
@@ -370,13 +380,18 @@ var AMASS = (function($, DateFormat) {
 
   _events.removeAttendee = [];
   _events.removeAttendee.push(function(callback) {
-    var attendee = this;
+    var attendee, attendeeFilter;
+
+    attendee = this;
+
+    attendeeFilter = function(attendee) {
+      return attendee.attributes.ticket._id === 
+        ticketNumbersEl[i].getAttribute('data-ticket-id');
+    };
+
     for (var i = 0; i < ticketNumbersEl.length; i++) {
       if (ticketNumbersEl[i].getAttribute('data-ticket-id') === attendee.attributes.ticket._id) {
-        ticketNumbersEl[i].value = attendees.count(function(attendee) {
-          return attendee.attributes.ticket._id === 
-            ticketNumbersEl[i].getAttribute('data-ticket-id');
-        });
+        ticketNumbersEl[i].value = attendees.count(attendeeFilter);
       }
     }
 
