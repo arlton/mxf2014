@@ -1,5 +1,5 @@
-/* global Handlebars, jQuery, DateFormat, $ */
-var AMASS = (function($, DateFormat) {
+/* global Handlebars, jQuery, $, HBS */
+var AMASS = (function($) {
   "use strict";
 
   var Attendees,    // Attendees object
@@ -8,12 +8,6 @@ var AMASS = (function($, DateFormat) {
     Cart,         // Cart object
     cart,         // Instantiated cart object
 
-    attendeeTemplateSrc        = document.getElementById('attendee-template').innerHTML,
-    registerSuccessTemplateSrc = document.getElementById('register-success-template').innerHTML,
-    promocodeFailureTemplateSrc = document.getElementById('promocode-failure-template').innerHTML,
-    promocodeSuccessTemplateSrc = document.getElementById('promocode-success-template').innerHTML,
-    ticketsTemplateSrc         = document.getElementById('tickets-template').innerHTML,
-    ticketsTemplate            = Handlebars.compile(ticketsTemplateSrc),
     ticketNumbersEl,           // Defined after tickets are pulled from server
 
     // Nodes
@@ -130,7 +124,7 @@ var AMASS = (function($, DateFormat) {
       callEvent('addAttendee', function(){}, that);
     };
 
-    Attendee.prototype.template = Handlebars.compile(attendeeTemplateSrc);
+    Attendee.prototype.template = Handlebars.partials['attendee'];
 
     that.add = function(attributes) {
       var attendee = new Attendee(that, attributes || {});
@@ -250,75 +244,9 @@ var AMASS = (function($, DateFormat) {
 
   // ** INIT
   function init() {
-    var ticketsContainer, updateTicketNumber;
+    var updateTicketNumber;
 
-    // Update AMASS Event with some dynamicness
-    settings.eventInfo.tickets = $.map(settings.eventInfo.tickets, function(ticket) {
-      var avail, today, from, to;
-
-      avail = ticket.availability;
-      today = new Date();
-      today.setHours(0);
-      today.setMinutes(0);
-      today.setSeconds(0);
-      today.setMilliseconds(0);
-
-      if (!avail) {
-        ticket.dateSentance = 'Not available';
-        return ticket;
-      }
-
-      if (avail.range) {
-        from = new Date(avail.range.from);
-        from.setHours(0);
-        from.setMinutes(0);
-        from.setSeconds(0);
-        from.setMilliseconds(0);
-
-        to = new Date(avail.range.to);
-        to.setHours(0);
-        to.setMinutes(0);
-        to.setSeconds(0);
-        to.setMilliseconds(0);
-
-        // Ticket available today or earlier and ends later than today
-        if (from <= today && to > today) {
-          ticket.dateSentance = 'Ends ' + DateFormat.format.date(to, settings.eventInfo.settings.dateFormat);
-          ticket.isAvailable = true;
-        }
-
-        // Ticket available today only (last day included)
-        if (today === to) {
-          ticket.dateSentance = 'Ends today';
-          ticket.isAvailable = true;
-        }
-
-        // Ticket starts today or earlier and ends on or past event date FIXME
-
-
-        // Ticket starts later than today and ends later than the day it starts and is multiple days
-        if (from > today && to > today && from !== to) {
-          ticket.dateSentance = 'Available from ' + DateFormat.format.date(from, settings.eventInfo.settings.dateFormat) + 
-            ' to ' + DateFormat.format.date(to, settings.eventInfo.settings.dateFormat);
-          ticket.isAvailable = false;
-        }
-
-        // Ticket starts later than today and ends later than today and is only for one day
-        if (from > today && to > today && from === to) {
-          ticket.dateSentance = 'Available only on ' + DateFormat.format.date(to, settings.eventInfo.settings.dateFormat);
-          ticket.isAvailable = false;
-        }
-
-        ticket.formattedPrice = '$' + ticket.price.toFixed(2).toString();
-
-        return ticket;
-      }
-    });
-
-    ticketsContainer = document.createElement('div');
-    ticketsContainer.innerHTML = ticketsTemplate(settings.eventInfo);
-
-    ticketNumbersEl = ticketsContainer.getElementsByClassName('ticket-number');
+    ticketNumbersEl = document.getElementById('tickets').getElementsByClassName('ticket-number');
 
     // Ticket numbers changed
     updateTicketNumber = function() {
@@ -348,8 +276,6 @@ var AMASS = (function($, DateFormat) {
     for (var i in ticketNumbersEl) {
       ticketNumbersEl[i].onblur = updateTicketNumber;
     }
-
-    ticketsEl.appendChild(ticketsContainer);
 
     attendees = new Attendees();
     cart = new Cart();
@@ -419,12 +345,10 @@ var AMASS = (function($, DateFormat) {
       type: 'GET',
       dataType: 'json'
     }).done(function(data, textStatus, jqXHR) {
-      template = Handlebars.compile(promocodeSuccessTemplateSrc);
-      container.innerHTML = template(data);
+      container.innerHTML = Handlebars.partials['promosuccess']();
       promocodeMessagingEl.appendChild(container);
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      template = Handlebars.compile(promocodeFailureTemplateSrc);
-      promocodeMessagingEl.innerHTML = template(jqXHR.responseJSON);
+      promocodeMessagingEl.innerHTML = Handlebars.partials['promofail']();
     }).always(callback);
 
     callback();
@@ -441,8 +365,7 @@ var AMASS = (function($, DateFormat) {
         dataType: 'json',
         data: $(amassFormEl).serialize()
       }).done(function(data, textStatus, jqXHR) {
-        successTemplate = Handlebars.compile(registerSuccessTemplateSrc);
-        mainEl.innerHTML = successTemplate(registerSuccessTemplateSrc);
+        mainEl.innerHTML = Handlebars.partials['registersuccess']();
       }).fail(function(jqXHR, textStatus, errorThrown) {
         console.log(jqXHR, jqXHR.responseJSON, textStatus, errorThrown);
       }).always(callback);
@@ -495,7 +418,7 @@ var AMASS = (function($, DateFormat) {
 
     return that;
   };
-})(jQuery, DateFormat);
+})(jQuery);
 
 // ** EVERYTHING BELOW NOT PART OF OUT OF BOX AMASS CODE
 $.ajax({

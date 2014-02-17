@@ -121,7 +121,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
 
   // JS distribution task.
-  grunt.registerTask('dist-js', ['clean', 'jshint', 'uglify']);
+  grunt.registerTask('dist-js', ['clean', 'jshint', 'handlebars', 'uglify']);
 
   // CSS distribution task.
   grunt.registerTask('dist-css', ['less']);

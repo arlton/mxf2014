@@ -9,7 +9,7 @@ app      = express();
 hbs      = require('hbs');
 
 hbs.registerPartials(__dirname + '/views/partials');
-
+app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 
 app.use(logfmt.requestLogger());

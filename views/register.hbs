@@ -33,7 +33,7 @@
           <div class="header">
             <div class="row">
               <div class="col-md-6">
-                <img src="assets/img/logo.png">
+                <img src="/assets/img/register_logo.png">
               </div>
               <div class="col-md-6">
                 <p class="hidden-xs hidden-sm"><strong>Event Registration</strong><br />Made by Few 2014<br />August 22nd – 23rd<br />Little Rock, Arkansas</p>
@@ -46,58 +46,6 @@
           </div>
           <form class="form-horizontal" id="amass-form" role="form" data-validate="parsley" action="/api/order" method="post">
             <div class="billing-info">
-              <script id="attendee-template" type="text/x-handlebars-template">
-                <h4>{{attributes.ticket.title}} Ticket #{{attributes.attendeeNumber}}{{#if hasRemove}}<span class="remove">Remove</span>{{/if}}</h4>
-                <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="first_name" class="control-label">First Name *</label>
-                    <input type="text" class="form-control parsley-validated first-name" id="first_name_{{attributes.attendeeNumber}}" name="attendees[{{index}}][first_name]" placeholder="" value="" data-notblank="true" data-required="true">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="last_name" class="control-label">Last Name *</label>
-                    <input type="text" class="form-control parsley-validated last-name" id="last_name_{{attributes.attendeeNumber}}" name="attendees[{{index}}][last_name]" placeholder="" value="" data-notblank="true" data-required="true">
-                  </div>
-                </div>
-                <div class="form-group">
-                <div class="col-lg-6">
-                  <label for="email_address" class="control-label">Email Address *</label>
-                  <input type="email" class="form-control parsley-validated" id="email_address_{{attributes.attendeeNumber}}" name="attendees[{{index}}][email_address]" placeholder="" value="" data-notblank="true" data-required="true" parsley-type="email" parsley-equalto="#confirm_email_address_{{attributes.attendeeNumber}}">
-                </div>
-                <div class="col-lg-6">
-                  <label for="confirm_email_address" class="control-label">Confirm Email Address *</label>
-                  <input type="email" class="form-control parsley-validated" id="confirm_email_address_{{attributes.attendeeNumber}}" name="attendees[{{index}}][confirm_email_address]" placeholder="" value="" data-notblank="true" data-required="true" parsley-type="email" parsley-equalto="#email_address_{{attributes.attendeeNumber}}">
-                </div>
-              </div>
-                <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="organization" class="control-label">Organization</label>
-                    <input type="text" class="form-control organization" id="organization_{{attributes.attendeeNumber}}" name="attendees[{{index}}][organization]" placeholder="">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="title" class="control-label">Title</label>
-                    <input type="text" class="form-control title" id="title_{{attributes.attendeeNumber}}" name="attendees[{{index}}][title]" placeholder="" value="">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-6">
-                    <label for="twitter_handle" class="control-label">Twitter Handle </label>
-                    <input type="text" class="form-control twitter-handle" id="twitter_handle_{{attributes.attendeeNumber}}" name="attendees[{{index}}][twitter_handle]" placeholder="" value="">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="shirt_size" class="control-label">Shirt Size *</label>
-                    <select class="form-control parsley-validated shirt-size" id="shirt_size_{{attributes.attendeeNumber}}" name="attendees[{{index}}][shirt_size]" data-notblank="true" data-required="true">
-                      <option></option>
-                      <option>Small</option>
-                      <option>Medium</option>
-                      <option>Large</option>
-                      <option>X-Large</option>
-                      <option>XX-Large</option>
-                    </select>
-                  </div>
-                </div>
-                <input type="hidden" name="attendees[{{index}}][ticket_id]" value="{{attributes.ticket._id}}">
-                <hr />
-              </script>
               <div id="attendees"></div>
               <h4>Additional Information</h4>
               <div class="form-group">
@@ -204,7 +152,7 @@
             </div>
           </form>
         </div>
-        <p class="stripe">Your payment will be processed by <a href="http://stripe.com" tabindex="-1"><img alt="Stripe" src="assets/img/stripe@2x.png" target="_blank"></a> — you’re in safe hands.</p>
+        <p class="stripe">Your payment will be processed by <a href="http://stripe.com" tabindex="-1"><img alt="Stripe" src="/assets/img/stripe@2x.png" target="_blank"></a> — you’re in safe hands.</p>
       </div>
     </div>
   </div>
