@@ -34,24 +34,24 @@ module.exports = function(grunt) {
           define: true
         }
       },
-      all: ["public/assets/js/custom.js"]
+      all: ["public/assets/js/home.js", "public/assets/js/register.js"]
     },
 
     clean: {
       all: {
-        src: ["public/assets/js/scripts.min.js"]
+        src: ["public/assets/js/home.min.js", "public/assets/js/register.mins.js"]
       }
     },
 
     less: {
       all: {
         options: {
-          paths: ["public/assets/less", "public/assets/css", "public/register/assets/less", "public/register/assets/css"],
+          paths: ["bower_components", "public/assets/less", "public/assets/css"],
           compress: true
         },
         files: {
-          "public/assets/css/style.css": "public/assets/less/style.less",
-          "public/register/assets/css/style.css": "public/register/assets/less/style.less"
+          "public/assets/css/home.css": "public/assets/less/home/home.less",
+          "public/assets/css/register.css": "public/assets/less/register/register.less"
         }
       }
     },
@@ -76,13 +76,21 @@ module.exports = function(grunt) {
       },
       all: {
         files: {
-          'public/assets/js/scripts.min.js': [
-              'public/assets/js/jquery.js'
+          'public/assets/js/home.min.js': [
+              'bower_components/jquery/dist/jquery.js'
             , 'public/assets/js/scrollit.js'
             , 'public/assets/js/waypoints.js'
             , 'public/assets/js/waypoints-sticky.js'
             , 'public/assets/js/tipr.js'
-            , 'public/assets/js/custom.js'
+            , 'public/assets/js/home.js'
+          ],
+          'public/assets/js/register.min.js': [
+              'bower_components/jquery/dist/jquery.js'
+            , 'bower_components/handlebars/handlebars.js'
+            , 'bower_components/momentjs/moment.js'
+            , 'public/assets/js/parsley.js'
+            , 'public/assets/js/templates.js'
+            , 'public/assets/js/register.js'
           ]
         }
       }
@@ -94,11 +102,11 @@ module.exports = function(grunt) {
         tasks: ['less', 'uglify']
       },
       javascript: {
-        files: ['public/assets/js/custom.js'],
+        files: ['public/assets/js/home.js', 'public/assets/js/register.js'],
         tasks: ['dist-js']
       },
       stylesheets: {
-        files: ['public/assets/less/*.less', 'public/register/assets/less/*.less'],
+        files: ['public/assets/less/**/*.less'],
         tasks: ['dist-css']
       }
     }

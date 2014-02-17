@@ -26,7 +26,8 @@
     "underscore": "~1.5.2",
     "sendgrid": "~1.0.0-rc.1.0",
     "handlebars": "~2.0.0-alpha.1",
-    "hbs": "~2.4.0"
+    "hbs": "~2.4.0",
+    "moment": "~2.5.1"
   },
   "main": "web.js",
   "scripts": {
