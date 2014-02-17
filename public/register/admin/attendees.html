@@ -51,19 +51,19 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Tickets</a></li>
-            <li class="active"><a href="#">Attendees</a></li>
-            <li><a href="#">Orders</a></li>
-            <li><a href="#">Promo Codes</a></li>
-            <li><a href="#">Event Settings</a></li>
+            <li><a href="/register/admin/"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+            <li><a href="/register/admin/tickets.html"><i class="fa fa-ticket"></i> Tickets</a></li>
+            <li class="active"><a href="/register/admin/attendees.html"><i class="fa fa-users"></i> Attendees</a></li>
+            <li><a href="/register/admin/orders.html"><i class="fa fa-money"></i> Orders</a></li>
+            <li><a href="/register/admin/promo_codes.html"><i class="fa fa-rocket"></i> Promo Codes</a></li>
+            <li><a href="/register/admin/event_settings.html"><i class="fa fa-cog"></i> Event Settings</a></li>
             <li><a href="#">View Event Page</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <ul class="pull-right options">
             <li><a href="#" class="btn btn-default">Export CSV</a></li>
-            <li><a href="#" class="btn btn-default">Add Attendee</a></li>
+            <li><a href="#" class="btn btn-default" data-toggle="modal" data-target="#addAttendee">Add Attendee</a></li>
           </ul>
           <h1 class="page-header">Attendees</h1>
           <div class="table-responsive">
@@ -104,40 +104,60 @@
               </tbody>
             </table>
           </div>
-          <h2 class="sub-header">Add Attendee</h2>
-          <form role="form">
-            <div class="form-group">
-              <label for="first_name">First Name</label>
-              <input type="text" class="form-control" id="first_name" placeholder="">
-            </div>
-            <div class="form-group">
-              <label for="last_name">Last Name</label>
-              <input type="text" class="form-control" id="last_name" placeholder="">
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="text" class="form-control" id="email" placeholder="">
-            </div>
-            <div class="form-group">
-              <label for="organization">Organziation</label>
-              <input type="text" class="form-control" id="organziation" placeholder="">
-            </div>
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" class="form-control" id="title" placeholder="">
-            </div>
-            <div class="form-group">
-              <label for="twitter_handle">Twitter Handle</label>
-              <input type="text" class="form-control" id="twitter_handle" placeholder="">
-            </div>
-            <div class="form-group">
-              <label for="shirt_size">Shirt Size</label>
-              <input type="text" class="form-control" id="shirt_size" placeholder="">
-            </div>
-            <button type="submit" class="btn btn-default">Add</button>
-          </form>
         </div>
       </div>
     </div>
+
+    <div id="addAttendee" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Add Attendee</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" id="first_name" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" class="form-control" id="last_name" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="text" class="form-control" id="email" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="organization">Organziation</label>
+                <input type="text" class="form-control" id="organziation" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="twitter_handle">Twitter Handle</label>
+                <input type="text" class="form-control" id="twitter_handle" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="shirt_size">Shirt Size</label>
+                <input type="text" class="form-control" id="shirt_size" placeholder="">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="../assets/js/bootstrap/modal.js"></script>
+    <script src="../assets/js/arlton.js"></script>
+
   </body>
 </html>
