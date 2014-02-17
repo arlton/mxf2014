@@ -413,7 +413,11 @@ module.exports = (function() {
           }
 
           // Send success email
-          res.render('registration_email', registrationModel, function(err, template) {
+          for (var i = 0; i < registrationData.tickets; i++) {
+            registrationData.tickets[i].attendeeNumber = i+1;
+          }
+
+          res.render('registration_email', registrationData, function(err, template) {
             if (err) { return logfmt.error(new Error('Error sending registration email')); }
             sendgrid.send({
               to: f.cc.email_address,

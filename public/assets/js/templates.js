@@ -114,7 +114,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-6 col-md-offset-3\">\n      <div class=\"confirmation\">\n        <img src=\"assets/img/logo.png\">\n        <h1>Registration Successful</h1>\n        <p>You're now registered for Made by Few 2014. You should receive a confirmation email shortly with your order details.</p>\n        <div class=\"share\">\n          <div class=\"row\">\n            <div class=\"col-md-4\">\n              <a class=\"btn btn-twitter btn-sm twitter_link\" href=\"http://twitter.com/intent/tweet?text=Sweet%21+I+just+got+my+ticket+to+%23mxf2014%21+Tickets+are+going+fast%3A+&url=http%3A//madebyfew.com\" target=\"_blank\"><i class=\"icon-twitter\"></i><span>Share on Twitter</span></a>\n            </div>\n            <div class=\"col-md-4\">\n              <a class=\"btn btn-facebook btn-sm fb_link\" onclick=\"return fbs_click()\" href=\"#\"><i class=\"icon-facebook\"></i><span>Share on Facebook</span></a>\n            </div>\n            <div class=\"col-md-4\">\n              <a class=\"btn btn-lanyrd btn-sm\" href=\"http://lanyrd.com/2014/mxf2014\" target=\"_blank\"><i class=\"icon-lanyrd\"></i><span>Share on Lanyrd</span></a>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";
+  return "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-6 col-md-offset-3\">\n      <div class=\"confirmation\">\n        <img src=\"/assets/img/register_logo.png\">\n        <h1>Registration Successful</h1>\n        <p>You're now registered for Made by Few 2014. You should receive a confirmation email shortly with your order details.</p>\n        <div class=\"share\">\n          <div class=\"row\">\n            <div class=\"col-md-4\">\n              <a class=\"btn btn-twitter btn-sm twitter_link\" href=\"http://twitter.com/intent/tweet?text=Sweet%21+I+just+got+my+ticket+to+%23mxf2014%21+Tickets+are+going+fast%3A+&url=http%3A//madebyfew.com\" target=\"_blank\"><i class=\"icon-twitter\"></i><span>Share on Twitter</span></a>\n            </div>\n            <div class=\"col-md-4\">\n              <a class=\"btn btn-facebook btn-sm fb_link\" onclick=\"return fbs_click()\" href=\"#\"><i class=\"icon-facebook\"></i><span>Share on Facebook</span></a>\n            </div>\n            <div class=\"col-md-4\">\n              <a class=\"btn btn-lanyrd btn-sm\" href=\"http://lanyrd.com/2014/mxf2014\" target=\"_blank\"><i class=\"icon-lanyrd\"></i><span>Share on Lanyrd</span></a>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";
   }));
 
 Handlebars.registerPartial("tickets", Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -190,33 +190,35 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1, stack2;
-  buffer += "\n                                                  <h3>Ticket Holder #"
-    + escapeExpression(((stack1 = ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+  var buffer = "", stack1;
+  buffer += "\n                                                  <h3>Ticket Holder #";
+  if (stack1 = helpers.attendeeNumber) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.attendeeNumber); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
     + ":</h3>\n                                                  <strong>First Name:</strong> ";
-  if (stack2 = helpers.first_name) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = (depth0 && depth0.first_name); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
-  buffer += escapeExpression(stack2)
+  if (stack1 = helpers.first_name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.first_name); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
     + "<br />\n                                                  <strong>Last Name:</strong> ";
-  if (stack2 = helpers.last_name) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = (depth0 && depth0.last_name); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
-  buffer += escapeExpression(stack2)
-    + "<br />\n                                                  <strong>Orgainzation:</strong> ";
-  if (stack2 = helpers.organization) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = (depth0 && depth0.organization); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
-  buffer += escapeExpression(stack2)
+  if (stack1 = helpers.last_name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.last_name); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "<br />\n                                                  <strong>Organization:</strong> ";
+  if (stack1 = helpers.organization) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.organization); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
     + "<br />\n                                                  <strong>Title:</strong> ";
-  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = (depth0 && depth0.title); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
-  buffer += escapeExpression(stack2)
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.title); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
     + "<br />\n                                                  <strong>Twitter:</strong> ";
-  if (stack2 = helpers.twitter_handle) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = (depth0 && depth0.twitter_handle); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
-  buffer += escapeExpression(stack2)
+  if (stack1 = helpers.twitter_handle) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.twitter_handle); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
     + "<br />\n                                                  <strong>Shirt Size:</strong> ";
-  if (stack2 = helpers.shirt_size) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = (depth0 && depth0.shirt_size); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
-  buffer += escapeExpression(stack2)
+  if (stack1 = helpers.shirt_size) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.shirt_size); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
     + "\n                                                  <hr />\n                                                ";
   return buffer;
   }
