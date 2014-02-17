@@ -102,7 +102,7 @@ module.exports = function(grunt) {
         tasks: ['less', 'uglify']
       },
       javascript: {
-        files: ['public/assets/js/home.js', 'public/assets/js/register.js'],
+        files: ['views/**/*.hbs', 'public/assets/js/home.js', 'public/assets/js/register.js'],
         tasks: ['dist-js']
       },
       stylesheets: {
