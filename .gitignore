@@ -13,3 +13,4 @@ app/routes-ck.js
 web-ck.js
 
 public/register/assets/js/custom-ck.js
+bower_components/
