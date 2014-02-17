@@ -345,10 +345,10 @@ var AMASS = (function($) {
       type: 'GET',
       dataType: 'json'
     }).done(function(data, textStatus, jqXHR) {
-      container.innerHTML = Handlebars.partials['promosuccess']();
+      container.innerHTML = Handlebars.partials['promosuccess'](data);
       promocodeMessagingEl.appendChild(container);
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      promocodeMessagingEl.innerHTML = Handlebars.partials['promofail']();
+      promocodeMessagingEl.innerHTML = Handlebars.partials['promofail'](jqXHR.responseJSON);
     }).always(callback);
 
     callback();
