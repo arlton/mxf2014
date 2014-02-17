@@ -15,6 +15,7 @@ var AMASS = (function($) {
     attendeesEl                = document.getElementById('attendees'),
     ticketsEl                  = document.getElementById('tickets'),
     amassFormEl                = document.getElementById('amass-form'),
+    cardErrorMessageEl         = document.getElementById('card-error'),
     promocodeSubmitEl          = document.getElementById('test-promocode'),
     promocodeInputEl           = document.getElementById('promocode'),
     promocodeMessagingEl       = document.getElementById('promocode-messaging'),
@@ -367,6 +368,7 @@ var AMASS = (function($) {
       }).done(function(data, textStatus, jqXHR) {
         mainEl.innerHTML = Handlebars.partials['registersuccess']();
       }).fail(function(jqXHR, textStatus, errorThrown) {
+        cardErrorMessageEl.innerHTML = jqXHR.responseJSON.data.message;
         console.log(jqXHR, jqXHR.responseJSON, textStatus, errorThrown);
       }).always(callback);
     }
