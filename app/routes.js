@@ -145,7 +145,9 @@ mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
       invoice             : String,
       description         : String,
       dispute             : String
-    }
+    },
+
+    promotions: [{ type: mongoose.Schema.ObjectId, ref: 'Events' }]
   });
 
   Event = mongoose.model('Events', eventSchema);
@@ -317,44 +319,9 @@ module.exports = (function() {
   });
 
   app.post('/api/event/:event_id/order', function(req, res) {
-    var f, registrationData, registrationModel, Cart, cart;
-
-    f = req.body;
-    registrationData = {};
-
-    Cart = function() {
-      var that, _items, _total;
-
-      that = this;
-      _items = [];
-      _total = 0.00;
-
-      that.addItem = function(item) {
-        _items.push(item);
-      };
-
-      that.getItems = function() {
-        return JSON.parse(JSON.stringify(_items));
-      };
-
-      that.getTotal = function() {
-        var items;
-
-        items = that.getItems();
-
-        for (var i = 0; i < items.length; i++) {
-          _total += items[i].price;
-        }
-
-        return Number(_total);
-      };
-
-      return that;
-    };
-
-    cart = new Cart();
-
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
+      var f, registrationData, Cart, cart, saveRegistration;
+
       if (err) { 
         // We're fucked
         res.writeHead(404, {'content-type':'application/json'});
@@ -363,46 +330,14 @@ module.exports = (function() {
         return logfmt.error(new Error('Unable to retrieve event: ' + err )); 
       }
 
-      registrationData.event = req.params.event_id;
+      f = req.body;
+      registrationData = {};
 
-      registrationData.customer = {
-        name: f.cc.name,
-        email_address: f.cc.email_address
-      };
+      saveRegistration = function(registrationData) {
+        var registrationModel;
+        console.log(registrationData);
 
-      // Validate cart FIXME
-
-      // Attach ticket info to attendees
-      for (var i = 0; i < f.attendees.length; i++) {
-        for (var x = 0; x < eventInfo.tickets.length; x++) {
-          if (f.attendees[i].ticket_id === String(eventInfo.tickets[x]._id)) {
-            f.attendees[i].ticket = eventInfo.tickets[x]._id;
-            cart.addItem(eventInfo.tickets[x]);
-            break;
-          }
-        }
-      }
-
-      registrationData.attendees = f.attendees;
-      registrationData.additional_information = f.additional_information;
-
-      // Process payment
-      stripe.charges.create({
-        amount: cart.getTotal(),
-        currency: 'usd',
-        card: f.cc,
-        metadata: { 'email': f.cc.email_address }
-      }).then(function(charge) {
-        logfmt.log({ 'type': 'charge', 'message': 'Successful charge', 'data': charge });
-
-        // Add payment to main object
-        charge.card.card_type = charge.card.type; // Get around mongo reserved word issue
-
-        registrationData.payment = charge;
-
-        // Update database
         registrationModel = new Registration(registrationData);
-
         registrationModel.save(function(err) {
           if (err) {
             // We're fucked
@@ -435,12 +370,118 @@ module.exports = (function() {
           res.write(JSON.stringify({ 'status': 'success', 'data': registrationData }));
           res.end();
         });
-      }, function(err) {
-        res.writeHead(400, {'content-type':'application/json'});
-        res.write(JSON.stringify({ 'status': 'fail', 'data': err })); // FIXME data should respond with which parts of the request failed in key/value pairs
-        res.end();
-        return logfmt.error(new Error('Error processing card: ' + err));
+      };
+
+      Cart = function() {
+        var that, _items, _promocodes, _total;
+
+        that = this;
+        _items = [];
+        _promocodes = [];
+        _total = 0.00;
+
+        that.addItem = function(item) {
+          _items.push(item);
+        };
+
+        that.getItems = function() {
+          return JSON.parse(JSON.stringify(_items));
+        };
+
+        that.addPromocode = function(promocode) {
+          if (typeof promocode === 'string') {
+            for (var i = 0; i < eventInfo.promotions.length; i++) {
+              if (promocode === eventInfo.promotions[i].code) {
+                _promocodes.push(eventInfo.promotions[i]);
+                return;
+              }
+            }
+          }
+
+          _promocodes.push(promocode);
+        };
+
+        that.getPromocodes = function(promocode) {
+          return JSON.parse(JSON.stringify(_promocodes));
+        };
+
+        that.getTotal = function(options) {
+          var items, promocodes;
+
+          items = that.getItems();
+          promocodes = that.getPromocodes();
+          _total = 0.00;
+
+          for (var i = 0; i < items.length; i++) {
+            _total += items[i].price;
+          }
+
+          for (var j = 0; j < promocodes.length; j++) {
+            _total = (_total - promocodes[j].amount < 0) ? 0 : _total - promocodes[j].amount;
+          }
+          
+          options = options || {};
+          return options.formatted ? '$' + _total.toFixed(2).toString() : _total.toString();
+        };
+
+        return that;
+      };
+
+      cart = new Cart();
+
+      registrationData.event = req.params.event_id;
+
+      registrationData.customer = {
+        name: f.cc.name,
+        email_address: f.cc.email_address
+      };
+
+      // Attach ticket info to attendees
+      for (var i = 0; i < f.attendees.length; i++) {
+        for (var j = 0; j < eventInfo.tickets.length; j++) {
+          if (f.attendees[i].ticket_id === String(eventInfo.tickets[j]._id)) {
+            f.attendees[i].ticket = eventInfo.tickets[j]._id;
+            cart.addItem(eventInfo.tickets[j]);
+            break;
+          }
+        }
+      }
+
+      for (var k = 0; k < f.promocode.length; k++) {
+        cart.addPromocode(f.promocode[k]);
+      }
+
+      registrationData.attendees = f.attendees;
+      registrationData.promotions = _.map(cart.getPromocodes(), function(promocode) {
+        console.log(promocode);
+        return promocode._id;
       });
+      registrationData.additional_information = f.additional_information;
+
+      if (cart.getTotal() <= 0) {
+        saveRegistration(registrationData);
+      } else {
+        // Process payment
+        stripe.charges.create({
+          amount: cart.getTotal()*100, // Stripe charges in cents not dollars. Fuckers.
+          currency: 'usd',
+          card: f.cc,
+          metadata: { 'email': f.cc.email_address }
+        }).then(function(charge) {
+          logfmt.log({ 'type': 'charge', 'message': 'Successful charge', 'data': charge });
+
+          // Add payment to main object
+          charge.card.card_type = charge.card.type; // Get around mongo reserved word issue
+
+          registrationData.payment = charge;
+          saveRegistration(registrationData);
+        }, function(err) {
+          res.writeHead(400, {'content-type':'application/json'});
+          res.write(JSON.stringify({ 'status': 'fail', 'data': err })); // FIXME data should respond with which parts of the request failed in key/value pairs
+          res.end();
+          return logfmt.error(new Error('Error processing card: ' + err));
+        });
+      }
     });
   });
 
