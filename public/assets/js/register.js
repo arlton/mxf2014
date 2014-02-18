@@ -184,11 +184,11 @@ var AMASS = (function($) {
   };
 
   Cart = function() {
-    var that, _items, _total;
+    var that, _items, _promocodes, _total;
 
     that = this;
-
     _items = [];
+    _promocodes = [];
     _total = 0.00;
 
     that.addItem = function(item) {
@@ -217,22 +217,38 @@ var AMASS = (function($) {
       return JSON.parse(JSON.stringify(_items));
     };
 
+    that.addPromocode = function(promocode) {
+      _promocodes.push(promocode);
+      that.updateTotal();
+    };
+
+    that.getPromocodes = function(promocode) {
+      return JSON.parse(JSON.stringify(_promocodes));
+    };
+
     that.updateTotal = function() {
-      var items = that.getItems();
-      _total = 0.00;
-
-      for (var i = 0; i < items.length; i++) {
-        _total += items[i].price;
-      }
-
-      for (var j in totalCostEl) {
-        totalCostEl[j].innerHTML = that.getTotal({ formatted: true });
+      for (var k in totalCostEl) {
+        totalCostEl[k].innerHTML = that.getTotal({ formatted: true });
       }
 
       return that.getTotal();
     };
 
     that.getTotal = function(options) {
+      var items, promocodes;
+
+      items = that.getItems();
+      promocodes = that.getPromocodes();
+      _total = 0.00;
+
+      for (var i = 0; i < items.length; i++) {
+        _total += items[i].price;
+      }
+
+      for (var j = 0; j < promocodes.length; j++) {
+        _total = (_total - promocodes[j].data.amount < 0) ? 0 : _total - promocodes[j].data.amount;
+      }
+
       options = options || {};
       return options.formatted ? '$' + _total.toFixed(2).toString() : _total.toString();
     };
@@ -346,6 +362,7 @@ var AMASS = (function($) {
       type: 'GET',
       dataType: 'json'
     }).done(function(data, textStatus, jqXHR) {
+      cart.addPromocode(data);
       container.innerHTML = Handlebars.partials['promosuccess'](data);
       promocodeMessagingEl.appendChild(container);
     }).fail(function(jqXHR, textStatus, errorThrown) {
