@@ -170,7 +170,7 @@ module.exports = (function() {
 
   app.get('/register', function(req, res) {
     // Get single event from database
-    Event.findOne({ _id: '52fd903c133ae6bd9fcd2423' }).exec(function(err, eventInfo) {
+    Event.findOne({ _id: '530396f65e8706f5d4ea6aa7' }).exec(function(err, eventInfo) {
       if (err) { 
         // We're fucked
         return logfmt.error(new Error('Unable to retrieve event: ' + err)); 

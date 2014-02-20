@@ -442,7 +442,7 @@ var AMASS = (function($) {
 
 // ** EVERYTHING BELOW NOT PART OF OUT OF BOX AMASS CODE
 $.ajax({
-  url: '/api/event/52fd903c133ae6bd9fcd2423',
+  url: '/api/event/530396f65e8706f5d4ea6aa7',
   dataType: 'json'
 }).done(function(event) {
   var amass = new AMASS();
