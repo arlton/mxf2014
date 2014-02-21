@@ -73,6 +73,8 @@ mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
       }
     ],
 
+    registrations: [{ type: mongoose.Schema.ObjectId, ref: 'Registrations' }],
+
     settings: {
       dateFormat: { type: String, trim: true, default: 'MMMM D, yyyy' }
     }
@@ -152,6 +154,67 @@ mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
 
   Event = mongoose.model('Events', eventSchema);
   Registration = mongoose.model('Registrations', registrationSchema);
+
+  /*
+  var amassEvent = new Event({
+    title: "Made By Few 2014",
+    logo_url: "/register/assets/img/logo.png",
+    settings: {
+      dateFormat: "MMMM Do, YYYY"
+    },
+    promotions: [
+      {
+        title: "Test Promotion",
+        code: "test",
+        amount: 185,
+        availability: {
+          range: {
+            from: "2014-01-01T06:00:00Z",
+            to: "2015-01-01T06:00:00Z"
+          }
+        }
+      }
+    ],
+    tickets: [
+      {
+        title: "Early Bird",
+        price: 185,
+        availability: {
+          range: {
+            from: "2014-01-01T06:00:00Z",
+            to: "2014-06-01T04:59:59Z"
+          }
+        }
+      },
+      {
+        title: "Regular",
+        price: 235,
+        availability: {
+          range: {
+            from: "2014-06-01T05:00:00Z",
+            to: "2014-08-23T04:59:59Z"
+          }
+        }
+      }
+    ],
+    location: {
+      address1: "",
+      address2: "",
+      city: "Little Rock",
+      state: "Arkansas",
+      zipcode: "",
+      zipcodeplus: ""
+    },
+    dates: {
+      range: {
+        from: "2014-08-22T05:00:00Z",
+        to: "2014-08-24T04:59:59Z"
+      }
+    }
+  });
+
+  amassEvent.save();
+  */
 });
 
 module.exports = (function() {
@@ -170,7 +233,7 @@ module.exports = (function() {
 
   app.get('/register', function(req, res) {
     // Get single event from database
-    Event.findOne({ _id: '52fd903c133ae6bd9fcd2423' }).exec(function(err, eventInfo) {
+    Event.findOne({ _id: '530396f65e8706f5d4ea6aa7' }).exec(function(err, eventInfo) {
       if (err) { 
         // We're fucked
         return logfmt.error(new Error('Unable to retrieve event: ' + err)); 
@@ -447,13 +510,14 @@ module.exports = (function() {
         }
       }
 
-      for (var k = 0; k < f.promocode.length; k++) {
-        cart.addPromocode(f.promocode[k]);
+      if (f.promocode) {
+        for (var k = 0; k < f.promocode.length; k++) {
+          cart.addPromocode(f.promocode[k]);
+        }
       }
 
       registrationData.attendees = f.attendees;
       registrationData.promotions = _.map(cart.getPromocodes(), function(promocode) {
-        console.log(promocode);
         return promocode._id;
       });
       registrationData.additional_information = f.additional_information;
