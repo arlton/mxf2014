@@ -18,6 +18,7 @@ var AMASS = (function($) {
     cardErrorMessageEl         = document.getElementById('card-error'),
     promocodeSubmitEl          = document.getElementById('test-promocode'),
     promocodeInputEl           = document.getElementById('promocode'),
+    promocodeListEl            = document.getElementById('promocode-list'),
     promocodeMessagingEl       = document.getElementById('promocode-messaging'),
     totalCostEl                = document.getElementsByClassName('total-cost'),
 
@@ -122,7 +123,7 @@ var AMASS = (function($) {
 
       that.el = container;
 
-      callEvent('addAttendee', function(){}, that);
+      callEvent('addAttendee', null, that);
     };
 
     Attendee.prototype.template = Handlebars.partials['attendee'];
@@ -371,13 +372,16 @@ var AMASS = (function($) {
     callback();
   });
 
-  _events.promocodeRemove = [];
-  _events.promocodeRemove.push(function(callback) {
-    var promocode;
-    promocode = this;
-    promocode.el.parentNode.removeChild(promocode.el);
+  _events.addPromocode = [];
+  _events.addPromocode.push(function(callback) {
+    cart.addPromocode(this);
+    callback();
+  });
 
-    cart.removePromocode(promocode);
+  _events.removePromocode = [];
+  _events.removePromocode.push(function(callback) {
+    cart.removePromocode(this);
+    callback();
   });
 
   _events.promocodeSubmit = [];
@@ -388,9 +392,11 @@ var AMASS = (function($) {
 
     for (var i = 0; i < promocodes.length; i++) {
       if (promocodes[i].data.code === promocodeInputEl.value) {
-        return;
+        return callback();
       }
     }
+
+    promocodeMessagingEl.innerHTML = '';
 
     $.ajax({
       url: '/api/event/' + settings.eventInfo._id + '/promo/' + promocodeInputEl.value,
@@ -404,23 +410,22 @@ var AMASS = (function($) {
       removeBtnsEl = promocode.el.getElementsByClassName('remove');
 
       removeEvent = function() {
-        callEvent('promocodeRemove', null, promocode);
+        callEvent('removePromocode', function() {
+          promocode.el.parentNode.removeChild(promocode.el);
+        }, promocode);
       };
 
       for (var i = 0; i < removeBtnsEl.length; i++) {
         removeBtnsEl[i].onclick = removeEvent;
       }
 
-      promocodeMessagingEl.appendChild(promocode.el);
+      promocodeListEl.appendChild(promocode.el);
 
-      cart.addPromocode(promocode);
-      callEvent('promocodeSuccess', null, promocode);
+      callEvent('addPromocode', null, promocode);
     }).fail(function(jqXHR, textStatus, errorThrown) {
       promocodeMessagingEl.innerHTML = Handlebars.partials['promofail'](jqXHR.responseJSON);
       callEvent('promocodeFail', null, promocodeInputEl.value);
     }).always(callback);
-
-    callback();
   });
 
   _events.formSubmit = [];
@@ -442,6 +447,7 @@ var AMASS = (function($) {
         $(cardErrorMessageEl).fadeIn('fast');
       }).always(callback);
     }
+
     callback();
   });
 
@@ -506,6 +512,17 @@ $.ajax({
   amass.on('removeAttendee', function(callback) {
     var attendeeEl = this.el;
     $(attendeeEl).fadeOut('fast', callback);
+  });
+
+  amass.on('addPromocode', function(callback) {
+    var promocodeEl = this.el;
+    $(promocodeEl).css('display', 'none');
+    $(promocodeEl).fadeIn('fast', callback);
+  });
+
+  amass.on('removePromocode', function(callback) {
+    var promocodeEl = this.el;
+    $(promocodeEl).fadeOut('fast', callback);
   });
 
   amass.setEventDetails(event);
