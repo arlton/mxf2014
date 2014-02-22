@@ -1,4 +1,4 @@
-var Handlebars, stripe, sendgrid, mongoose, _, Event, Registration, fs, moment;
+var Handlebars, stripe, sendgrid, _, Event, Registration, fs, moment;
 
 Handlebars = require('handlebars');
 stripe    = require('stripe')(process.env.STRIPE_API_KEY);
@@ -6,223 +6,18 @@ sendgrid  = require('sendgrid')(
   process.env.SENDGRID_USERNAME,
   process.env.SENDGRID_PASSWORD
 );
-mongoose  = require('mongoose');
 _         = require('underscore');
 logfmt    = require('logfmt');
 fs        = require('fs');
 moment    = require('moment');
 
-mongoose.connect(process.env.MONGOHQ_URL, function (err, res) {
-  var eventSchema, registrationSchema, promotionSchema;
-
-  if (err) {
-    res.writeHead(500, {'content-type':'application/json'});
-    res.write(JSON.stringify({ 'status': 'error', 'message': err }));
-    res.end();
-    return logfmt.error(new Error('Unable to connect: ' + err));
-  } else {
-    logfmt.log({ 'type': 'database', 'message': 'Connected' });
-  }
-
-  eventSchema = new mongoose.Schema({
-    title    : { type: String, trim: true },
-    logo_url : { type: String, trim: true },
-
-    dates: {
-      range: {
-        from : Date,
-        to   : Date
-      }
-    },
-
-    location: {
-      address1    : { type: String, trim: true },
-      address2    : { type: String, trim: true },
-      city        : { type: String, trim: true },
-      state       : { type: String, trim: true },
-      zipcode     : { type: String, trim: true },
-      zipcodeplus : { type: String, trim: true }
-    },
-
-    tickets: [
-      {
-        id    : mongoose.Schema.ObjectId,
-        title : { type: String, trim: true },
-        price : Number,
-        availability: {
-          range: {
-            from : Date,
-            to   : Date
-          }
-        }
-      }
-    ],
-
-    promotions: [
-      {
-        id     : mongoose.Schema.ObjectId,
-        title  : { type: String, trim: true },
-        code   : { type: String, trim: true },
-        amount : { type: Number },
-        availability: {
-          range: {
-            from : Date,
-            to   : Date
-          }
-        }
-      }
-    ],
-
-    registrations: [{ type: mongoose.Schema.ObjectId, ref: 'Registrations' }],
-
-    settings: {
-      dateFormat: { type: String, trim: true, default: 'MMMM D, yyyy' }
-    }
-  });
-
-  registrationSchema = new mongoose.Schema({
-    event: { type: mongoose.Schema.ObjectId, ref: 'Events' },
-    
-    attendees: [{
-      first_name     : { type: String, trim: true },
-      last_name      : { type: String, trim: true },
-      email_address  : { type: String, trim: true },
-      organization   : { type: String, trim: true },
-      shirt_size     : { type: String, trim: true },
-      ticket         : { type: mongoose.Schema.ObjectId, ref: 'Events' },
-      title          : { type: String, trim: true },
-      twitter_handle : { type: String, trim: true }
-    }],
-
-    additional_information: { type: String, trim: true },
-
-    customer: {
-      name            : { type: String, trim: true },
-      email_address   : { type: String, trim: true },
-      address_line1   : { type: String, trim: true },
-      address_line2   : { type: String, trim: true },
-      address_city    : { type: String, trim: true },
-      address_state   : { type: String, trim: true },
-      address_zip     : { type: String, trim: true },
-      address_country : { type: String, trim: true }
-    },
-
-    payment: {
-      id       : String,
-      object   : String,
-      created  : Number,
-      livemode : Boolean,
-      paid     : Boolean,
-      amount   : Number,
-      currency : String,
-      refunded : Boolean,
-      card: {
-        id                  : String,
-        object              : String,
-        last4               : String,
-        card_type           : String,
-        exp_month           : Number,
-        exp_year            : Number,
-        fingerprint         : String,
-        customer            : String,
-        country             : String,
-        name                : String,
-        address_line1       : String,
-        address_line2       : String,
-        address_city        : String,
-        address_state       : String,
-        address_zip         : String,
-        address_country     : String,
-        cvc_check           : String,
-        address_line1_check : String,
-        address_zip_check   : String
-      },
-      captured            : Boolean,
-      refunds             : Array,
-      balance_transaction : String,
-      failure_message     : String,
-      failure_code        : String,
-      amount_refunded     : Number,
-      customer            : String,
-      invoice             : String,
-      description         : String,
-      dispute             : String
-    },
-
-    promotions: [{ type: mongoose.Schema.ObjectId, ref: 'Events' }]
-  });
-
-  Event = mongoose.model('Events', eventSchema);
-  Registration = mongoose.model('Registrations', registrationSchema);
-
-  /*
-  var amassEvent = new Event({
-    title: "Made By Few 2014",
-    logo_url: "/register/assets/img/logo.png",
-    settings: {
-      dateFormat: "MMMM Do, YYYY"
-    },
-    promotions: [
-      {
-        title: "Test Promotion",
-        code: "test",
-        amount: 185,
-        availability: {
-          range: {
-            from: "2014-01-01T06:00:00Z",
-            to: "2015-01-01T06:00:00Z"
-          }
-        }
-      }
-    ],
-    tickets: [
-      {
-        title: "Early Bird",
-        price: 185,
-        availability: {
-          range: {
-            from: "2014-01-01T06:00:00Z",
-            to: "2014-06-01T04:59:59Z"
-          }
-        }
-      },
-      {
-        title: "Regular",
-        price: 235,
-        availability: {
-          range: {
-            from: "2014-06-01T05:00:00Z",
-            to: "2014-08-23T04:59:59Z"
-          }
-        }
-      }
-    ],
-    location: {
-      address1: "",
-      address2: "",
-      city: "Little Rock",
-      state: "Arkansas",
-      zipcode: "",
-      zipcodeplus: ""
-    },
-    dates: {
-      range: {
-        from: "2014-08-22T05:00:00Z",
-        to: "2014-08-24T04:59:59Z"
-      }
-    }
-  });
-
-  amassEvent.save();
-  */
-});
-
 module.exports = (function() {
-  var express, app, hbs;
+  var express, app, hbs, db;
   
   express = require('express');
   app     = express();
   hbs     = require('hbs');
+  db      = require('./db');
 
   app.use(express.bodyParser());
 
@@ -233,12 +28,11 @@ module.exports = (function() {
 
   app.get('/register', function(req, res) {
     // Get single event from database
-    Event.findOne({ _id: '530396f65e8706f5d4ea6aa7' }).exec(function(err, eventInfo) {
+    db.models.Event.findOne({ _id: '530396f65e8706f5d4ea6aa7' }).exec(function(err, eventInfo) {
       if (err) { 
         // We're fucked
         return logfmt.error(new Error('Unable to retrieve event: ' + err)); 
       }
-
 
       // Update AMASS Event with some dynamicness
       eventInfo.tickets = _.map(eventInfo.tickets, function(ticket) {
@@ -320,7 +114,7 @@ module.exports = (function() {
 
   app.get('/api/event/:event_id', function(req, res) {
     // Get single event from database
-    Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
+    db.models.Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
       if (err) { 
         // We're fucked
         es.writeHead(404, {'content-type':'application/json'});
@@ -341,7 +135,7 @@ module.exports = (function() {
   });
 
   app.get('/api/event/:event_id/promo/:code', function(req, res) {
-    Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
+    db.models.Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
       if (err) { 
         // We're fucked
         es.writeHead(404, {'content-type':'application/json'});
@@ -382,7 +176,7 @@ module.exports = (function() {
   });
 
   app.post('/api/event/:event_id/order', function(req, res) {
-    Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
+    db.models.Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
       var f, registrationData, Cart, cart, saveRegistration;
 
       if (err) { 
@@ -400,7 +194,7 @@ module.exports = (function() {
         var registrationModel;
         console.log(registrationData);
 
-        registrationModel = new Registration(registrationData);
+        registrationModel = new db.models.Registration(registrationData);
         registrationModel.save(function(err) {
           if (err) {
             // We're fucked
