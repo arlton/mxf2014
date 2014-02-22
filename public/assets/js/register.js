@@ -218,12 +218,32 @@ var AMASS = (function($) {
     };
 
     that.addPromocode = function(promocode) {
+      for (var i = 0; i < _promocodes.length; i++) {
+        if (_promocodes[i].data._id === promocode.data._id) {
+          return;
+        }
+      }
+
       _promocodes.push(promocode);
       that.updateTotal();
     };
 
-    that.getPromocodes = function(promocode) {
-      return JSON.parse(JSON.stringify(_promocodes));
+    that.removePromocode = function(promocode) {
+      for (var i = 0; i < _promocodes.length; i++) {
+        if (_promocodes[i].data._id === promocode.data._id) {
+          _promocodes = _promocodes.splice(i, 0);
+          that.updateTotal();
+          return;
+        }
+      }
+    };
+
+    that.getPromocodes = function() {
+      return $.map(_promocodes, function(promocode) {
+        return {
+          data: promocode.data 
+        };
+      });
     };
 
     that.updateTotal = function() {
@@ -351,22 +371,53 @@ var AMASS = (function($) {
     callback();
   });
 
+  _events.promocodeRemove = [];
+  _events.promocodeRemove.push(function(callback) {
+    var promocode;
+    promocode = this;
+    promocode.el.parentNode.removeChild(promocode.el);
+
+    cart.removePromocode(promocode);
+  });
+
   _events.promocodeSubmit = [];
   _events.promocodeSubmit.push(function(callback) {
-    var template, container;
+    var promocodes;
 
-    container = document.createElement('div');
+    promocodes = cart.getPromocodes();
+
+    for (var i = 0; i < promocodes.length; i++) {
+      if (promocodes[i].data.code === promocodeInputEl.value) {
+        return;
+      }
+    }
 
     $.ajax({
       url: '/api/event/' + settings.eventInfo._id + '/promo/' + promocodeInputEl.value,
       type: 'GET',
       dataType: 'json'
-    }).done(function(data, textStatus, jqXHR) {
-      cart.addPromocode(data);
-      container.innerHTML = Handlebars.partials['promosuccess'](data);
-      promocodeMessagingEl.appendChild(container);
+    }).done(function(promocode, textStatus, jqXHR) {
+      var removeBtnsEl, removeEvent;
+
+      promocode.el = document.createElement('div');
+      promocode.el.innerHTML = Handlebars.partials['promosuccess'](promocode);
+      removeBtnsEl = promocode.el.getElementsByClassName('remove');
+
+      removeEvent = function() {
+        callEvent('promocodeRemove', null, promocode);
+      };
+
+      for (var i = 0; i < removeBtnsEl.length; i++) {
+        removeBtnsEl[i].onclick = removeEvent;
+      }
+
+      promocodeMessagingEl.appendChild(promocode.el);
+
+      cart.addPromocode(promocode);
+      callEvent('promocodeSuccess', null, promocode);
     }).fail(function(jqXHR, textStatus, errorThrown) {
       promocodeMessagingEl.innerHTML = Handlebars.partials['promofail'](jqXHR.responseJSON);
+      callEvent('promocodeFail', null, promocodeInputEl.value);
     }).always(callback);
 
     callback();
