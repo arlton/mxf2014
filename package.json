@@ -19,6 +19,14 @@
     "grunt-contrib-handlebars": "~0.6.1"
   },
   "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-contrib-less": "~0.9.0",
+    "grunt-contrib-handlebars": "~0.6.1",
     "express": "~3.4.8",
     "logfmt": "~0.20.0",
     "stripe": "~2.4.0",
@@ -31,6 +39,7 @@
   },
   "main": "web.js",
   "scripts": {
+    "postinstall": "echo postinstall time; ./node_modules/grunt/bin/grunt dist",
     "start": "node web.js"
   },
   "repository": {
