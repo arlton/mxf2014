@@ -19,3 +19,7 @@ public/assets/js/register.min-ck.js
 app/controllers/event-ck.js
 
 app/controllers/order-ck.js
+
+public/assets/js/register-ck.js
+
+public/assets/js/templates-ck.js
