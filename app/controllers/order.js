@@ -1,8 +1,9 @@
-var Event, _, strip, sendgrid;
+var Event, ApiResponse, _, strip, sendgrid;
 
 Event         = require('../models/event');
 Registration  = require('../models/registration');
 
+ApiResponse   = require('../utils/apiresponse');
 _             = require('underscore');
 stripe        = require('stripe')(process.env.STRIPE_API_KEY);
 sendgrid      = require('sendgrid')(
@@ -12,14 +13,18 @@ sendgrid      = require('sendgrid')(
 
 module.exports.controller = function(app) {
   app.post('/api/event/:event_id/order', function(req, res) {
+    var apiresponse = new ApiResponse(res);
+
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
       var f, registrationData, Cart, cart, saveRegistration;
 
       if (err) { 
         // We're fucked
-        res.writeHead(404, {'content-type':'application/json'});
-        res.write(JSON.stringify({ 'status': 'fail', 'message': 'Event not found', 'data': { 'event_id': req.params.event_id } })); // FIXME am I sure that findOne method would only error when unable to find an event?
-        res.end();
+        apiresponse.send(404, { 
+          'status': 'fail', 
+          'message': 'Event not found', 
+          'data': { 'event_id': req.params.event_id }
+        }); // FIXME am I sure that findOne method would only error when unable to find an event?
         return logfmt.error(new Error('Unable to retrieve event: ' + err )); 
       }
 
@@ -28,15 +33,16 @@ module.exports.controller = function(app) {
 
       saveRegistration = function(registrationData) {
         var registrationModel;
-        console.log(registrationData);
 
         registrationModel = new Registration(registrationData);
         registrationModel.save(function(err) {
           if (err) {
             // We're fucked
-            res.writeHead(500, {'content-type':'application/json'});
-            res.write(JSON.stringify({ 'status': 'error', 'message': 'Unable to store registration details', 'data': [err, registrationData] }));
-            res.end();
+            apiresponse.send(500, { 
+              'status': 'error', 
+              'message': 'Unable to store registration details', 
+              'data': [err, registrationData]
+            });
             return logfmt.error(new Error('Unable to save registration: ' + err));
           }
 
@@ -59,9 +65,7 @@ module.exports.controller = function(app) {
           });
          
           // Show response JSON
-          res.writeHead(200, {'content-type':'application/json'});
-          res.write(JSON.stringify({ 'status': 'success', 'data': registrationData }));
-          res.end();
+          apiresponse.send(200, { 'status': 'success', 'data': registrationData });
         });
       };
 
@@ -170,9 +174,7 @@ module.exports.controller = function(app) {
           registrationData.payment = charge;
           saveRegistration(registrationData);
         }, function(err) {
-          res.writeHead(400, {'content-type':'application/json'});
-          res.write(JSON.stringify({ 'status': 'fail', 'data': err })); // FIXME data should respond with which parts of the request failed in key/value pairs
-          res.end();
+          apiresponse.send(400, { 'status': 'fail', 'data': err }); // FIXME data should respond with which parts of the request failed in key/value pairs
           return logfmt.error(new Error('Error processing card: ' + err));
         });
       }
