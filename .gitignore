@@ -15,3 +15,7 @@ web-ck.js
 public/register/assets/js/custom-ck.js
 bower_components/
 public/assets/js/register.min-ck.js
+
+app/controllers/event-ck.js
+
+app/controllers/order-ck.js
