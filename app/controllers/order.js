@@ -11,7 +11,7 @@ sendgrid      = require('sendgrid')(
 );
 
 module.exports.controller = function(app) {
-  app.get('/api/event/:event_id/order', function(req, res) {
+  app.post('/api/event/:event_id/order', function(req, res) {
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
       var f, registrationData, Cart, cart, saveRegistration;
 
