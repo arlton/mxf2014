@@ -50,7 +50,7 @@ module.exports = function(grunt) {
           compress: true
         },
         files: {
-          "public/assets/css/home.css": "public/assets/less/home/home.less",
+          "public/assets/css/home.min.css": "public/assets/less/home/home.less",
           "public/assets/css/register.min.css": "public/assets/less/register/register.less"
         }
       }
