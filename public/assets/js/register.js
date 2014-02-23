@@ -173,7 +173,9 @@ var AMASS = (function($) {
 
       if (typeof query === 'function') {
         count = 0;
-        for (var i in _list) {
+        console.log(_list);
+        for (var i = 0; i < _list.length; i++) {
+          console.log(_list[i]);
           if (query(_list[i])) {
             count += 1;
           }
