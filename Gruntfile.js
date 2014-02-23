@@ -61,10 +61,10 @@ module.exports = function(grunt) {
         options: {
           namespace: "HBS",
           partialRegex: /.*/,
-          partialsPathRegex: /views\/partials\//
+          partialsPathRegex: /app\/views\/partials\//
         },
         files: {
-          "public/assets/js/templates.js": "views/**/*.hbs"
+          "public/assets/js/templates.js": "app/views/**/*.hbs"
         }
       }
     },
