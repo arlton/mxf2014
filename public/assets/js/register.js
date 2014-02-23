@@ -1,7 +1,5 @@
 /* global Handlebars, jQuery, $, HBS */
 var AMASS = (function($) {
-  "use strict";
-
   var Attendees,    // Attendees object
     attendees,    // Instantiated attendees object
 
