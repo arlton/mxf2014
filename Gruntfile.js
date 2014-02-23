@@ -88,6 +88,8 @@ module.exports = function(grunt) {
               'bower_components/jquery/dist/jquery.js'
             , 'bower_components/handlebars/handlebars.js'
             , 'bower_components/momentjs/moment.js'
+            , 'bower_components/ladda/js/spin.js'
+            , 'bower_components/ladda/js/ladda.js'
             , 'public/assets/js/parsley.js'
             , 'public/assets/js/templates.js'
             , 'public/assets/js/register.js'
