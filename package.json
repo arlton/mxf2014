@@ -39,7 +39,7 @@
   },
   "main": "web.js",
   "scripts": {
-    "postinstall": "echo postinstall time; ./node_modules/grunt/bin/grunt dist",
+    "postinstall": "echo postinstall time; ./node_modules/grunt/lib/grunt dist",
     "start": "node web.js"
   },
   "repository": {
