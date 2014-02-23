@@ -1,5 +1,7 @@
 /* global Handlebars, jQuery, $, HBS */
 var AMASS = (function($) {
+  "use strict";
+
   var Attendees,    // Attendees object
     attendees,    // Instantiated attendees object
 
@@ -280,12 +282,17 @@ var AMASS = (function($) {
 
   // ** INIT
   function init() {
+    console.log(1);
     var updateTicketNumber;
 
     ticketNumbersEl = document.getElementById('tickets').getElementsByClassName('ticket-number');
 
+    console.log(2);
+
     // Ticket numbers changed
     updateTicketNumber = function() {
+      console.log(3);
+
       var attendeesCount = attendees.count(),
         ticket = {},
         ticketsCount = parseInt(this.value, 10),
@@ -297,15 +304,20 @@ var AMASS = (function($) {
           break;
         }
       }
+      console.log(4);
 
       if (ticketsCount > attendeesCount) {
         for (var k = 0; k < (ticketsCount - attendeesCount); k++) {
           attendees.add({ticket: ticket});
         }
+        console.log(5);
+
       } else {
+
         for (var l = 0; l < (attendeesCount - ticketsCount); l++) {
           attendees.remove(attendees.count()-1);
         }
+        console.log(6);
       }
     };
 
@@ -313,11 +325,16 @@ var AMASS = (function($) {
       ticketNumbersEl[i].onblur = updateTicketNumber;
     }
 
+    console.log(7);
+
     attendees = new Attendees();
     cart = new Cart();
+    console.log(8);
 
     // Setup initial validation
     $(amassFormEl).parsley();
+
+    console.log(9);
 
     // Artificially adding an early bird ticket. FIXME THIS IS SHITTTTTTTT
     attendees.add({ ticket: settings.eventInfo.tickets[0] });
