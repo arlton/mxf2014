@@ -109,12 +109,12 @@
   display:block;
   font-family:Helvetica;
   font-size:16px;
-  font-weight:normal;
+  font-weight:bold;
   line-height:100%;
   letter-spacing:normal;
   margin-top:10px;
   margin-right:0;
-  margin-bottom:5px;
+  margin-bottom:15px;
   margin-left:0;
   text-align:left;
   }
@@ -434,54 +434,69 @@
 </head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
 <center>
-	<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
-  	<tr>
-    	<td align="center" valign="top" id="bodyCell">
-      	<!-- BEGIN TEMPLATE // -->
-      	<table border="0" cellpadding="0" cellspacing="0" id="templateContainer">
-        	<tr>
-          	<td align="center" valign="top">
-            	<!-- BEGIN HEADER // -->
+  <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+    <tr>
+      <td align="center" valign="top" id="bodyCell">
+        <!-- BEGIN TEMPLATE // -->
+        <table border="0" cellpadding="0" cellspacing="0" id="templateContainer">
+          <tr>
+            <td align="center" valign="top">
+              <!-- BEGIN HEADER // -->
                 <table border="0" cellpadding="20" cellspacing="0" width="100%" id="templateHeader">
                     <tr>
                     <td valign="top" class="headerContent">
-                    	<img src="http://mxf2014.herokuapp.com/assets/img/logo-email.png" style="width:250px; height: 82px; display: block; margin-top: 50px; margin-left: auto; margin-bottom: 30px; margin-right: auto;" alt="Made by Few 2014"/>
+                      <img src="http://mxf2014.herokuapp.com/assets/img/logo-email.png" style="width:350px; height: 115px; display: block; margin-top: 50px; margin-left: auto; margin-bottom: 30px; margin-right: auto;" alt="Made by Few 2014"/>
                     </td>
                   </tr>
                 </table>
                 <!-- // END HEADER -->
               </td>
             </tr>
-        	<tr>
-          	<td align="center" valign="top">
-            	<!-- BEGIN BODY // -->
+          <tr>
+            <td align="center" valign="top">
+              <!-- BEGIN BODY // -->
               <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
                 <tr>
                   <td valign="top" class="bodyContent" mc:edit="body_content01">
-                    <h2>Hi {{payment.card.name}},</h2>
-										Thanks for registering for Made by Few 2014! It’s going to be an amazing time. Please review your order information below and let us know if you have any questions. We look forward to seeing you in August.
-										<br />
-										<br />
-										Cheers,<br />
-										The Made by Few Team
-										<br />
-										<br />
-										<br />
-										<br />
-										<h2>Order confirmation:</h2>
+                    <h2>Hi {{payment.card.name}}, this is your order confirmation for Made by Few 2014.</h2>
+                    Thanks for registering! It’s going to be an amazing time. Please review your order information below and let us know if you have any questions. We look forward to seeing you in August.
+                    <br />
+                    <br />
+                    Cheers,<br />
+                    The Made by Few Team
+                    <br />
+                    <br />
+                    <br />
+                    <h2>Confirmation number: 000034</h2>
+                    <br />
                     <hr />
+                    <h3>Registered Attendees:</h3>
                     {{#each attendees}}
                       <strong>First Name:</strong> {{first_name}}<br />
                       <strong>Last Name:</strong> {{last_name}}<br />
-                      <strong>Organization:</strong> {{organization}}<br />
-                      <strong>Title:</strong> {{title}}<br />
-                      <strong>Twitter:</strong> {{twitter_handle}}<br />
+                      <strong>Organization:</strong> {{#if organization}}
+                      {{organization}}
+                    {{else}}
+                      N/A
+                    {{/if}}<br />
+                      <strong>Title:</strong> {{#if title}}
+                      {{title}}
+                    {{else}}
+                      N/A
+                    {{/if}}<br />
+                      <strong>Twitter:</strong> {{#if twitter_handle}}
+                      {{twitter_handle}}
+                    {{else}}
+                      N/A
+                    {{/if}}<br />
                       <strong>Shirt Size:</strong> {{shirt_size}}
                       <hr />
                     {{/each}}
+                    <h3>Additional Information:</h3>
                     {{#if additional_information}}
-                      <h3>Additional Information:</h3>
                       {{additional_information}}
+                    {{else}}
+                      N/A
                     {{/if}}
                     <hr />
                     <h3>Event Information:</h3>
@@ -502,9 +517,9 @@
           </tr>
         </table>
         <table>
-        	<tr>
-          	<td align="center" valign="top">
-            	<!-- BEGIN FOOTER // -->
+          <tr>
+            <td align="center" valign="top">
+              <!-- BEGIN FOOTER // -->
               <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateFooter">
                 <tr>
                   <td valign="top" class="footerContent" mc:edit="footer_content00">
