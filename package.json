@@ -39,7 +39,6 @@
   },
   "main": "web.js",
   "scripts": {
-    "postinstall": "node_modules/grunt/lib/grunt dist",
     "start": "node web.js"
   },
   "repository": {
