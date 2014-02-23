@@ -27,56 +27,39 @@ module.exports.controller = function(app) {
     });
   });
 
-  app.get('/api/event/:event_id/promo/:promo_id', function(req, res) {
-    Registration.findOne({ 'promotions': req.params.promo_id }, function(err, promotion) {
-      // Has promotion already been used before?
-      if (promotion) {
-        res.writeHead(404, {'content-type':'application/json'});
-        res.write(JSON.stringify({ 
-          'status': 'fail', 
-          'message': 'Promotional code not valid', 
-          'data': { '_id': req.params.promo_id } 
-        }));
-        res.end();
+  app.get('/api/event/:event_id/promo/:code', function(req, res) {
+    function promotionFail(data) {
+      data = data || {};
+      res.writeHead(404, {'content-type':'application/json'});
+      res.write(JSON.stringify({ 
+        'status': 'fail', 
+        'message': 'Promotional code not valid', 
+        'data': data
+      }));
+      res.end();
+    };
 
-        return;
+    Event.findOne({ 'promotions.code': req.params.code }, 'promotions.$', function(err, eventInfo) {
+      var promotion;
+
+      if (err || !eventInfo) {
+        return promotionFail({ 'code': req.params.code });
       }
 
-      Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
-        if (err || !eventInfo) { 
-          // We're fucked
-          res.writeHead(404, {'content-type':'application/json'});
-          res.write(JSON.stringify({ 
-            'status': 'fail', 
-            'message': 'Event not found', 
-            'data': { 'event_id': req.params.event_id } 
-          }));
+      promotion = eventInfo.promotions[0];
 
-          res.end();
-          return logfmt.error(new Error('Unable to retrieve event: ' + err)); 
+      Registration.findOne({ 'promotions': promotion._id }, function(err, registration) {
+        // Has promotion already been used before?
+        if (registration) {
+          return promotionFail({ '_id': promotion._id });
         }
 
-        if (eventInfo.promotions && eventInfo.promotions.length > 0) {
-          for (var i = 0; i < eventInfo.promotions.length; i++) {
-            if (eventInfo.promotions[i].promo_id === req.params.promo_id) { // FIXME add date check
-              res.writeHead(200, {'content-type':'application/json'});
-              res.write(JSON.stringify({
-                'status': 'success',
-                'data': eventInfo.promotions[i]
-              }));
-              res.end();
-              return;
-            }
-          }
-
-          res.writeHead(404, {'content-type':'application/json'});
-          res.write(JSON.stringify({
-            'status': 'fail',
-            'message': 'Promotional code not valid',
-            'data': { '_id': req.params.promo_id }
-          }));
-          res.end();
-        }
+        res.writeHead(200, {'content-type':'application/json'});
+        res.write(JSON.stringify({
+          'status': 'success',
+          'data': promotion
+        }));
+        res.end();
       });
     });
   });
