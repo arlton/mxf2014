@@ -23,3 +23,11 @@ app/controllers/order-ck.js
 public/assets/js/register-ck.js
 
 public/assets/js/templates-ck.js
+
+public/assets/css/home.css
+
+public/assets/css/register.min.css
+
+public/assets/js/home.min.js
+
+public/assets/js/register.min.js
