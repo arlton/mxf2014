@@ -31,27 +31,24 @@ module.exports.controller = function(app) {
       f = req.body;
       registrationData = {};
 
-      saveRegistration = function(registrationData) {
+      saveRegistration = function(registration) {
         var registrationModel;
 
-        registrationModel = new Registration(registrationData);
-        registrationModel.save(function(err) {
+        registrationModel = new Registration(registration);
+        registrationModel.save(function(err, registration) {
           if (err) {
             // We're fucked
             apiresponse.send(500, { 
               'status': 'error', 
               'message': 'Unable to store registration details', 
-              'data': [err, registrationData]
+              'data': [err, registration]
             });
             return logfmt.error(new Error('Unable to save registration: ' + err));
           }
 
           // Send success email
-          for (var i = 0; i < registrationData.tickets; i++) {
-            registrationData.tickets[i].attendeeNumber = i+1;
-          }
-
-          res.render('registration_email', registrationData, function(err, template) {
+          registration.confirmation_code = String(registration._id).toUpperCase();
+          res.render('registration_email', registration, function(err, template) {
             if (err) { return logfmt.error(new Error('Error sending registration email')); }
             sendgrid.send({
               to: f.cc.email_address,
@@ -65,7 +62,7 @@ module.exports.controller = function(app) {
           });
          
           // Show response JSON
-          apiresponse.send(200, { 'status': 'success', 'data': registrationData });
+          apiresponse.send(200, { 'status': 'success', 'data': registration });
         });
       };
 

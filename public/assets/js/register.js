@@ -1,4 +1,4 @@
-/* global Handlebars, jQuery, $, HBS */
+/* global Handlebars, jQuery, $, HBS, Ladda */
 var AMASS = (function($) {
   "use strict";
 
@@ -432,6 +432,7 @@ var AMASS = (function($) {
   _events.formSubmit.push(function(callback) {
     var successTemplate;
 
+    callEvent('formSubmitBefore');
     if ($(amassFormEl).parsley('validate')) {
       $.ajax({
         url: '/api/event/' + settings.eventInfo._id + '/order',
@@ -445,7 +446,12 @@ var AMASS = (function($) {
           .text(jqXHR.responseJSON.data.message)
           .appendTo($(cardErrorMessageEl).empty());
         $(cardErrorMessageEl).fadeIn('fast');
-      }).always(callback);
+      }).always(function() {
+        callEvent('formSubmitAfter', arguments);
+        callback();
+      });
+    } else {
+      callEvent('formSubmitAfter');
     }
 
     callback();
@@ -502,7 +508,10 @@ $.ajax({
   url: '/api/event/530396f65e8706f5d4ea6aa7',
   dataType: 'json'
 }).done(function(event) {
-  var amass = new AMASS();
+  var amass, ladda;
+
+  amass = new AMASS();
+  ladda = Ladda.create(document.querySelector('.ladda-button'));
 
   amass.on('addAttendee', function(callback) {
     var attendeeEl = this.el;
@@ -523,6 +532,19 @@ $.ajax({
   amass.on('removePromocode', function(callback) {
     var promocodeEl = this.el;
     $(promocodeEl).fadeOut('fast', callback);
+  });
+
+  amass.on('formSubmitBefore', function(callback) {
+    console.log('woot');
+    ladda.start();
+
+    callback();
+  });
+
+  amass.on('formSubmitAfter', function(callback) {
+    console.log('woot woot woot');
+    ladda.stop();
+    callback();
   });
 
   amass.setEventDetails(event);
