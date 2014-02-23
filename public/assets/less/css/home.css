@@ -768,7 +768,10 @@ footer p.mobile {
   margin: 50px auto;
 }
 #contest .ticket.mobile {
-  width: 40%;
+  width: 100%;
+}
+#contest .ticket.mobile img {
+  margin: 30px auto 0 auto;
 }
 #contest h1 {
   color: #ffffff;
@@ -781,7 +784,7 @@ footer p.mobile {
   font-style: italic;
 }
 #contest h1.mobile {
-  font-size: 50px;
+  font-size: 40px;
 }
 #contest h2 {
   color: #ffffff;
@@ -847,6 +850,9 @@ footer p.mobile {
   width: 30%;
   display: block;
   margin: 0 auto;
+}
+#contest .mobile img.logo {
+  width: 60%;
 }
 #contest .rules {
   background: #ffffff;
