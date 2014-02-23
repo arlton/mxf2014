@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 
     clean: {
       all: {
-        src: ["public/assets/js/home.min.js", "public/assets/js/register.mins.js"]
+        src: ["public/assets/js/home.min.js", "public/assets/js/register.min.js"]
       }
     },
 
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
         },
         files: {
           "public/assets/css/home.css": "public/assets/less/home/home.less",
-          "public/assets/css/register.css": "public/assets/less/register/register.less"
+          "public/assets/css/register.min.css": "public/assets/less/register/register.less"
         }
       }
     },
@@ -72,7 +72,7 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         compress: true,
-        mangle: false
+        mangle: true
       },
       all: {
         files: {
