@@ -732,17 +732,20 @@ footer {
   background-size: cover;
   padding: 40px 0 100px 0;
   .ticket {
-    width: 20%;
+    width: 50%;
     display: block;
     margin: 20px auto 0 auto;
     border-radius: 500px;
     img {
       width: 80%;
       display: block;
-      margin: 29% auto;
+      margin: 50px auto;
     }
     &.mobile {
-      width: 40%;
+      width: 100%;
+      img {
+        margin: 30px auto 0 auto;
+      }
     }
   }
   h1 {
@@ -755,7 +758,7 @@ footer {
     font-weight: 900;
     font-style: italic;
     &.mobile {
-      font-size: 50px;
+      font-size: 40px;
     }
   }
   h2 {
@@ -823,6 +826,11 @@ footer {
     display: block;
     margin: 0 auto;
   }
+  .mobile {
+      img.logo {
+        width: 60%;
+      }
+    }
   .rules {
     background: @white;
     margin: 20px 0;
@@ -830,8 +838,8 @@ footer {
     h2 {
       color: @black;
       text-align: left;
-      font-size: 36px;
-      line-height: 44px;
+      font-size: 50px;
+      line-height: 56px;
       margin-bottom: 40px;
       text-align: center;
     }
