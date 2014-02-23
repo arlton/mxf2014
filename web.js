@@ -16,6 +16,7 @@ app.set('view engine', 'hbs');
 
 app.use(logfmt.requestLogger());
 app.use(express.bodyParser());
+app.use(express.compress());
 app.use(express.static(path.join(__dirname, 'public')));
 
 fs.readdirSync('./app/controllers').forEach(function (file) {
