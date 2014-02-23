@@ -82,6 +82,7 @@ var AMASS = (function($) {
       that.parent = parent;
 
       that.attributes = attributes;
+      console.log(that.parent);
       that.attributes.attendeeNumber = that.parent.count()+1;
 
       that.hasRemove = (that.attributes.attendeeNumber > 1);
@@ -173,9 +174,7 @@ var AMASS = (function($) {
 
       if (typeof query === 'function') {
         count = 0;
-        console.log(_list);
         for (var i = 0; i < _list.length; i++) {
-          console.log(_list[i]);
           if (query(_list[i])) {
             count += 1;
           }
