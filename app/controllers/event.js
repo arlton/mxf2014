@@ -1,42 +1,42 @@
-var Event, _;
+var Event, ApiResponse, _;
 
-Event     = require('../models/event');
+Event       = require('../models/event');
 
-_         = require('underscore');
+ApiResponse = require('../utils/apiresponse');
+_           = require('underscore');
 
 module.exports.controller = function(app) {
   app.get('/api/event/:event_id', function(req, res) {
+    apiresponse = new ApiResponse(res);
+
     // Get single event from database
     Event.findOne({ _id: req.params.event_id }).exec(function(err, eventInfo) {
       if (err) { 
         // We're fucked
-        res.writeHead(404, {'content-type':'application/json'});
-        res.write(JSON.stringify({ 
+        
+        apiresponse.send(404, {
           'status': 'fail', 
           'message': 'Event not found', 
           'data': { 'event_id': req.params.event_id } 
-        })); // FIXME am I sure that findOne method would only error when unable to find an event?
+        }); // FIXME am I sure that findOne method would only error when unable to find an event?
 
-        res.end();
         return logfmt.error(new Error('Unable to retrieve event: ' + err)); 
       }
 
-      res.writeHead(200, {'content-type':'application/json'});
-      res.write(JSON.stringify(eventInfo));
-      res.end();
+      apiresponse.send(200, eventInfo);
     });
   });
 
   app.get('/api/event/:event_id/promo/:code', function(req, res) {
+    apiresponse = new ApiResponse(res);
+
     function promotionFail(data) {
       data = data || {};
-      res.writeHead(404, {'content-type':'application/json'});
-      res.write(JSON.stringify({ 
+      apiresponse.send(404, { 
         'status': 'fail', 
         'message': 'Promotional code not valid', 
         'data': data
-      }));
-      res.end();
+      });
     };
 
     Event.findOne({ 'promotions.code': req.params.code }, 'promotions.$', function(err, eventInfo) {
@@ -54,12 +54,10 @@ module.exports.controller = function(app) {
           return promotionFail({ '_id': promotion._id });
         }
 
-        res.writeHead(200, {'content-type':'application/json'});
-        res.write(JSON.stringify({
+        apiresponse.send(200, {
           'status': 'success',
           'data': promotion
-        }));
-        res.end();
+        });
       });
     });
   });
