@@ -131,6 +131,9 @@ module.exports = function(grunt) {
   // Full distribution task.
   grunt.registerTask('dist', ['dist-css', 'dist-js']);
 
+  // Tasks to run on prod
+  grunt.registerTask('heroku', ['dist']);
+  
   // Default task.
   grunt.registerTask('default', ['dist', 'watch']);
 };
