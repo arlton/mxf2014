@@ -82,7 +82,6 @@ var AMASS = (function($) {
       that.parent = parent;
 
       that.attributes = attributes;
-      console.log(that.parent);
       that.attributes.attendeeNumber = that.parent.count()+1;
 
       that.hasRemove = (that.attributes.attendeeNumber > 1);
@@ -249,7 +248,7 @@ var AMASS = (function($) {
     };
 
     that.updateTotal = function() {
-      for (var k in totalCostEl) {
+      for (var k = 0; k < totalCostEl.length; k++) {
         totalCostEl[k].innerHTML = that.getTotal({ formatted: true });
       }
 
@@ -294,7 +293,7 @@ var AMASS = (function($) {
         ticketsCount = parseInt(this.value, 10),
         ticketId = this.getAttribute('data-ticket-id');
 
-      for (var j in settings.eventInfo.tickets) {
+      for (var j = 0; j < settings.eventInfo.tickets.length; j++) {
         if (settings.eventInfo.tickets[j]._id === ticketId) {
           ticket = settings.eventInfo.tickets[j];
           break;
