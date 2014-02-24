@@ -99,7 +99,7 @@ module.exports = function(grunt) {
     },
 
     imagemin: {
-      dynamic: {
+      all: {
         options: {
           optimizationLevel: 7,
           progressive: true,
@@ -151,7 +151,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-css', ['less']);
 
   // Full distribution task.
-  grunt.registerTask('dist', ['imagemin', 'dist-css', 'dist-js']);
+  grunt.registerTask('dist', ['dist-css', 'dist-js', 'imagemin']);
 
   // Tasks to run on prod
   grunt.registerTask('heroku', ['dist']);
