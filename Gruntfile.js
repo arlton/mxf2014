@@ -98,13 +98,34 @@ module.exports = function(grunt) {
       }
     },
 
+    imagemin: {
+      dynamic: {
+        options: {
+          optimizationLevel: 7,
+          progressive: true,
+          interlaced: true,
+          cache: false
+        },
+        files: [{
+          expand: true,
+          cwd: 'public/assets/uimg/',
+          src: ['**/*.{png,jpg,gif}'],
+          dest: 'public/assets/img/'
+        }]
+      }
+    },
+
     watch: {
       gruntfile: {
         files: ['Gruntfile.js'],
         tasks: ['less', 'uglify']
       },
+      images: {
+        files: ['public/assets/uimg/**/*.{png,jpg,gif}'],
+        tasks: ['imagemin']
+      },
       javascript: {
-        files: ['views/**/*.hbs', 'public/assets/js/home.js', 'public/assets/js/register.js'],
+        files: ['app/views/**/*.hbs', 'public/assets/js/home.js', 'public/assets/js/register.js'],
         tasks: ['dist-js']
       },
       stylesheets: {
@@ -121,6 +142,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   // JS distribution task.
   grunt.registerTask('dist-js', ['clean', 'jshint', 'handlebars', 'uglify']);
@@ -129,7 +151,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-css', ['less']);
 
   // Full distribution task.
-  grunt.registerTask('dist', ['dist-css', 'dist-js']);
+  grunt.registerTask('dist', ['imagemin', 'dist-css', 'dist-js']);
 
   // Tasks to run on prod
   grunt.registerTask('heroku', ['dist']);
