@@ -74,7 +74,7 @@ var AMASS = (function($) {
     _list = [];
 
     Attendee = function(parent, attributes) {
-      var that, container, formTagsEl, inputsEl, selectsEl, removeBtns,
+      var that, formTagsEl, inputsEl, selectsEl, removeBtns,
         bindInput, bindRemove;
 
       that = this;
@@ -87,18 +87,18 @@ var AMASS = (function($) {
       that.hasRemove = (that.attributes.attendeeNumber > 1);
       that.index = that.parent.count();
 
-      container = document.createElement('div');
-      container.innerHTML = that.template(that);
+      that.el = document.createElement('div');
+      that.el.innerHTML = that.template(that);
 
-      inputsEl = container.getElementsByTagName('input');
+      inputsEl = that.el.getElementsByTagName('input');
       inputsEl = Array.prototype.slice.call(inputsEl);
 
-      selectsEl = container.getElementsByTagName('select');
+      selectsEl = that.el.getElementsByTagName('select');
       selectsEl = Array.prototype.slice.call(selectsEl);
 
       formTagsEl = inputsEl.concat(selectsEl);
 
-      removeBtns = container.getElementsByClassName('remove');
+      removeBtns = that.el.getElementsByClassName('remove');
 
       // Bind inputs live
       bindInput = function() {
@@ -119,9 +119,7 @@ var AMASS = (function($) {
         removeBtns[k].onclick = bindRemove;
       }
 
-      attendeesEl.appendChild(container);
-
-      that.el = container;
+      attendeesEl.appendChild(that.el);
 
       callEvent('addAttendee', null, that);
     };
@@ -515,7 +513,9 @@ $.ajax({
 
   amass.on('addAttendee', function(callback) {
     var attendeeEl = this.el;
-    $(attendeeEl).fadeIn('fast', callback);
+    $(attendeeEl)
+      .css('display', 'none')
+      .slideDown('fast', callback);
   });
 
   amass.on('removeAttendee', function(callback) {
