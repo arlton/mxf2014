@@ -56,7 +56,7 @@ ul {
   }
 }
 
-.btn-secondary {
+.btn-gold {
   background: @gold;
   border: none;
   border-radius: 2px;
@@ -68,6 +68,24 @@ ul {
   &:active,
   &:focus {
     background: @black;
+    border: @white;
+    outline: none;
+    color: @white;
+  }
+}
+
+.btn-black {
+  background: @black;
+  border: none;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: @white;
+  &:hover,
+  &:active,
+  &:focus {
+    background: @gold;
     border: @white;
     outline: none;
     color: @white;
