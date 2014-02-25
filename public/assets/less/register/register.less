@@ -261,7 +261,7 @@ body {
     }
   }
   .billing-info {
-    padding: 20px;
+    padding: 20px 30px;
     h4 {
       text-align: left;
       margin-top: 10px;
@@ -281,7 +281,7 @@ body {
   }
   .promocode {
     background: @white;
-    padding: 0 20px 20px 20px;
+    padding: 10px 30px 30px 30px;
     float: left;
     width: 100%;
     h4 {
@@ -354,7 +354,7 @@ body {
   }
   .bottom {
     background: @black;
-    padding: 54px 20px 25px 20px;
+    padding: 54px 30px 10px 30px;
     .btn-primary {
       float: right;
       padding: 15px 55px;
@@ -364,19 +364,32 @@ body {
         float: none;
         text-align: center;
         display: block;
+        margin-bottom: 20px;
       }
     }
     p {
-      font-size: 26px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 400;
       color: @gold;
-      margin-top: 34px;
+      margin-top: 20px;
+      text-transform: uppercase;
+      line-height: 28px;
+      text-align: center;
       span {
-        font-weight: 400;
+        font-weight: 600;
+        font-size: 42px;
+
       }
       &.mobile {
         text-align: center;
-        margin-top: 10px;
+        margin-top: 20px;
+        font-size: 24px;
+        text-transform: none;
+        font-weight: 400;
+        span {
+          font-size: 24px;
+          font-weight: 400;
+        }
       }
     }
   }
