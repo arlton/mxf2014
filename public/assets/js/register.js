@@ -535,14 +535,11 @@ $.ajax({
   });
 
   amass.on('formSubmitBefore', function(callback) {
-    console.log('woot');
     ladda.start();
-
     callback();
   });
 
   amass.on('formSubmitAfter', function(callback) {
-    console.log('woot woot woot');
     ladda.stop();
     callback();
   });

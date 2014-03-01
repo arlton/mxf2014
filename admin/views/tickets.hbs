@@ -1,0 +1,94 @@
+{{> _header}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      {{> _sidebar}}
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <ul class="pull-right options">
+        <li><a href="#" class="btn btn-default" data-toggle="modal" data-target="#addTicket">Add Ticket</a></li>
+      </ul>
+      <h1 class="page-header">Tickets</h1>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Cost</th>
+              <th>Quantity Available</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Early Bird</td>
+              <td>$185.00</td>
+              <td>Unlimited</td>
+              <td>March 1, 2014</td>
+              <td>July 1, 2014</td>
+              <td><a href="#">Edit</a></td>
+            </tr>
+            <tr>
+              <td>Regular</td>
+              <td>$235.00</td>
+              <td>Unlimited</td>
+              <td>July 1, 2014</td>
+              <td>August 22, 2014</td>
+              <td><a href="#">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="addTicket" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Ticket</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="ticket_title">Title</label>
+            <input type="text" class="form-control" id="ticket_title" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="ticket_cost">Cost</label>
+            <input type="text" class="form-control" id="ticket_cost" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="quantity_vailable">Quantity Available</label>
+            <input type="text" class="form-control" id="quantity_vailable" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="minimum_quantity">Minimum Quantity</label>
+            <input type="text" class="form-control" id="minimum_quantity" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="minimum_quantity">Maximum Quantity</label>
+            <input type="text" class="form-control" id="maximum" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="start_date">Start Date</label>
+            <input type="text" class="form-control" id="start_date" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="end_date">End Date</label>
+            <input type="text" class="form-control" id="end_date" placeholder="">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{> _footer}}
