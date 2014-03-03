@@ -10,11 +10,10 @@ module.exports.controller = function(app) {
     var eventId;
 
     if (process.env.ENVIRONMENT === 'Production' 
-        && req.headers['X-Forwarded-Proto'] !== 'https') {
-      
+        && req.headers['x-forwarded-proto'] !== 'https') {
       // respond with html page
       if (req.accepts('html')) {
-        res.render('404', { url: req.url });
+        res.redirect('https://mxf2014.herokuapp.com/register');
         return;
       }
     }
