@@ -9,6 +9,13 @@ module.exports.controller = function(app) {
   app.get('/register', function(req, res) {
     var eventId;
 
+    if (process.env.ENVIRONMENT === 'Production' 
+        && req.headers['X-Forwarded-Proto'] !== 'https') {
+      res.writeHead(404);
+      res.render('404');
+      return;
+    }
+
     eventId   = '530396f65e8706f5d4ea6aa7'; // FIXME This should not be hardcoded
 
     // Get single event from database

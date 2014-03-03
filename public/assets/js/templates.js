@@ -161,6 +161,15 @@ function program2(depth0,data) {
   return buffer;
   }));
 
+this["HBS"]["app/views/404.hbs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "404 BIIIITTTCCCHHHHHHH";
+  });
+
 this["HBS"]["app/views/home.hbs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
