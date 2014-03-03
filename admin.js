@@ -1,4 +1,4 @@
-// web.js
+// admin.js
 var express, logfmt, port, fs, hbs, path, app;
 
 express  = require('express');
@@ -17,7 +17,7 @@ app.set('view engine', 'hbs');
 app.use(logfmt.requestLogger());
 app.use(express.bodyParser());
 app.use(express.compress());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/admin/public')));
 
 fs.readdirSync(__dirname + '/admin/controllers').forEach(function (file) {
   var route;
