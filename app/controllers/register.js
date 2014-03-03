@@ -13,7 +13,7 @@ module.exports.controller = function(app) {
         && req.headers['X-Forwarded-Proto'] !== 'https') {
       res.writeHead(404);
       res.render('404');
-      return;
+      res.end();
     }
 
     eventId   = '530396f65e8706f5d4ea6aa7'; // FIXME This should not be hardcoded
