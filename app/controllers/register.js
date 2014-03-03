@@ -11,9 +11,12 @@ module.exports.controller = function(app) {
 
     if (process.env.ENVIRONMENT === 'Production' 
         && req.headers['X-Forwarded-Proto'] !== 'https') {
-      res.writeHead(404);
-      res.render('404');
-      res.end();
+      
+      // respond with html page
+      if (req.accepts('html')) {
+        res.render('404', { url: req.url });
+        return;
+      }
     }
 
     eventId   = '530396f65e8706f5d4ea6aa7'; // FIXME This should not be hardcoded
