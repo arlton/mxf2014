@@ -158,7 +158,7 @@ module.exports.controller = function(app) {
       } else {
         // Process payment
         stripe.charges.create({
-          amount: (cart.getTotal().toFixed(2)) * 100, // Stripe charges in cents not dollars. Fuckers.
+          amount: cart.getTotal().toFixed(2) * 100, // Stripe charges in cents not dollars. Fuckers.
           currency: 'usd',
           card: f.cc,
           metadata: { 'email': f.cc.email_address }
