@@ -173,11 +173,11 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  @media (min-width: @screen-sm-min) {
+  @media (max-width: @screen-sm-min) {
     background-image: none;
     background-color: @dark-grey; 
   }
-  @media (min-width: @screen-md-min) {
+  @media (max-width: @screen-md-min) {
     background-image: none;
     background-color: @dark-grey; 
   }
@@ -398,13 +398,24 @@ body {
   }
 }
 
-p.stripe {
+p.footer {
   margin-bottom: 100px;
   text-align: center;
   color: @white;
+  line-height: 32px;
   img {
     height: 20px;
     margin-left: 2px;
+    margin-top: -2px;
+    &.amass {
+      height: 15px;
+    }
+  }
+  a {
+    color: @gold;
+    &:hover {
+      color: @white;
+    }
   }
 }
 
