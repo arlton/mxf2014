@@ -154,7 +154,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist', ['dist-css', 'dist-js', 'imagemin']);
 
   // Tasks to run on prod 
-  grunt.registerTask('heroku:Production', ['dist']);
+  grunt.registerTask('heroku', ['dist']);
   
   // Default task.
   grunt.registerTask('default', ['dist', 'watch']);
