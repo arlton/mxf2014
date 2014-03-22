@@ -246,11 +246,34 @@ var AMASS = (function($) {
     };
 
     that.updateTotal = function() {
+      var total, formattedTotal;
+
+      total = that.getTotal();
+      formattedTotal = that.getTotal({ formatted: true });
+
       for (var k = 0; k < totalCostEl.length; k++) {
         totalCostEl[k].innerHTML = that.getTotal({ formatted: true });
       }
 
-      return that.getTotal();
+      if (total <= 0) {
+        $('#cc_number').parsley('removeConstraint', 'required');
+        $('#cc_type').parsley('removeConstraint', 'required');
+        $('#cc_exp_month').parsley('removeConstraint', 'required');
+        $('#cc_exp_year').parsley('removeConstraint', 'required');
+        $('#cc_cvc').parsley('removeConstraint', 'required');
+
+        $('#cc-info-actual').slideUp();
+      } else {
+        $('#cc_number').parsley('addConstraint', { 'required': true });
+        $('#cc_type').parsley('addConstraint', { 'required': true });
+        $('#cc_exp_month').parsley('addConstraint', { 'required': true });
+        $('#cc_exp_year').parsley('addConstraint', { 'required': true });
+        $('#cc_cvc').parsley('addConstraint', { 'required': true });
+        
+        $('#cc-info-actual').slideDown();
+      }
+
+      return total;
     };
 
     that.getTotal = function(options) {
@@ -269,7 +292,8 @@ var AMASS = (function($) {
       }
 
       options = options || {};
-      return options.formatted ? '$' + _total.toFixed(2).toString() : _total.toString();
+
+      return options.formatted ? '$' + _total.toFixed(2).toString() : _total;
     };
 
     that.empty = function() {

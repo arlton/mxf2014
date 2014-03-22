@@ -115,7 +115,7 @@ module.exports.controller = function(app) {
           }
           
           options = options || {};
-          return options.formatted ? '$' + _total.toFixed(2).toString() : _total.toString();
+          return options.formatted ? '$' + _total.toFixed(2).toString() : _total;
         };
 
         return that;
@@ -158,7 +158,7 @@ module.exports.controller = function(app) {
       } else {
         // Process payment
         stripe.charges.create({
-          amount: Number(cart.getTotal().toFixed(2)) * 100, // Stripe charges in cents not dollars. Fuckers.
+          amount: cart.getTotal() * 100, // Stripe charges in cents not dollars. Fuckers.
           currency: 'usd',
           card: f.cc,
           metadata: { 'email': f.cc.email_address }
