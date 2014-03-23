@@ -82,20 +82,20 @@ module.exports.controller = function(app) {
           return JSON.parse(JSON.stringify(_items));
         };
 
-        that.addPromocode = function(promocode) {
-          if (typeof promocode === 'string') {
+        that.addPromocode = function(promocode_id) {
+          if (typeof promocode_id === 'string') {
             for (var i = 0; i < eventInfo.promotions.length; i++) {
-              if (promocode === eventInfo.promotions[i].code) {
+              if (promocode_id === String(eventInfo.promotions[i]._id)) {
                 _promocodes.push(eventInfo.promotions[i]);
                 return;
               }
             }
           }
 
-          _promocodes.push(promocode);
+          _promocodes.push(promocode_id);
         };
 
-        that.getPromocodes = function(promocode) {
+        that.getPromocodes = function() {
           return JSON.parse(JSON.stringify(_promocodes));
         };
 
@@ -111,7 +111,9 @@ module.exports.controller = function(app) {
           }
 
           for (var j = 0; j < promocodes.length; j++) {
-            _total = (_total - promocodes[j].amount < 0) ? 0 : _total - promocodes[j].amount;
+            _total -= promocodes[j].amount;
+
+            if (_total < 0) { _total = 0; }
           }
           
           options = options || {};
