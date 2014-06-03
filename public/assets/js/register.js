@@ -343,8 +343,8 @@ var AMASS = (function($) {
     // Setup initial validation
     $(amassFormEl).parsley();
 
-    // Artificially adding an early bird ticket. FIXME THIS IS SHITTTTTTTT
-    attendees.add({ ticket: settings.eventInfo.tickets[0] });
+    // Artificially adding a regular ticket. FIXME THIS IS SHITTTTTTTT
+    attendees.add({ ticket: settings.eventInfo.tickets[1] });
   }
 
   // ** EVENTS
