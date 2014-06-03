@@ -10,7 +10,6 @@ app      = express();
 port     = Number(process.env.PORT || 5001);
 
 hbs.registerPartials(__dirname + '/admin/views/partials');
-
 app.set('views', __dirname + '/admin/views');
 app.set('view engine', 'hbs');
 

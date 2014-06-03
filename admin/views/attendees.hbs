@@ -25,26 +25,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Arlton</td>
-              <td>Lowry</td>
-              <td>arlton@few.io</td>
-              <td>We Are Few, LLC</td>
-              <td>Designer</td>
-              <td>@arlton</td>
-              <td>XXL</td>
-              <td><a href="#">Edit</a></td>
-            </tr>
-            <tr>
-              <td>David</td>
-              <td>Hudson</td>
-              <td>david@few.io</td>
-              <td>We Are Few, LLC</td>
-              <td>Developer</td>
-              <td>@_davidhudson</td>
-              <td>XL</td>
-              <td><a href="#">Edit</a></td>
-            </tr>
+            {{#each registrations}}
+              {{#each attendees}}
+                <tr>
+                  <td>{{first_name}}</td>
+                  <td>{{last_name}}</td>
+                  <td>{{email_address}}</td>
+                  <td>{{organization}}</td>
+                  <td>{{title}}</td>
+                  <td><a href="http://twitter.com/{{twitter_handle}}">{{twitter_handle}}</a></td>
+                  <td>{{shirt_size}}</td>
+                  <td><a href="#">Edit</a></td>
+                </tr>
+              {{/each}}
+            {{/each}}
           </tbody>
         </table>
       </div>
