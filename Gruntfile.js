@@ -46,12 +46,13 @@ module.exports = function(grunt) {
     less: {
       all: {
         options: {
-          paths: ["bower_components", "public/assets/less", "public/assets/css"],
+          paths: ["bower_components", "public/assets/less", "public/assets/css", "admin/public/assets/less", "admin/public/assets/css"],
           compress: true
         },
         files: {
           "public/assets/css/home.min.css": "public/assets/less/home/home.less",
-          "public/assets/css/register.min.css": "public/assets/less/register/register.less"
+          "public/assets/css/register.min.css": "public/assets/less/register/register.less",
+          "admin/public/assets/css/admin.css": "admin/public/assets/less/admin.less"
         }
       }
     },
@@ -93,6 +94,10 @@ module.exports = function(grunt) {
             , 'public/assets/js/parsley.js'
             , 'public/assets/js/templates.js'
             , 'public/assets/js/register.js'
+          ],
+          'admin/public/assets/js/admin.js': [
+              'bower_components/jquery/dist/jquery.js'
+            , 'bower_components/bootstrap/dist/js/bootstrap.js'
           ]
         }
       }
