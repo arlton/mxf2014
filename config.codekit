@@ -1,7 +1,29 @@
 {
 "CodeKitInfo": "This is a CodeKit 2.x project configuration file. It is designed to sync project settings across multiple machines. MODIFYING THE CONTENTS OF THIS FILE IS A POOR LIFE DECISION. If you do so, you will likely cause CodeKit to crash. This file is not useful unless accompanied by the project that created it in CodeKit 2. This file is not backwards-compatible with CodeKit 1.x. For more information, see: http:\/\/incident57.com\/codekit",
-"creatorBuild": "16921",
+"creatorBuild": "17018",
 "files": {
+	"\/admin.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/admin.js",
+		"outputAbbreviatedPath": "\/min\/admin-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/admin\/controllers\/attendees.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/admin\/controllers\/attendees.js",
+		"outputAbbreviatedPath": "\/admin\/controllers\/min\/attendees-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/admin\/controllers\/dashboard.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -52,6 +74,28 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/admin\/controllers\/tickets.js",
 		"outputAbbreviatedPath": "\/admin\/controllers\/min\/tickets-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/admin\/db.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/admin\/db.js",
+		"outputAbbreviatedPath": "\/admin\/min\/db-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/admin\/models\/registrations.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/admin\/models\/registrations.js",
+		"outputAbbreviatedPath": "\/admin\/models\/min\/registrations-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -137,6 +181,26 @@
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
+		},
+	"\/admin\/public\/assets\/less\/admin.less": {
+		"allowInsecureImports": 0,
+		"createSourceMap": 0,
+		"disableJavascript": 0,
+		"fileType": 1,
+		"ieCompatibility": 1,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/admin\/public\/assets\/less\/admin.less",
+		"outputAbbreviatedPath": "\/admin\/public\/assets\/css\/admin.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"relativeURLS": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"strictImports": 0,
+		"strictMath": 0,
+		"strictUnits": 0
 		},
 	"\/app\/controllers\/event.js": {
 		"fileType": 64,
@@ -69509,10 +69573,6 @@
 			"active": 0,
 			"flagValue": 3
 			},
-		"no-unnecessary_fat_arrows": {
-			"active": 1,
-			"flagValue": -1
-			},
 		"no_backticks": {
 			"active": 1,
 			"flagValue": -1
@@ -69567,6 +69627,10 @@
 			},
 		"no_unnecessary_double_quotes": {
 			"active": 0,
+			"flagValue": -1
+			},
+		"no_unnecessary_fat_arrows": {
+			"active": 1,
 			"flagValue": -1
 			},
 		"non_empty_constructor_needs_parens": {
